@@ -1,18 +1,32 @@
-" colour scheme + colours
-
-colorscheme xoria256
-" let g:solarized_visibility = "high"
-" let g:solarized_contrast = "high"
-" let g:solarized_termcolors=16
-" set background=dark
+colorscheme hybrid
 
 set t_Co=256
 set term=xterm-256color
 
 " Powerline + Syntatistic Config
+
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:Powerline_symbols = 'fancy'
+let g:airline_powerline_fonts=1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
 
 filetype plugin on
 set encoding=utf-8
@@ -32,12 +46,18 @@ nmap <silent> <leader>d <Plug>DashSearch
 " CtrlP Clear Cache
 map <silent> <leader>cc :CtrlPClearAllCaches<CR>
 
+" Persist views across opening and closing files
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
+
 let g:tern_show_signature_in_pum=1
 let g:tern_show_argument_hints='on_hold'
+
 let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_register_as_syntastic_checker = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
+
 imap <Tab> <C-P>
 
 set completeopt-=menu,preview
