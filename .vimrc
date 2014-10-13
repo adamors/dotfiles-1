@@ -1,7 +1,11 @@
-colorscheme hybrid
+colorscheme molokai
+" let g:solarized_bold = 1
+" let g:solarized_underline = 1
+" let g:solarized_contrast = 'high'
 
 set t_Co=256
 set term=xterm-256color
+set foldmethod=syntax
 
 " Powerline + Syntatistic Config
 
@@ -39,6 +43,7 @@ set expandtab
 set laststatus=2
 set t_ut=
 set cursorline
+set smartindent
 
 " Dash integration
 nmap <silent> <leader>d <Plug>DashSearch
@@ -81,3 +86,10 @@ au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:U
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-e>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+
+filetype plugin on
+au FileType php setl ofu=phpcomplete#CompletePHP
+au FileType ruby,eruby setl ofu=rubycomplete#Complete
+au FileType html,xhtml setl ofu=htmlcomplete#CompleteTags
+au FileType css setl ofu=csscomplete#CompleteCSS
