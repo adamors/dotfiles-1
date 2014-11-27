@@ -1,4 +1,4 @@
-colorscheme molokai
+colorscheme hybrid
 " let g:solarized_bold = 1
 " let g:solarized_underline = 1
 " let g:solarized_contrast = 'high'
@@ -7,10 +7,13 @@ set t_Co=256
 set term=xterm-256color
 set foldmethod=syntax
 
+set guifont=Inconsolata-dz\ for\ Powerline:h13
+
 " Powerline + Syntatistic Config
 
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+let g:syntastic_mode_map = { 'passive_filetypes': ['sass', 'scss'] }
 let g:airline_powerline_fonts=1
 
 if !exists('g:airline_symbols')
@@ -31,7 +34,6 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
-
 filetype plugin on
 set encoding=utf-8
 set fillchars+=stl:\ ,stlnc:\
@@ -44,6 +46,10 @@ set laststatus=2
 set t_ut=
 set cursorline
 set smartindent
+
+" Remove right and left hand scrollbars
+set guioptions-=r
+set guioptions-=L
 
 " Dash integration
 nmap <silent> <leader>d <Plug>DashSearch
@@ -59,7 +65,7 @@ let g:tern_show_signature_in_pum=1
 let g:tern_show_argument_hints='on_hold'
 
 let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_register_as_syntastic_checker = 1
+let g:ycm_register_as_syntastic_checker = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 
