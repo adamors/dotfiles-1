@@ -1,4 +1,5 @@
-colorscheme hybrid
+colorscheme molokai
+
 " let g:solarized_bold = 1
 " let g:solarized_underline = 1
 " let g:solarized_contrast = 'high'
@@ -56,6 +57,7 @@ nmap <silent> <leader>d <Plug>DashSearch
 
 " CtrlP Clear Cache
 map <silent> <leader>cc :CtrlPClearAllCaches<CR>
+nnoremap <silent> <C-T> :CtrlPBufTag<CR>
 
 " Persist views across opening and closing files
 autocmd BufWinLeave *.* mkview
@@ -68,6 +70,9 @@ let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_register_as_syntastic_checker = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
+
+let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmine,chai'
+" au FileType javascript call JavaScriptFold()
 
 imap <Tab> <C-P>
 
