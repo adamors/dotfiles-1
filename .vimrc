@@ -1,39 +1,31 @@
-colorscheme molokai
+colorscheme hybrid
 
 " let g:solarized_bold = 1
 " let g:solarized_underline = 1
 " let g:solarized_contrast = 'high'
+" let g:solarized_termcolors=256
 
 set t_Co=256
 set term=xterm-256color
 set foldmethod=syntax
 
-set guifont=Inconsolata-dz\ for\ Powerline:h13
+set guifont=Source\ Code\ Pro\ for\ Powerline:h13
 
 " Powerline + Syntatistic Config
 
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_mode_map = { 'passive_filetypes': ['sass', 'scss'] }
+
 let g:airline_powerline_fonts=1
 
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-" unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
 filetype plugin on
 set encoding=utf-8
