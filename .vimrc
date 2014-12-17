@@ -1,9 +1,5 @@
-colorscheme hybrid
-
-" let g:solarized_bold = 1
-" let g:solarized_underline = 1
-" let g:solarized_contrast = 'high'
-" let g:solarized_termcolors=256
+set background=dark
+colorscheme base16-railscasts
 
 set t_Co=256
 set term=xterm-256color
@@ -36,7 +32,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set laststatus=2
-set t_ut=
+" set t_ut=
 set cursorline
 set smartindent
 
@@ -50,21 +46,23 @@ nmap <silent> <leader>d <Plug>DashSearch
 " CtrlP Clear Cache
 map <silent> <leader>cc :CtrlPClearAllCaches<CR>
 nnoremap <silent> <C-T> :CtrlPBufTag<CR>
+let g:ctrlp_custom_ignore = { 'dir':  '\v[\/](doc|tmp|node_modules|vendor)' }
 
 " Persist views across opening and closing files
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
+" autocmd BufWinLeave *.* mkview
+" autocmd BufWinEnter *.* silent loadview
 
 let g:tern_show_signature_in_pum=1
 let g:tern_show_argument_hints='on_hold'
 
-let g:ycm_add_preview_to_completeopt = 0
+let g:javascript_enable_domhtmlcss=1
+
+let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_register_as_syntastic_checker = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 
 let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmine,chai'
-" au FileType javascript call JavaScriptFold()
 
 imap <Tab> <C-P>
 
@@ -86,13 +84,16 @@ function! g:UltiSnips_Complete()
 endfunction
 
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsListSnippets="<c-e>"
+
+
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-
 filetype plugin on
+set ofu=syntaxcomplete#Complete
 au FileType php setl ofu=phpcomplete#CompletePHP
 au FileType ruby,eruby setl ofu=rubycomplete#Complete
 au FileType html,xhtml setl ofu=htmlcomplete#CompleteTags
 au FileType css setl ofu=csscomplete#CompleteCSS
+
+" imap <C-J> <Plug>snipMateNextOrTrigger
+" smap <C-J> <Plug>snipMateNextOrTrigger
