@@ -1,9 +1,10 @@
-set background=dark
+" set background=dark
 colorscheme base16-railscasts
 
 set t_Co=256
 set term=xterm-256color
 set foldmethod=syntax
+set foldlevelstart=20
 
 set guifont=Source\ Code\ Pro\ for\ Powerline:h13
 
@@ -35,6 +36,10 @@ set laststatus=2
 " set t_ut=
 set cursorline
 set smartindent
+set lazyredraw
+set ttyfast
+set ttymouse=xterm2
+set ttyscroll=3
 
 " Remove right and left hand scrollbars
 set guioptions-=r
@@ -47,6 +52,20 @@ nmap <silent> <leader>d <Plug>DashSearch
 map <silent> <leader>cc :CtrlPClearAllCaches<CR>
 nnoremap <silent> <C-T> :CtrlPBufTag<CR>
 let g:ctrlp_custom_ignore = { 'dir':  '\v[\/](doc|tmp|node_modules|vendor)' }
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:ctrlp_lazy_update = 350
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_max_files = 0
+if executable("ag")
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore '.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
+endif
+
+" Nerdtree Config
+let NERDTreeShowHidden=1
 
 " Persist views across opening and closing files
 " autocmd BufWinLeave *.* mkview
