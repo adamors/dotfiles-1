@@ -1,19 +1,102 @@
-" set background=dark
-colorscheme base16-railscasts
+" set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/Align'
+Plugin 'bling/vim-airline'
+Plugin 'mileszs/ack.vim'
+Plugin 'matthewsimo/angular-vim-snippets'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'rizzatti/dash.vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'ervandew/supertab'
+Plugin 'burnettk/vim-angular'
+Plugin 'xsbeats/vim-blade'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-commentary'
+Plugin 'ap/vim-css-color'
+Plugin 'w0ng/vim-hybrid'
+Plugin 'pangloss/vim-javascript'
+Plugin 'heavenshell/vim-jsdoc'
+Plugin 'mxw/vim-jsx'
+Plugin 'justinj/vim-react-snippets'
+Plugin 'bling/vim-bufferline'
+Plugin 'othree/yajs.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+Plugin 'cakebaker/scss-syntax.vim'
+
+call vundle#end()
+filetype plugin indent on
+syntax enable
+
+let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:SuperTabDefaultCompletionType = '<C-Tab>'
 
 set t_Co=256
-set term=xterm-256color
-set foldmethod=syntax
+set t_ut=
+set background=dark
+colorscheme hybrid
+set foldmethod=manual
 set foldlevelstart=20
-
+set number
+set laststatus=2
+set nowrap
+set ignorecase
+set infercase
+set noshowmode
+set encoding=utf-8
+set fillchars+=stl:\ ,stlnc:\
+set termencoding=utf-8
+set smartindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set laststatus=2
+set cursorline
+set smartindent
+set lazyredraw
+set ttyfast
+set hlsearch
+set incsearch
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
+set wildmenu
+set completeopt-=menu,preview
+set guioptions-=r
+set guioptions-=L
 set guifont=Source\ Code\ Pro\ for\ Powerline:h13
+
 
 " Powerline + Syntatistic Config
 
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_mode_map = { 'passive_filetypes': ['sass', 'scss'] }
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
+let g:airline_symbols = {}
 let g:airline_powerline_fonts=1
 
 let g:airline_left_sep = ''
@@ -24,26 +107,10 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
-filetype plugin on
-set encoding=utf-8
-set fillchars+=stl:\ ,stlnc:\
-set termencoding=utf-8
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set laststatus=2
-" set t_ut=
-set cursorline
-set smartindent
-set lazyredraw
-set ttyfast
-set ttymouse=xterm2
-set ttyscroll=3
+autocmd vimenter AirlineAfterInit call AirlineInit()
+" autocmd vimenter * NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-" Remove right and left hand scrollbars
-set guioptions-=r
-set guioptions-=L
 
 " Dash integration
 nmap <silent> <leader>d <Plug>DashSearch
@@ -51,25 +118,35 @@ nmap <silent> <leader>d <Plug>DashSearch
 " CtrlP Clear Cache
 map <silent> <leader>cc :CtrlPClearAllCaches<CR>
 nnoremap <silent> <C-T> :CtrlPBufTag<CR>
+
+" Git
+map <silent> <leader>gs :Gstatus<CR>
+map <silent> <leader>gd :Gdiff<CR>
+map <silent> <leader>gc :Gcommit<CR>
+map <silent> <leader>gp :Gpush<CR>
+map <silent> <leader>gu :Gpull<CR>
+nnoremap <leader>gb :Git branch<Space>
+nnoremap <leader>go :Git checkout<Space>
+
+" Enable JSX for .js files
+let g:jsx_ext_required = 0
+
 let g:ctrlp_custom_ignore = { 'dir':  '\v[\/](doc|tmp|node_modules|vendor)' }
 let g:ctrlp_show_hidden = 1
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
-let g:ctrlp_lazy_update = 350
+let g:ctrlp_lazy_update = 0
 let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_max_files = 0
-if executable("ag")
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore '.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
+
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_use_caching = 0
 endif
 
 " Nerdtree Config
 let NERDTreeShowHidden=1
-
-" Persist views across opening and closing files
-" autocmd BufWinLeave *.* mkview
-" autocmd BufWinEnter *.* silent loadview
+map <silent> <leader>n :NERDTreeToggle<CR>
 
 let g:tern_show_signature_in_pum=1
 let g:tern_show_argument_hints='on_hold'
@@ -85,7 +162,6 @@ let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmin
 
 imap <Tab> <C-P>
 
-set completeopt-=menu,preview
 
 function! g:UltiSnips_Complete()
     call UltiSnips#ExpandSnippet()
@@ -104,15 +180,10 @@ endfunction
 
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 
-
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-filetype plugin on
 set ofu=syntaxcomplete#Complete
 au FileType php setl ofu=phpcomplete#CompletePHP
 au FileType ruby,eruby setl ofu=rubycomplete#Complete
 au FileType html,xhtml setl ofu=htmlcomplete#CompleteTags
 au FileType css setl ofu=csscomplete#CompleteCSS
-
-" imap <C-J> <Plug>snipMateNextOrTrigger
-" smap <C-J> <Plug>snipMateNextOrTrigger
