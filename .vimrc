@@ -27,9 +27,9 @@ Plugin 'ap/vim-css-color'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'pangloss/vim-javascript'
 Plugin 'heavenshell/vim-jsdoc'
-Plugin 'mxw/vim-jsx'
+Plugin 'othree/vim-jsx'
 Plugin 'justinj/vim-react-snippets'
-Plugin 'bling/vim-bufferline'
+" Plugin 'bling/vim-bufferline'
 Plugin 'othree/yajs.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -40,24 +40,44 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'vim-scripts/restore_view.vim'
+Plugin 'vim-scripts/xoria256.vim'
+Plugin 'chriskempson/base16-vim'
+Plugin 'eddsteel/vim-vimbrant'
+Plugin 'vim-scripts/wombat256.vim'
+Plugin 'chankaward/vim-railscasts-theme'
+Plugin 'tomasr/molokai'
+Plugin 'wesgibbs/vim-irblack'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-haml'
+" Plugin 'nelstrom/vim-textobj-rubyblock'
 
 call vundle#end()
 filetype plugin indent on
-syntax enable
+ syntax enable
 
 let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:SuperTabDefaultCompletionType = '<C-Tab>'
+let g:hybrid_use_Xresources = 1
+
+let javascript_enable_domhtmlcss = 1
+
+set clipboard+=unnamedplus
+
 
 set t_Co=256
 set t_ut=
 set background=dark
-colorscheme hybrid
-set foldmethod=manual
-set foldlevelstart=20
+let base16colorspace=256
+colorscheme base16-tomorrow
 set number
 set laststatus=2
+set backspace=2
 set nowrap
 set ignorecase
 set infercase
@@ -69,11 +89,9 @@ set smartindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set laststatus=2
 set cursorline
 set smartindent
 set lazyredraw
-set ttyfast
 set hlsearch
 set incsearch
 set backupdir=~/.vim/backup//
@@ -84,7 +102,7 @@ set completeopt-=menu,preview
 set guioptions-=r
 set guioptions-=L
 set guifont=Source\ Code\ Pro\ for\ Powerline:h13
-
+set foldmethod=manual
 
 " Powerline + Syntatistic Config
 
@@ -109,7 +127,8 @@ let g:airline_symbols.linenr = ''
 
 autocmd vimenter AirlineAfterInit call AirlineInit()
 " autocmd vimenter * NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+let NERDTreeQuitOnOpen = 1
 
 
 " Dash integration
@@ -147,6 +166,8 @@ endif
 " Nerdtree Config
 let NERDTreeShowHidden=1
 map <silent> <leader>n :NERDTreeToggle<CR>
+let NERDTreeIgnore=['\.DS_Store$', '\.vim$']
+
 
 let g:tern_show_signature_in_pum=1
 let g:tern_show_argument_hints='on_hold'
@@ -187,3 +208,6 @@ au FileType php setl ofu=phpcomplete#CompletePHP
 au FileType ruby,eruby setl ofu=rubycomplete#Complete
 au FileType html,xhtml setl ofu=htmlcomplete#CompleteTags
 au FileType css setl ofu=csscomplete#CompleteCSS
+
+imap <C-J> <Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
