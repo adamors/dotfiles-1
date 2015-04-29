@@ -29,7 +29,6 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'heavenshell/vim-jsdoc'
 Plugin 'othree/vim-jsx'
 Plugin 'justinj/vim-react-snippets'
-" Plugin 'bling/vim-bufferline'
 Plugin 'othree/yajs.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -44,16 +43,16 @@ Plugin 'vim-scripts/restore_view.vim'
 Plugin 'vim-scripts/xoria256.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'eddsteel/vim-vimbrant'
-Plugin 'vim-scripts/wombat256.vim'
-Plugin 'chankaward/vim-railscasts-theme'
-Plugin 'tomasr/molokai'
 Plugin 'wesgibbs/vim-irblack'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-haml'
-" Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'kchmck/vim-coffee-script'
+Plugin '1995eaton/vim-better-javascript-completion'
+Plugin 'gregsexton/MatchTag'
+Plugin 'tmhedberg/matchit'
 
 call vundle#end()
 filetype plugin indent on
@@ -67,14 +66,13 @@ let g:hybrid_use_Xresources = 1
 
 let javascript_enable_domhtmlcss = 1
 
-set clipboard+=unnamedplus
-
+" set clipboard+=unnamedplus
 
 set t_Co=256
 set t_ut=
 set background=dark
 let base16colorspace=256
-colorscheme base16-tomorrow
+colorscheme xoria256
 set number
 set laststatus=2
 set backspace=2
@@ -86,9 +84,9 @@ set encoding=utf-8
 set fillchars+=stl:\ ,stlnc:\
 set termencoding=utf-8
 set smartindent
-set tabstop=4
-set shiftwidth=4
 set expandtab
+set tabstop=2 shiftwidth=2 softtabstop=2
+set autoindent
 set cursorline
 set smartindent
 set lazyredraw
@@ -133,6 +131,8 @@ let NERDTreeQuitOnOpen = 1
 
 " Dash integration
 nmap <silent> <leader>d <Plug>DashSearch
+" Neovim Terminal
+" map <silent> <leader>t :terminal<CR>
 
 " CtrlP Clear Cache
 map <silent> <leader>cc :CtrlPClearAllCaches<CR>
@@ -184,24 +184,23 @@ let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmin
 imap <Tab> <C-P>
 
 
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips#JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
-            endif
-        endif
-    endif
-    return ""
-endfunction
+" function! g:UltiSnips_Complete()
+"     call UltiSnips#ExpandSnippet()
+"     if g:ulti_expand_res == 0
+"         if pumvisible()
+"             return "\<C-n>"
+"         else
+"             call UltiSnips#JumpForwards()
+"             if g:ulti_jump_forwards_res == 0
+"                return "\<TAB>"
+"             endif
+"         endif
+"     endif
+"     return ""
+" endfunction
+" au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 set ofu=syntaxcomplete#Complete
 au FileType php setl ofu=phpcomplete#CompletePHP
