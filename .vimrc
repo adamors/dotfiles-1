@@ -32,7 +32,7 @@ Plugin 'justinj/vim-react-snippets'
 Plugin 'othree/yajs.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'jeetsukumaran/vim-buffergator'
+" Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
@@ -53,6 +53,8 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin '1995eaton/vim-better-javascript-completion'
 Plugin 'gregsexton/MatchTag'
 Plugin 'tmhedberg/matchit'
+Plugin 'justincampbell/vim-railscasts'
+Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 
 call vundle#end()
 filetype plugin indent on
@@ -69,10 +71,8 @@ let javascript_enable_domhtmlcss = 1
 " set clipboard+=unnamedplus
 
 set t_Co=256
-set t_ut=
-set background=dark
 let base16colorspace=256
-colorscheme xoria256
+set t_ut=
 set number
 set laststatus=2
 set backspace=2
@@ -101,6 +101,8 @@ set guioptions-=r
 set guioptions-=L
 set guifont=Source\ Code\ Pro\ for\ Powerline:h13
 set foldmethod=manual
+colorscheme xoria256
+set background=dark
 
 " Powerline + Syntatistic Config
 
@@ -138,12 +140,15 @@ nmap <silent> <leader>d <Plug>DashSearch
 map <silent> <leader>cc :CtrlPClearAllCaches<CR>
 nnoremap <silent> <C-T> :CtrlPBufTag<CR>
 
+" Tabs
+map <silent> <leader>tn :tabnew<CR>
+
 " Git
 map <silent> <leader>gs :Gstatus<CR>
 map <silent> <leader>gd :Gdiff<CR>
 map <silent> <leader>gc :Gcommit<CR>
-map <silent> <leader>gp :Gpush<CR>
-map <silent> <leader>gu :Gpull<CR>
+map <silent> <leader>gp :terminal git push<CR>
+map <silent> <leader>gu :terminal git pull<CR>
 nnoremap <leader>gb :Git branch<Space>
 nnoremap <leader>go :Git checkout<Space>
 
