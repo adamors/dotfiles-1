@@ -4,13 +4,17 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'benmills/vimux'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-dispatch'
 Plugin 'vim-scripts/Align'
 Plugin 'bling/vim-airline'
-Plugin 'mileszs/ack.vim'
+" Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
+Plugin 'FelikZ/ctrlp-py-matcher'
 Plugin 'matthewsimo/angular-vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -32,7 +36,6 @@ Plugin 'justinj/vim-react-snippets'
 Plugin 'othree/yajs.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-" Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
@@ -53,8 +56,6 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin '1995eaton/vim-better-javascript-completion'
 Plugin 'gregsexton/MatchTag'
 Plugin 'tmhedberg/matchit'
-Plugin 'justincampbell/vim-railscasts'
-Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 
 call vundle#end()
 filetype plugin indent on
@@ -101,7 +102,7 @@ set guioptions-=r
 set guioptions-=L
 set guifont=Source\ Code\ Pro\ for\ Powerline:h13
 set foldmethod=manual
-colorscheme xoria256
+colorscheme base16-ocean
 set background=dark
 
 " Powerline + Syntatistic Config
@@ -152,6 +153,10 @@ map <silent> <leader>gu :terminal git pull<CR>
 nnoremap <leader>gb :Git branch<Space>
 nnoremap <leader>go :Git checkout<Space>
 
+" Ag
+
+nnoremap <leader>f :Ag<Space>
+
 " Enable JSX for .js files
 let g:jsx_ext_required = 0
 
@@ -161,6 +166,15 @@ let g:ctrlp_show_hidden = 1
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ctrlp_lazy_update = 0
 let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ -g ""'
+
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
