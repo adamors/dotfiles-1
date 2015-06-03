@@ -188,8 +188,8 @@ map <silent> <leader>n :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.DS_Store$', '\.vim$']
 
 
-let g:tern_show_signature_in_pum=1
-let g:tern_show_argument_hints='on_hold'
+" let g:tern_show_signature_in_pum=1
+" let g:tern_show_argument_hints='on_hold'
 
 let g:javascript_enable_domhtmlcss=1
 
@@ -229,3 +229,5 @@ au FileType css setl ofu=csscomplete#CompleteCSS
 
 imap <C-J> <Plug>snipMateNextOrTrigger
 smap <C-J> <Plug>snipMateNextOrTrigger
+let g:airline_theme='powerlineish'
+
