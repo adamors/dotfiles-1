@@ -1,9 +1,11 @@
-" set nocompatible
+set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'kana/vim-textobj-user'
+Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'benmills/vimux'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
@@ -12,7 +14,6 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-dispatch'
 Plugin 'vim-scripts/Align'
 Plugin 'bling/vim-airline'
-" Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
 Plugin 'matthewsimo/angular-vim-snippets'
@@ -58,8 +59,12 @@ Plugin 'gregsexton/MatchTag'
 Plugin 'tmhedberg/matchit'
 
 call vundle#end()
+
+filetype on
+filetype plugin on
 filetype plugin indent on
- syntax enable
+
+syntax enable
 
 let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
@@ -100,7 +105,7 @@ set wildmenu
 set completeopt-=menu,preview
 set guioptions-=r
 set guioptions-=L
-set guifont=Source\ Code\ Pro\ for\ Powerline:h13
+set guifont=Source\ Code\ Pro\ for\ Powerline:h11
 set foldmethod=manual
 colorscheme base16-ocean
 set background=dark
@@ -129,7 +134,7 @@ let g:airline_symbols.linenr = ''
 autocmd vimenter AirlineAfterInit call AirlineInit()
 " autocmd vimenter * NERDTree
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let NERDTreeQuitOnOpen = 1
+" let NERDTreeQuitOnOpen = 1
 
 
 " Dash integration
@@ -231,3 +236,7 @@ imap <C-J> <Plug>snipMateNextOrTrigger
 smap <C-J> <Plug>snipMateNextOrTrigger
 let g:airline_theme='powerlineish'
 
+
+" Rails / Ruby Mappings
+
+map <silent> <leader>rc :Rails console<CR>
