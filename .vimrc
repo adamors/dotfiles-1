@@ -4,6 +4,9 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'elzr/vim-json'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'chrisbra/csv.vim'
 Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'benmills/vimux'
@@ -240,3 +243,10 @@ let g:airline_theme='powerlineish'
 " Rails / Ruby Mappings
 
 map <silent> <leader>rc :Rails console<CR>
+
+" Misc Mappings
+
+" Ag search for current word under cursor
+map <leader>w :Ag <cword><cr>
+
+" Tmux
