@@ -4,6 +4,8 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'endel/vim-github-colorscheme'
 Plugin 'elzr/vim-json'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'chrisbra/csv.vim'
@@ -110,8 +112,10 @@ set guioptions-=r
 set guioptions-=L
 set guifont=Source\ Code\ Pro\ for\ Powerline:h11
 set foldmethod=manual
-colorscheme base16-ocean
-set background=dark
+" colorscheme base16-ocean
+colorscheme github
+" set background=dark
+set background=light
 
 " Powerline + Syntatistic Config
 
@@ -243,10 +247,20 @@ let g:airline_theme='powerlineish'
 " Rails / Ruby Mappings
 
 map <silent> <leader>rc :Rails console<CR>
+map <silent> <leader>rm :Rake db:migrate<CR>
 
-" Misc Mappings
+" RSpec
+let g:rspec_command = "Dispatch rspec {spec}"
+
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
+
+" Convert HTML to Haml, ensuew the html2haml gem is installed
+nmap <leader>h :%!html2haml --erb 2> /dev/null<CR>:set ft=haml<CR>
+vmap <leader>h :!html2haml --erb 2> /dev/null<CR>
 
 " Ag search for current word under cursor
 map <leader>w :Ag <cword><cr>
-
-" Tmux
