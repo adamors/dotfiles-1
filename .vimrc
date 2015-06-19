@@ -4,6 +4,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'ngmy/vim-rubocop'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'endel/vim-github-colorscheme'
 Plugin 'elzr/vim-json'
@@ -48,7 +49,6 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'vim-scripts/restore_view.vim'
 Plugin 'vim-scripts/xoria256.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'eddsteel/vim-vimbrant'
@@ -112,10 +112,8 @@ set guioptions-=r
 set guioptions-=L
 set guifont=Source\ Code\ Pro\ for\ Powerline:h11
 set foldmethod=manual
-" colorscheme base16-ocean
-colorscheme github
-" set background=dark
-set background=light
+colorscheme base16-ocean
+set background=dark
 
 " Powerline + Syntatistic Config
 
@@ -143,11 +141,8 @@ autocmd vimenter AirlineAfterInit call AirlineInit()
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " let NERDTreeQuitOnOpen = 1
 
-
 " Dash integration
 nmap <silent> <leader>d <Plug>DashSearch
-" Neovim Terminal
-" map <silent> <leader>t :terminal<CR>
 
 " CtrlP Clear Cache
 map <silent> <leader>cc :CtrlPClearAllCaches<CR>
@@ -155,6 +150,9 @@ nnoremap <silent> <C-T> :CtrlPBufTag<CR>
 
 " Tabs
 map <silent> <leader>tn :tabnew<CR>
+
+" Misc
+nmap <silent> <leader>o :only<CR>
 
 " Git
 map <silent> <leader>gs :Gstatus<CR>
@@ -243,11 +241,16 @@ imap <C-J> <Plug>snipMateNextOrTrigger
 smap <C-J> <Plug>snipMateNextOrTrigger
 let g:airline_theme='powerlineish'
 
+" RuboCop Mappings
+
+map <silent> <leader>ru :Rubocop<CR>
+map <silent> <leader>rf :Rubocop --auto-correct<CR>
 
 " Rails / Ruby Mappings
 
-map <silent> <leader>rc :Rails console<CR>
+map <silent> <leader>rc :Dispatch Rails console<CR>
 map <silent> <leader>rm :Rake db:migrate<CR>
+map <silent> <leader>q :ccl<CR>
 
 " RSpec
 let g:rspec_command = "Dispatch rspec {spec}"
@@ -264,3 +267,5 @@ vmap <leader>h :!html2haml --erb 2> /dev/null<CR>
 
 " Ag search for current word under cursor
 map <leader>w :Ag <cword><cr>
+map <leader>ws :FixWhitespace<cr>
+
