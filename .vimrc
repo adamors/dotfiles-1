@@ -158,10 +158,10 @@ nmap <silent> <leader>o :only<CR>
 map <silent> <leader>gs :Gstatus<CR>
 map <silent> <leader>gd :Gdiff<CR>
 map <silent> <leader>gc :Gcommit<CR>
-map <silent> <leader>gp :terminal git push<CR>
-map <silent> <leader>gu :terminal git pull<CR>
-nnoremap <leader>gb :Git branch<Space>
-nnoremap <leader>go :Git checkout<Space>
+map <silent> <leader>gp :!git push<CR>
+map <silent> <leader>gu :!git pull<CR>
+nnoremap <leader>gb :!git branch<Space>
+nnoremap <leader>go :!git checkout<Space>
 
 " Ag
 
