@@ -28,3 +28,4 @@ function ruby_version()
 alias ll="ls -lgha"
 alias r="rails"
 alias tmux="tmux -2"
+alias v="vim ."

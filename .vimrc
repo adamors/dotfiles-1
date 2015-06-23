@@ -243,8 +243,8 @@ let g:airline_theme='powerlineish'
 
 " RuboCop Mappings
 
-map <silent> <leader>ru :Rubocop<CR>
-map <silent> <leader>rf :Rubocop --auto-correct<CR>
+map <silent> <leader>ru :RuboCop<CR>
+map <silent> <leader>rf :RuboCop --auto-correct<CR>
 
 " Rails / Ruby Mappings
 
@@ -268,4 +268,7 @@ vmap <leader>h :!html2haml --erb 2> /dev/null<CR>
 " Ag search for current word under cursor
 map <leader>w :Ag <cword><cr>
 map <leader>ws :FixWhitespace<cr>
+
+" Format JSON
+map <leader>js :%!python -m json.tool<cr>
 
