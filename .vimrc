@@ -62,6 +62,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin '1995eaton/vim-better-javascript-completion'
 Plugin 'gregsexton/MatchTag'
 Plugin 'tmhedberg/matchit'
+Plugin 'ain/vim-capistrano'
 
 call vundle#end()
 
