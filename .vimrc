@@ -164,7 +164,6 @@ nnoremap <leader>gb :Git branch<Space>
 nnoremap <leader>go :Git checkout<Space>
 
 " Ag
-
 nnoremap <leader>f :Ag<Space>
 
 " Enable JSX for .js files
@@ -197,10 +196,6 @@ let NERDTreeShowHidden=1
 map <silent> <leader>n :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.DS_Store$', '\.vim$']
 
-
-" let g:tern_show_signature_in_pum=1
-" let g:tern_show_argument_hints='on_hold'
-
 let g:javascript_enable_domhtmlcss=1
 
 let g:ycm_add_preview_to_completeopt = 1
@@ -211,25 +206,6 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmine,chai'
 
 imap <Tab> <C-P>
-
-
-" function! g:UltiSnips_Complete()
-"     call UltiSnips#ExpandSnippet()
-"     if g:ulti_expand_res == 0
-"         if pumvisible()
-"             return "\<C-n>"
-"         else
-"             call UltiSnips#JumpForwards()
-"             if g:ulti_jump_forwards_res == 0
-"                return "\<TAB>"
-"             endif
-"         endif
-"     endif
-"     return ""
-" endfunction
-" au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-
-" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 set ofu=syntaxcomplete#Complete
 au FileType php setl ofu=phpcomplete#CompletePHP
@@ -242,12 +218,10 @@ smap <C-J> <Plug>snipMateNextOrTrigger
 let g:airline_theme='powerlineish'
 
 " RuboCop Mappings
-
 map <silent> <leader>ru :RuboCop<CR>
 map <silent> <leader>rf :RuboCop --auto-correct<CR>
 
 " Rails / Ruby Mappings
-
 map <silent> <leader>rc :Dispatch Rails console<CR>
 map <silent> <leader>rm :Rake db:migrate<CR>
 map <silent> <leader>q :ccl<CR>
@@ -260,7 +234,6 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-
 " Convert HTML to Haml, ensuew the html2haml gem is installed
 nmap <leader>h :%!html2haml --erb 2> /dev/null<CR>:set ft=haml<CR>
 vmap <leader>h :!html2haml --erb 2> /dev/null<CR>
@@ -271,4 +244,3 @@ map <leader>ws :FixWhitespace<cr>
 
 " Format JSON
 map <leader>js :%!python -m json.tool<cr>
-
