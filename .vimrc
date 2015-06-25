@@ -244,3 +244,6 @@ map <leader>ws :FixWhitespace<cr>
 
 " Format JSON
 map <leader>js :%!python -m json.tool<cr>
+" Misc
+map <leader>f{ :normal va{V=<cr>
+map <leader>fa :normal vf"f"<cr>
