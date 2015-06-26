@@ -161,6 +161,7 @@ map <silent> <leader>gd :Gdiff<CR>
 map <silent> <leader>gc :Gcommit<CR>
 map <silent> <leader>gp :!git push<CR>
 map <silent> <leader>gu :!git pull<CR>
+map <silent> <leader>lg :!git lg<CR>
 nnoremap <leader>gb :!git branch<Space>
 nnoremap <leader>go :!git checkout<Space>
 
