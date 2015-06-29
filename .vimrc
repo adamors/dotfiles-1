@@ -4,6 +4,9 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+let mapleader=","
+
+Plugin 'craigemery/vim-autotag'
 Plugin 'majutsushi/tagbar'
 Plugin 'ngmy/vim-rubocop'
 Plugin 'thoughtbot/vim-rspec'
