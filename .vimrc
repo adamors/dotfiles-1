@@ -4,6 +4,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'majutsushi/tagbar'
 Plugin 'ngmy/vim-rubocop'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'endel/vim-github-colorscheme'
@@ -147,7 +148,8 @@ nmap <silent> <leader>d <Plug>DashSearch
 
 " CtrlP Clear Cache
 map <silent> <leader>cc :CtrlPClearAllCaches<CR>
-nnoremap <silent> <C-T> :CtrlPBufTag<CR>
+nnoremap <silent> <C-T> :CtrlPTag<CR>
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
 
 " Tabs
 map <silent> <leader>tn :tabnew<CR>
@@ -227,6 +229,7 @@ map <silent> <leader>rf :RuboCop --auto-correct<CR>
 map <silent> <leader>rc :Dispatch Rails console<CR>
 map <silent> <leader>rm :Rake db:migrate<CR>
 map <silent> <leader>q :ccl<CR>
+map <silent> <leader>qo :copen<CR>
 
 " RSpec
 let g:rspec_command = "Dispatch rspec {spec}"
