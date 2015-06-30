@@ -4,8 +4,8 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-let mapleader=","
-
+Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'vivkin/flatland.vim'
 Plugin 'craigemery/vim-autotag'
 Plugin 'majutsushi/tagbar'
 Plugin 'ngmy/vim-rubocop'
@@ -84,8 +84,6 @@ let g:hybrid_use_Xresources = 1
 
 let javascript_enable_domhtmlcss = 1
 
-" set clipboard+=unnamedplus
-
 set t_Co=256
 let base16colorspace=256
 set t_ut=
@@ -115,7 +113,7 @@ set wildmenu
 set completeopt-=menu,preview
 set guioptions-=r
 set guioptions-=L
-set guifont=Source\ Code\ Pro\ for\ Powerline:h11
+set guifont=Source\ Code\ Pro\ for\ Powerline:h12
 set foldmethod=manual
 colorscheme base16-ocean
 set background=dark
