@@ -162,10 +162,10 @@ nmap <silent> <leader>o :only<CR>
 map <silent> <leader>gs :Gstatus<CR>
 map <silent> <leader>gd :Gdiff<CR>
 map <silent> <leader>gc :Gcommit<CR>
-map <silent> <leader>gp :!git push<CR>
+map <silent> <leader>gp :Gpush<CR>
 map <silent> <leader>gu :!git pull<CR>
 map <silent> <leader>lg :!git lg<CR>
-nnoremap <leader>gb :!git branch<Space>
+nnoremap <leader>gb :GBlame<cr>
 nnoremap <leader>go :!git checkout<Space>
 
 " Ag
