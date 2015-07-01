@@ -32,7 +32,9 @@ function ruby_version()
 
 alias ll="ls -lgha"
 alias r="rails"
+alias t="tmux -2"
 alias tmux="tmux -2"
 alias v="vim ."
 alias ctags="`brew --prefix`/bin/ctags"
-alias s="cat ~/.ssh/config | grep '^Host\|^#\|^$'"
+alias s="cat ~/.ssh/config | grep --colour '^Host\|^#\|^$'"
+alias c="clear"
