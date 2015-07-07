@@ -111,6 +111,7 @@ set guifont=Source\ Code\ Pro\ for\ Powerline:h12
 set foldmethod=manual
 colorscheme base16-ocean
 set background=dark
+set synmaxcol=300
 
 " Powerline + Syntatistic Config
 
@@ -159,7 +160,7 @@ map <silent> <leader>gc :Gcommit<CR>
 map <silent> <leader>gp :Gpush<CR>
 map <silent> <leader>gu :!git pull<CR>
 map <silent> <leader>lg :!git lg<CR>
-nnoremap <leader>gb :GBlame<cr>
+nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>go :!git checkout<Space>
 
 " Ag
