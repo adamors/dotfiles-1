@@ -4,6 +4,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'szw/vim-g'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'craigemery/vim-autotag'
 Plugin 'majutsushi/tagbar'
@@ -34,7 +35,6 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'ervandew/supertab'
 Plugin 'burnettk/vim-angular'
-" Plugin 'xsbeats/vim-blade'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-commentary'
 Plugin 'ap/vim-css-color'
@@ -51,12 +51,10 @@ Plugin 'honza/vim-snippets'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'vim-scripts/xoria256.vim'
 Plugin 'chriskempson/base16-vim'
-" Plugin 'digitaltoad/vim-jade'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-haml'
-" Plugin 'kchmck/vim-coffee-script'
 Plugin '1995eaton/vim-better-javascript-completion'
 Plugin 'gregsexton/MatchTag'
 Plugin 'tmhedberg/matchit'
@@ -248,3 +246,9 @@ map <leader>js :%!python -m json.tool<cr>
 " Misc
 map <leader>f{ :normal va{V=<cr>
 map <leader>fa :normal vf"f"<cr>
+map <leader>g :Google <cword><cr>
+
+" Tab Navigation
+nnoremap th :tabnext<CR>
+nnoremap tl :tabprev<CR>
+nnoremap tn :tabnew<CR>
