@@ -4,6 +4,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'szw/vim-g'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'craigemery/vim-autotag'
