@@ -4,6 +4,8 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'ryanoasis/vim-devicons'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'szw/vim-g'
 Plugin 'AndrewRadev/splitjoin.vim'
@@ -87,7 +89,8 @@ set nowrap
 set ignorecase
 set infercase
 set noshowmode
-set encoding=utf-8
+" set encoding=utf-8
+set encoding=utf8
 set fillchars+=stl:\ ,stlnc:\
 set termencoding=utf-8
 set smartindent
@@ -106,7 +109,7 @@ set wildmenu
 set completeopt-=menu,preview
 set guioptions-=r
 set guioptions-=L
-set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+set guifont=Source\ Code\ Pro\ Powerline\ Plus\ Nerd\ File\ Types:h12
 set foldmethod=manual
 colorscheme base16-ocean
 set background=dark
@@ -161,6 +164,7 @@ map <silent> <leader>gu :!git pull<CR>
 map <silent> <leader>lg :!git lg<CR>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>go :!git checkout<Space>
+nnoremap <leader>gl :!git lg<cr>
 
 " Ag
 nnoremap <leader>f :Ag<Space>
@@ -247,9 +251,11 @@ map <leader>js :%!python -m json.tool<cr>
 " Misc
 map <leader>f{ :normal va{V=<cr>
 map <leader>fa :normal vf"f"<cr>
-map <leader>g :Google <cword><cr>
 
 " Tab Navigation
 nnoremap th :tabnext<CR>
 nnoremap tl :tabprev<CR>
 nnoremap tn :tabnew<CR>
+
+" View .vimrc
+map <leader>v :sp ~/.vimrc<cr>
