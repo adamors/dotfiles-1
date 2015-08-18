@@ -4,6 +4,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'mhinz/vim-janah'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'NLKNguyen/papercolor-theme'
@@ -111,7 +112,7 @@ set guioptions-=r
 set guioptions-=L
 set guifont=Source\ Code\ Pro\ Powerline\ Plus\ Nerd\ File\ Types:h12
 set foldmethod=manual
-colorscheme base16-ocean
+colorscheme PaperColor
 set background=dark
 set synmaxcol=300
 
