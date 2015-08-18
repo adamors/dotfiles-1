@@ -6,6 +6,20 @@ plugins=(git)
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin"
 source $ZSH/oh-my-zsh.sh
 
+# Load zsh-syntax-highlighting.
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#
+# Load zsh-autosuggestions.
+source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
+
+# Enable autosuggestions automatically.
+zle-line-init() {
+  zle autosuggest-start
+}
+zle -N zle-line-init
+
+bindkey '^f' vi-forward-word
+
 # ============
 # Base16 Shell
 # ============
@@ -26,15 +40,16 @@ function ruby_version()
   fi
 }
 
-# ======
-# Alias
-# ======
+# =======
+# Aliases
+# =======
 
 alias ll="ls -lgha"
 alias r="rails"
 alias t="tmux -2"
 alias tmux="tmux -2"
 alias v="vim ."
+alias n="nvim ."
 alias ctags="`brew --prefix`/bin/ctags"
 alias s="cat ~/.ssh/config | grep --colour '^#'"
 alias c="clear"
