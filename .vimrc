@@ -112,7 +112,7 @@ set guioptions-=r
 set guioptions-=L
 set guifont=Source\ Code\ Pro\ Powerline\ Plus\ Nerd\ File\ Types:h12
 set foldmethod=manual
-colorscheme PaperColor
+colorscheme xoria256
 set background=dark
 set synmaxcol=300
 
@@ -260,3 +260,4 @@ nnoremap tn :tabnew<CR>
 
 " View .vimrc
 map <leader>v :sp ~/.vimrc<cr>
+colorscheme xoria256
