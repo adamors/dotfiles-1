@@ -4,6 +4,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'sheerun/vim-wombat-scheme'
 Plugin 'mhinz/vim-janah'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'ryanoasis/vim-devicons'
@@ -112,7 +113,7 @@ set guioptions-=r
 set guioptions-=L
 set guifont=Source\ Code\ Pro\ Powerline\ Plus\ Nerd\ File\ Types:h12
 set foldmethod=manual
-colorscheme xoria256
+colorscheme PaperColor
 set background=dark
 set synmaxcol=300
 
@@ -260,4 +261,3 @@ nnoremap tn :tabnew<CR>
 
 " View .vimrc
 map <leader>v :sp ~/.vimrc<cr>
-colorscheme xoria256
