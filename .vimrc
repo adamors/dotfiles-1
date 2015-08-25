@@ -4,6 +4,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'jgdavey/vim-turbux'
 Plugin 'sheerun/vim-wombat-scheme'
 Plugin 'mhinz/vim-janah'
 Plugin 'kchmck/vim-coffee-script'
@@ -83,6 +84,7 @@ let javascript_enable_domhtmlcss = 1
 
 set t_Co=256
 let base16colorspace=256
+set relativenumber
 set t_ut=
 set number
 set laststatus=2
