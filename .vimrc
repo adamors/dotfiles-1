@@ -47,7 +47,8 @@ Plugin 'ap/vim-css-color'
 Plugin 'pangloss/vim-javascript'
 Plugin 'heavenshell/vim-jsdoc'
 Plugin 'othree/yajs.vim'
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-vinegar'
 Plugin 'scrooloose/syntastic'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -122,6 +123,7 @@ set synmaxcol=300
 " Powerline + Syntatistic Config
 
 let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_mode_map = { 'passive_filetypes': ['sass', 'scss'] }
 let g:syntastic_always_populate_loc_list = 1
