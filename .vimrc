@@ -4,6 +4,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'jgdavey/vim-turbux'
 Plugin 'sheerun/vim-wombat-scheme'
 Plugin 'mhinz/vim-janah'
@@ -13,7 +14,7 @@ Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'szw/vim-g'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'craigemery/vim-autotag'
-Plugin 'majutsushi/tagbar'
+" Plugin 'majutsushi/tagbar'
 Plugin 'ngmy/vim-rubocop'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'endel/vim-github-colorscheme'
@@ -47,8 +48,7 @@ Plugin 'ap/vim-css-color'
 Plugin 'pangloss/vim-javascript'
 Plugin 'heavenshell/vim-jsdoc'
 Plugin 'othree/yajs.vim'
-" Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-vinegar'
+Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -56,7 +56,6 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'vim-scripts/xoria256.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
@@ -74,6 +73,7 @@ filetype plugin on
 filetype plugin indent on
 
 syntax enable
+syntax on
 
 let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
@@ -94,7 +94,6 @@ set nowrap
 set ignorecase
 set infercase
 set noshowmode
-" set encoding=utf-8
 set encoding=utf8
 set fillchars+=stl:\ ,stlnc:\
 set termencoding=utf-8
@@ -114,16 +113,18 @@ set wildmenu
 set completeopt-=menu,preview
 set guioptions-=r
 set guioptions-=L
-set guifont=Source\ Code\ Pro\ Powerline\ Plus\ Nerd\ File\ Types:h12
+set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline:h12
 set foldmethod=manual
 colorscheme PaperColor
 set background=dark
 set synmaxcol=300
+set complete-=i
+set colorcolumn=80
 
 " Powerline + Syntatistic Config
 
 let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+" let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_mode_map = { 'passive_filetypes': ['sass', 'scss'] }
 let g:syntastic_always_populate_loc_list = 1
@@ -143,9 +144,6 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
 autocmd vimenter AirlineAfterInit call AirlineInit()
-" autocmd vimenter * NERDTree
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-" let NERDTreeQuitOnOpen = 1
 
 " Dash integration
 nmap <silent> <leader>d <Plug>DashSearch
@@ -231,7 +229,7 @@ map <silent> <leader>ru :RuboCop<CR>
 map <silent> <leader>rf :RuboCop --auto-correct<CR>
 
 " Rails / Ruby Mappings
-map <silent> <leader>rc :Dispatch Rails console<CR>
+map <silent> <leader>rc :Console<CR>
 map <silent> <leader>rm :Rake db:migrate<CR>
 map <silent> <leader>q :ccl<CR>
 map <silent> <leader>qo :copen<CR>
@@ -244,7 +242,7 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-" Convert HTML to Haml, ensuew the html2haml gem is installed
+" Convert HTML to Haml, ensure the html2haml gem is installed
 nmap <leader>h :%!html2haml --erb 2> /dev/null<CR>:set ft=haml<CR>
 vmap <leader>h :!html2haml --erb 2> /dev/null<CR>
 
