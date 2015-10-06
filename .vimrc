@@ -4,6 +4,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'prophittcorey/vim-flay'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'jgdavey/vim-turbux'
 Plugin 'sheerun/vim-wombat-scheme'
@@ -113,13 +114,14 @@ set wildmenu
 set completeopt-=menu,preview
 set guioptions-=r
 set guioptions-=L
-set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline:h12
+set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline\ Plus\ Nerd\ File\ Types:h12
 set foldmethod=manual
 colorscheme PaperColor
 set background=dark
 set synmaxcol=300
 set complete-=i
-set colorcolumn=80
+set autoread
+" set colorcolumn=80
 
 " Powerline + Syntatistic Config
 
@@ -263,3 +265,6 @@ nnoremap tn :tabnew<CR>
 
 " View .vimrc
 map <leader>v :sp ~/.vimrc<cr>
+
+" Flay Integration - sudo gem install flay
+nnoremap <Leader>f :Flay<CR>

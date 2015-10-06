@@ -13,12 +13,12 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
 
 # Enable autosuggestions automatically.
-zle-line-init() {
-  zle autosuggest-start
-}
-zle -N zle-line-init
+# zle-line-init() {
+#   zle autosuggest-start
+# }
+# zle -N zle-line-init
 
-bindkey '^f' vi-forward-word
+# bindkey '^f' vi-forward-word
 
 # ============
 # Base16 Shell
@@ -61,4 +61,3 @@ alias n="nvim ."
 alias ctags="`brew --prefix`/bin/ctags"
 alias s="cat ~/.ssh/config | grep --colour '^#'"
 alias c="clear"
-alias b="bundle exec"
