@@ -4,7 +4,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'prophittcorey/vim-flay'
+" Plugin 'prophittcorey/vim-flay'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'jgdavey/vim-turbux'
 Plugin 'sheerun/vim-wombat-scheme'
@@ -57,7 +57,7 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'chriskempson/base16-vim'
+" Plugin 'chriskempson/base16-vim'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-bundler'
@@ -86,7 +86,7 @@ let javascript_enable_domhtmlcss = 1
 
 set t_Co=256
 let base16colorspace=256
-set relativenumber
+" set relativenumber
 set t_ut=
 set number
 set laststatus=2
@@ -116,7 +116,7 @@ set guioptions-=r
 set guioptions-=L
 set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline\ Plus\ Nerd\ File\ Types:h12
 set foldmethod=manual
-colorscheme PaperColor
+colorscheme solarized
 set background=dark
 set synmaxcol=300
 set complete-=i
@@ -125,14 +125,14 @@ set autoread
 
 " Powerline + Syntatistic Config
 
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['eslint']
 " let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_mode_map = { 'passive_filetypes': ['sass', 'scss'] }
-let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
 
 let g:airline_symbols = {}
 let g:airline_powerline_fonts=1
@@ -146,6 +146,7 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
 autocmd vimenter AirlineAfterInit call AirlineInit()
+
 
 " Dash integration
 nmap <silent> <leader>d <Plug>DashSearch
@@ -204,6 +205,9 @@ endif
 let NERDTreeShowHidden=1
 map <silent> <leader>n :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.DS_Store$', '\.vim$']
+autocmd VimEnter * NERDTree
+autocmd BufWinEnter * NERDTreeMirror
+autocmd VimEnter * wincmd p
 
 let g:javascript_enable_domhtmlcss=1
 
@@ -267,4 +271,4 @@ nnoremap tn :tabnew<CR>
 map <leader>v :sp ~/.vimrc<cr>
 
 " Flay Integration - sudo gem install flay
-nnoremap <Leader>f :Flay<CR>
+" nnoremap <Leader>f :Flay<CR>

@@ -12,6 +12,8 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Load zsh-autosuggestions.
 source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
 
+source "/Applications/SQLAnywhere12/System/bin64/sa_config.sh"
+
 # Enable autosuggestions automatically.
 # zle-line-init() {
 #   zle autosuggest-start
@@ -56,8 +58,8 @@ alias ll="ls -lgha"
 alias r="rails"
 alias t="tmux -2"
 alias tmux="tmux -2"
-alias v="vim ."
-alias n="nvim ."
+alias v="vim"
+alias n="nvim"
 alias ctags="`brew --prefix`/bin/ctags"
 alias s="cat ~/.ssh/config | grep --colour '^#'"
 alias c="clear"
