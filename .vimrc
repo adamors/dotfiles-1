@@ -4,7 +4,8 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" Plugin 'prophittcorey/vim-flay'
+Plugin 'tpope/vim-vividchalk'
+Plugin 'vim-scripts/TailMinusF'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'jgdavey/vim-turbux'
 Plugin 'sheerun/vim-wombat-scheme'
@@ -116,7 +117,7 @@ set guioptions-=r
 set guioptions-=L
 set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline\ Plus\ Nerd\ File\ Types:h12
 set foldmethod=manual
-colorscheme solarized
+colorscheme vividchalk
 set background=dark
 set synmaxcol=300
 set complete-=i
