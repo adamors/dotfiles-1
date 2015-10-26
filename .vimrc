@@ -4,6 +4,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'nanotech/jellybeans.vim'
 Plugin 'tpope/vim-vividchalk'
 Plugin 'vim-scripts/TailMinusF'
 Plugin 'altercation/vim-colors-solarized'
@@ -16,7 +17,6 @@ Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'szw/vim-g'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'craigemery/vim-autotag'
-" Plugin 'majutsushi/tagbar'
 Plugin 'ngmy/vim-rubocop'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'endel/vim-github-colorscheme'
@@ -86,8 +86,7 @@ let g:hybrid_use_Xresources = 1
 let javascript_enable_domhtmlcss = 1
 
 set t_Co=256
-let base16colorspace=256
-" set relativenumber
+set colorcolumn=80
 set t_ut=
 set number
 set laststatus=2
@@ -122,7 +121,6 @@ set background=dark
 set synmaxcol=300
 set complete-=i
 set autoread
-" set colorcolumn=80
 
 " Powerline + Syntatistic Config
 
@@ -271,5 +269,5 @@ nnoremap tn :tabnew<CR>
 " View .vimrc
 map <leader>v :sp ~/.vimrc<cr>
 
-" Flay Integration - sudo gem install flay
-" nnoremap <Leader>f :Flay<CR>
+" Disable K looking up stuff
+map K <Nop>
