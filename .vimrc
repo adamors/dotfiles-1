@@ -179,7 +179,8 @@ nnoremap <leader>go :!git checkout<Space>
 nnoremap <leader>gl :!git lg<cr>
 
 " Ag
-nnoremap <leader>f :Ag<Space>
+nnoremap <leader>fw :Ag <cword><CR>
+nnoremap <leader>f :Ag <Space>
 
 " Enable JSX for .js files
 let g:jsx_ext_required = 0
