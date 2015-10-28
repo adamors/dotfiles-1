@@ -4,25 +4,20 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'nanotech/jellybeans.vim'
+Plugin 'flazz/vim-colorschemes'
 Plugin 'tpope/vim-vividchalk'
 Plugin 'vim-scripts/TailMinusF'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'jgdavey/vim-turbux'
 Plugin 'sheerun/vim-wombat-scheme'
 Plugin 'mhinz/vim-janah'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'ryanoasis/vim-devicons'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'szw/vim-g'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'craigemery/vim-autotag'
-Plugin 'ngmy/vim-rubocop'
-Plugin 'thoughtbot/vim-rspec'
 Plugin 'endel/vim-github-colorscheme'
 Plugin 'elzr/vim-json'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'chrisbra/csv.vim'
 Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'benmills/vimux'
@@ -35,21 +30,13 @@ Plugin 'vim-scripts/Align'
 Plugin 'bling/vim-airline'
 Plugin 'rking/ag.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
-Plugin 'matthewsimo/angular-vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'rizzatti/dash.vim'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'marijnh/tern_for_vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'ervandew/supertab'
-Plugin 'burnettk/vim-angular'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-commentary'
-Plugin 'ap/vim-css-color'
-Plugin 'pangloss/vim-javascript'
-Plugin 'heavenshell/vim-jsdoc'
-Plugin 'othree/yajs.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'bronson/vim-trailing-whitespace'
@@ -57,16 +44,36 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-Plugin 'cakebaker/scss-syntax.vim'
-" Plugin 'chriskempson/base16-vim'
+Plugin 'gregsexton/MatchTag'
+Plugin 'tmhedberg/matchit'
+
+" Rails / Ruby Plugins
+Plugin 'ain/vim-capistrano'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-haml'
+Plugin 'ngmy/vim-rubocop'
+Plugin 'thoughtbot/vim-rspec'
+
+" SCSS / CSS Plugins
+Plugin 'ap/vim-css-color'
+Plugin 'cakebaker/scss-syntax.vim'
+
+" Javascript Plugins
+Plugin 'mxw/vim-jsx'
 Plugin '1995eaton/vim-better-javascript-completion'
-Plugin 'gregsexton/MatchTag'
-Plugin 'tmhedberg/matchit'
-Plugin 'ain/vim-capistrano'
+Plugin 'pangloss/vim-javascript'
+Plugin 'matthewsimo/angular-vim-snippets'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'burnettk/vim-angular'
+Plugin 'heavenshell/vim-jsdoc'
+Plugin 'othree/yajs.vim'
+Plugin 'kchmck/vim-coffee-script'
+
+" Misc Plugins
+Plugin 'szw/vim-tags'
 
 call vundle#end()
 
@@ -86,7 +93,6 @@ let g:hybrid_use_Xresources = 1
 let javascript_enable_domhtmlcss = 1
 
 set t_Co=256
-set colorcolumn=80
 set t_ut=
 set number
 set laststatus=2
@@ -116,7 +122,7 @@ set guioptions-=r
 set guioptions-=L
 set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline\ Plus\ Nerd\ File\ Types:h12
 set foldmethod=manual
-colorscheme vividchalk
+colorscheme default
 set background=dark
 set synmaxcol=300
 set complete-=i
@@ -124,7 +130,7 @@ set autoread
 
 " Powerline + Syntatistic Config
 
-let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_checkers = ['eslint']
 " let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_mode_map = { 'passive_filetypes': ['sass', 'scss'] }
@@ -271,3 +277,6 @@ map <leader>v :sp ~/.vimrc<cr>
 
 " Disable K looking up stuff
 map K <Nop>
+
+" let &colorcolumn=join(range(81,999),",")
+" highlight ColorColumn ctermbg=235 guibg=#2c2d27
