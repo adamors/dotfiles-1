@@ -1,25 +1,21 @@
-set nocompatible
+" set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'flazz/vim-colorschemes'
-Plugin 'tpope/vim-vividchalk'
-Plugin 'vim-scripts/TailMinusF'
+Plugin 'justincampbell/vim-railscasts'
+Plugin 'kristijanhusak/vim-hybrid-material'
+Plugin 'ratazzi/blackboard.vim'
+Plugin 'mmazer/vim-github-colorscheme'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'itchyny/lightline.vim'
+Plugin 'tpope/vim-rbenv'
 Plugin 'jgdavey/vim-turbux'
-Plugin 'sheerun/vim-wombat-scheme'
 Plugin 'mhinz/vim-janah'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'szw/vim-g'
 Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'craigemery/vim-autotag'
-Plugin 'endel/vim-github-colorscheme'
 Plugin 'elzr/vim-json'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'kana/vim-textobj-user'
-Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'benmills/vimux'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
@@ -27,7 +23,6 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-dispatch'
 Plugin 'vim-scripts/Align'
-Plugin 'bling/vim-airline'
 Plugin 'rking/ag.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
 Plugin 'Valloric/YouCompleteMe'
@@ -48,13 +43,14 @@ Plugin 'gregsexton/MatchTag'
 Plugin 'tmhedberg/matchit'
 
 " Rails / Ruby Plugins
-Plugin 'ain/vim-capistrano'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-haml'
 Plugin 'ngmy/vim-rubocop'
 Plugin 'thoughtbot/vim-rspec'
+Plugin 'kana/vim-textobj-user'
+Plugin 'nelstrom/vim-textobj-rubyblock'
 
 " SCSS / CSS Plugins
 Plugin 'ap/vim-css-color'
@@ -64,16 +60,17 @@ Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'mxw/vim-jsx'
 Plugin '1995eaton/vim-better-javascript-completion'
 Plugin 'pangloss/vim-javascript'
-Plugin 'matthewsimo/angular-vim-snippets'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'burnettk/vim-angular'
-Plugin 'heavenshell/vim-jsdoc'
 Plugin 'othree/yajs.vim'
 Plugin 'kchmck/vim-coffee-script'
 
 " Misc Plugins
 Plugin 'szw/vim-tags'
+
+" Colorschemes
+Plugin 'chriskempson/base16-vim'
 
 call vundle#end()
 
@@ -84,18 +81,19 @@ filetype plugin indent on
 syntax enable
 syntax on
 
+let g:rails_ctags_arguments = ['--languages=-javascript', '--fields=+l', '--exclude=.git', '--exclude=log']
+
 let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:SuperTabDefaultCompletionType = '<C-Tab>'
-let g:hybrid_use_Xresources = 1
 
 let javascript_enable_domhtmlcss = 1
+" let mapleader=" "
 
-set t_Co=256
-set t_ut=
 set number
 set laststatus=2
+set colorcolumn=80
 set backspace=2
 set nowrap
 set ignorecase
@@ -117,13 +115,14 @@ set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 set wildmenu
+set wildignorecase
 set completeopt-=menu,preview
 set guioptions-=r
 set guioptions-=L
 set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline\ Plus\ Nerd\ File\ Types:h12
 set foldmethod=manual
-colorscheme default
 set background=dark
+silent! colorscheme hybrid_material
 set synmaxcol=300
 set complete-=i
 set autoread
@@ -150,7 +149,7 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
-autocmd vimenter AirlineAfterInit call AirlineInit()
+" autocmd vimenter AirlineAfterInit call AirlineInit()
 
 
 " Dash integration
@@ -159,10 +158,11 @@ nmap <silent> <leader>d <Plug>DashSearch
 " CtrlP Clear Cache
 map <silent> <leader>cc :CtrlPClearAllCaches<CR>
 nnoremap <silent> <C-T> :CtrlPTag<CR>
-nnoremap <silent> <Leader>b :TagbarToggle<CR>
 
 " Tabs
 map <silent> <leader>tn :tabnew<CR>
+map <silent> <leader>nt :tabnext<CR>
+map <silent> <leader>pt :tabprevious<CR>
 
 " Misc
 nmap <silent> <leader>o :only<CR>
@@ -172,15 +172,13 @@ map <silent> <leader>gs :Gstatus<CR>
 map <silent> <leader>gd :Gdiff<CR>
 map <silent> <leader>gc :Gcommit<CR>
 map <silent> <leader>gp :Gpush<CR>
-map <silent> <leader>gu :!git pull<CR>
-map <silent> <leader>lg :!git lg<CR>
-nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>go :!git checkout<Space>
-nnoremap <leader>gl :!git lg<cr>
+map <silent> <leader>gu :Dispatch git pull<CR>
+map <silent> <leader>gl :Dispatch git lg<CR>
+map <silent> <leader>gb :Gblame<cr>
+map <leader>go :Dispatch git checkout<Space>
 
 " Ag
-nnoremap <leader>fw :Ag <cword><CR>
-nnoremap <leader>f :Ag <Space>
+nnoremap <leader>f :Ag<Space>
 
 " Enable JSX for .js files
 let g:jsx_ext_required = 0
@@ -211,8 +209,6 @@ endif
 let NERDTreeShowHidden=1
 map <silent> <leader>n :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.DS_Store$', '\.vim$']
-autocmd VimEnter * NERDTree
-autocmd BufWinEnter * NERDTreeMirror
 autocmd VimEnter * wincmd p
 
 let g:javascript_enable_domhtmlcss=1
@@ -221,6 +217,7 @@ let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_register_as_syntastic_checker = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
 let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmine,chai'
 
@@ -234,7 +231,7 @@ au FileType css setl ofu=csscomplete#CompleteCSS
 
 imap <C-J> <Plug>snipMateNextOrTrigger
 smap <C-J> <Plug>snipMateNextOrTrigger
-let g:airline_theme='powerlineish'
+" let g:airline_theme='powerlineish'
 
 " RuboCop Mappings
 map <silent> <leader>ru :RuboCop<CR>
@@ -245,6 +242,7 @@ map <silent> <leader>rc :Console<CR>
 map <silent> <leader>rm :Rake db:migrate<CR>
 map <silent> <leader>q :ccl<CR>
 map <silent> <leader>qo :copen<CR>
+map <silent> <leader>rr :!ruby %<CR>
 
 " RSpec
 let g:rspec_command = "Dispatch rspec {spec}"
@@ -279,5 +277,31 @@ map <leader>v :sp ~/.vimrc<cr>
 " Disable K looking up stuff
 map K <Nop>
 
-" let &colorcolumn=join(range(81,999),",")
-" highlight ColorColumn ctermbg=235 guibg=#2c2d27
+command! W :w
+command! Q :q
+
+let NERDTreeQuitOnOpen=1
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+
+if has('nvim')
+  nmap <bs> :<c-u>TmuxNavigateLeft<cr>
+endif
