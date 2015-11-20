@@ -1,3 +1,3 @@
-def cls
-    system('cls')
+def clear
+    system('clear')
 end
