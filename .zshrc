@@ -1,7 +1,11 @@
 export ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="gnzh"
+ZSH_THEME="ys"
 plugins=(git)
+
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
+export RACKSPACE_USERNAME=cef-karloakes
+export RACKSPACE_API_KEY=1c2f1cf162794f6e96b09b24b6a95773
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin"
 source $ZSH/oh-my-zsh.sh
@@ -21,13 +25,6 @@ source "/Applications/SQLAnywhere12/System/bin64/sa_config.sh"
 # zle -N zle-line-init
 
 # bindkey '^f' vi-forward-word
-
-# ============
-# Base16 Shell
-# ============
-
-# BASE16_SHELL="$HOME/.config/base16-shell/base16-ocean.dark.sh"
-# [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
@@ -58,8 +55,8 @@ alias ll="ls -lgha"
 alias r="rails"
 alias t="tmux -2"
 alias tmux="tmux -2"
-alias v="vim"
-alias n="nvim"
+alias v="NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
+alias n="NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
 alias ctags="`brew --prefix`/bin/ctags"
 alias s="cat ~/.ssh/config | grep --colour '^#'"
 alias c="clear"
