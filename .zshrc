@@ -1,13 +1,15 @@
 export ZSH=$HOME/.oh-my-zsh
+# export PATH="/usr/local/sbin:$PATH"
+export DYLD_BIND_AT_LAUNCH=1
 
 ZSH_THEME="ys"
 plugins=(git)
 
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
+# export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export RACKSPACE_USERNAME=cef-karloakes
 export RACKSPACE_API_KEY=1c2f1cf162794f6e96b09b24b6a95773
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/sbin:$PATH"
 source $ZSH/oh-my-zsh.sh
 
 # Load zsh-syntax-highlighting.
@@ -59,4 +61,9 @@ alias v="NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
 alias n="NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
 alias ctags="`brew --prefix`/bin/ctags"
 alias s="cat ~/.ssh/config | grep --colour '^#'"
+alias be="bundle exec"
+alias es="elasticsearch"
 alias c="clear"
+
+export NVM_DIR="/Users/gavsim/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

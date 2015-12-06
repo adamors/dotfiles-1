@@ -1,20 +1,15 @@
 " set nocompatible
 filetype off
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'justincampbell/vim-railscasts'
-Plugin 'kristijanhusak/vim-hybrid-material'
-Plugin 'ratazzi/blackboard.vim'
-Plugin 'mmazer/vim-github-colorscheme'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'itchyny/lightline.vim'
 Plugin 'tpope/vim-rbenv'
 Plugin 'jgdavey/vim-turbux'
 Plugin 'mhinz/vim-janah'
 Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'elzr/vim-json'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'benmills/vimux'
 Plugin 'gmarik/Vundle.vim'
@@ -59,18 +54,23 @@ Plugin 'cakebaker/scss-syntax.vim'
 " Javascript Plugins
 Plugin 'mxw/vim-jsx'
 Plugin '1995eaton/vim-better-javascript-completion'
-Plugin 'pangloss/vim-javascript'
+Plugin 'justinj/vim-react-snippets'
+" Plugin 'pangloss/vim-javascript'
+Plugin 'rschmukler/pangloss-vim-indent'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'burnettk/vim-angular'
 Plugin 'othree/yajs.vim'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'elzr/vim-json'
 
 " Misc Plugins
 Plugin 'szw/vim-tags'
 
 " Colorschemes
 Plugin 'chriskempson/base16-vim'
+Plugin 'mhartington/oceanic-next'
+Plugin 'kristijanhusak/vim-hybrid-material'
 
 call vundle#end()
 
@@ -93,7 +93,7 @@ let javascript_enable_domhtmlcss = 1
 
 set number
 set laststatus=2
-set colorcolumn=80
+" set colorcolumn=80
 set backspace=2
 set nowrap
 set ignorecase
@@ -120,9 +120,10 @@ set completeopt-=menu,preview
 set guioptions-=r
 set guioptions-=L
 set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline\ Plus\ Nerd\ File\ Types:h12
-set foldmethod=manual
+set foldmethod=indent
+set foldlevel=128
 set background=dark
-silent! colorscheme hybrid_material
+silent! colorscheme OceanicNext
 set synmaxcol=300
 set complete-=i
 set autoread
@@ -282,8 +283,12 @@ command! Q :q
 
 let NERDTreeQuitOnOpen=1
 
+if has('nvim')
+  nmap <bs> :<c-u>TmuxNavigateLeft<cr>
+endif
+
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'powerline',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
@@ -301,7 +306,3 @@ let g:lightline = {
       \ 'separator': { 'left': '⮀', 'right': '⮂' },
       \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
       \ }
-
-if has('nvim')
-  nmap <bs> :<c-u>TmuxNavigateLeft<cr>
-endif
