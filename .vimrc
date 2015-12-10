@@ -1,105 +1,106 @@
-" set nocompatible
-filetype off
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'itchyny/lightline.vim'
-Plugin 'tpope/vim-rbenv'
-Plugin 'jgdavey/vim-turbux'
-Plugin 'mhinz/vim-janah'
-Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'benmills/vimux'
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-dispatch'
-Plugin 'vim-scripts/Align'
-Plugin 'rking/ag.vim'
-Plugin 'FelikZ/ctrlp-py-matcher'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'rizzatti/dash.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'ervandew/supertab'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-commentary'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-Plugin 'gregsexton/MatchTag'
-Plugin 'tmhedberg/matchit'
+call plug#begin('~/.vim/plugged')
 
 " Rails / Ruby Plugins
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-haml'
-Plugin 'ngmy/vim-rubocop'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'kana/vim-textobj-user'
-Plugin 'nelstrom/vim-textobj-rubyblock'
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-haml'
+Plug 'ngmy/vim-rubocop', { 'for': 'ruby' }
+Plug 'thoughtbot/vim-rspec' , { 'for': 'ruby' }
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
+Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
 
-" SCSS / CSS Plugins
-Plugin 'ap/vim-css-color'
-Plugin 'cakebaker/scss-syntax.vim'
+" SCSS / CSS Plugs
+Plug 'ap/vim-css-color'
+Plug 'cakebaker/scss-syntax.vim'
 
-" Javascript Plugins
-Plugin 'mxw/vim-jsx'
-Plugin '1995eaton/vim-better-javascript-completion'
-Plugin 'justinj/vim-react-snippets'
-" Plugin 'pangloss/vim-javascript'
-Plugin 'rschmukler/pangloss-vim-indent'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'burnettk/vim-angular'
-Plugin 'othree/yajs.vim'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'elzr/vim-json'
+" Javascript Plugs
+Plug 'mxw/vim-jsx'
+Plug '1995eaton/vim-better-javascript-completion'
+Plug 'justinj/vim-react-snippets'
 
-" Misc Plugins
-Plugin 'szw/vim-tags'
+" Plug 'pangloss/vim-javascript'
+Plug 'rschmukler/pangloss-vim-indent'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'marijnh/tern_for_vim'
+Plug 'burnettk/vim-angular'
+Plug 'othree/yajs.vim'
+Plug 'kchmck/vim-coffee-script'
+Plug 'elzr/vim-json'
+Plug 'moll/vim-node'
+Plug 'valloric/MatchTagAlways'
+
+" Misc Plugs
+Plug 'benekastah/neomake'
+Plug 'Yggdroot/indentLine'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-dispatch'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-commentary'
+Plug 'scrooloose/nerdtree'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+" Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+Plug 'gregsexton/MatchTag'
+Plug 'tmhedberg/matchit'
+Plug 'itchyny/lightline.vim'
+Plug 'jgdavey/vim-turbux'
+Plug 'mhinz/vim-janah'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'benmills/vimux'
+Plug 'vim-scripts/Align'
+Plug 'rking/ag.vim'
+Plug 'FelikZ/ctrlp-py-matcher'
+" Plug 'Valloric/YouCompleteMe'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rizzatti/dash.vim'
+Plug 'SirVer/ultisnips'
+Plug 'ervandew/supertab'
+Plug 'ryanoasis/vim-devicons'
+
+
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/neco-vim'
+Plug 'Shougo/neoinclude.vim'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 
 " Colorschemes
-Plugin 'chriskempson/base16-vim'
-Plugin 'mhartington/oceanic-next'
-Plugin 'kristijanhusak/vim-hybrid-material'
+Plug 'mhartington/oceanic-next'
 
-call vundle#end()
+call plug#end()
 
-filetype on
-filetype plugin on
-filetype plugin indent on
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
-syntax enable
-syntax on
 
 let g:rails_ctags_arguments = ['--languages=-javascript', '--fields=+l', '--exclude=.git', '--exclude=log']
 
-let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:SuperTabDefaultCompletionType = '<C-Tab>'
+" let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
+" let g:ycm_collect_identifiers_from_tags_files = 1
+" let g:SuperTabDefaultCompletionType = '<C-Tab>'
 
-let javascript_enable_domhtmlcss = 1
-" let mapleader=" "
 
+filetype plugin indent on
+filetype on
+filetype plugin on
+syntax enable
+syntax on
 set number
 set laststatus=2
-" set colorcolumn=80
+" set colorcolumn=120
 set backspace=2
 set nowrap
 set ignorecase
 set infercase
 set noshowmode
-set encoding=utf8
 set fillchars+=stl:\ ,stlnc:\
 set termencoding=utf-8
 set smartindent
@@ -115,8 +116,9 @@ set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 set wildmenu
+set wildmode=full
 set wildignorecase
-set completeopt-=menu,preview
+set complete=.,b,w,u,t,k
 set guioptions-=r
 set guioptions-=L
 set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline\ Plus\ Nerd\ File\ Types:h12
@@ -127,31 +129,6 @@ silent! colorscheme OceanicNext
 set synmaxcol=300
 set complete-=i
 set autoread
-
-" Powerline + Syntatistic Config
-
-" let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_ruby_checkers = ['rubocop', 'mri']
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:syntastic_mode_map = { 'passive_filetypes': ['sass', 'scss'] }
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-
-let g:airline_symbols = {}
-let g:airline_powerline_fonts=1
-
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
-" autocmd vimenter AirlineAfterInit call AirlineInit()
-
 
 " Dash integration
 nmap <silent> <leader>d <Plug>DashSearch
@@ -174,7 +151,7 @@ map <silent> <leader>gd :Gdiff<CR>
 map <silent> <leader>gc :Gcommit<CR>
 map <silent> <leader>gp :Gpush<CR>
 map <silent> <leader>gu :Dispatch git pull<CR>
-map <silent> <leader>gl :Dispatch git lg<CR>
+map <silent> <leader>gl :terminal git lg<CR>
 map <silent> <leader>gb :Gblame<cr>
 map <leader>go :Dispatch git checkout<Space>
 
@@ -214,24 +191,18 @@ autocmd VimEnter * wincmd p
 
 let g:javascript_enable_domhtmlcss=1
 
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_register_as_syntastic_checker = 0
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
+" let g:ycm_add_preview_to_completeopt = 1
+" let g:ycm_register_as_syntastic_checker = 0
+" let g:ycm_confirm_extra_conf = 0
+" let g:ycm_collect_identifiers_from_tags_files = 1
+" let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
 let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmine,chai'
 
 imap <Tab> <C-P>
 
-set ofu=syntaxcomplete#Complete
-au FileType php setl ofu=phpcomplete#CompletePHP
-au FileType ruby,eruby setl ofu=rubycomplete#Complete
-au FileType html,xhtml setl ofu=htmlcomplete#CompleteTags
-au FileType css setl ofu=csscomplete#CompleteCSS
-
-imap <C-J> <Plug>snipMateNextOrTrigger
-smap <C-J> <Plug>snipMateNextOrTrigger
+" imap <C-J> <Plug>snipMateNextOrTrigger
+" smap <C-J> <Plug>snipMateNextOrTrigger
 " let g:airline_theme='powerlineish'
 
 " RuboCop Mappings
@@ -302,7 +273,45 @@ let g:lightline = {
       \   'readonly': '(&filetype!="help"&& &readonly)',
       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
       \ }
+      \ }
+
+" Neomake Config
+
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_ruby_enabled_makers = ['rubocop']
+autocmd! BufWritePost * Neomake
+
+
+au BufRead,BufNewFile *.scss set filetype=scss.css
+
+" Remember cursor position between sessions
+autocmd BufReadPost *
+      \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+      \   exe "normal! g'\"" |
+      \ endif
+autocmd BufRead * normal zz
+
+hi CursorLineNR guifg=#ffffff
+
+let g:deoplete#enable_at_startup = 1
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: pumvisible() ? "\<C-n>" : "\<TAB>"
+  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: "\<TAB>"
+
+let g:vimjs#casesensistive = 1
+let g:vimjs#smartcomplete = 1
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType javascript setlocal omnifunc=tern#Complete
+
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+let g:neosnippet#snippets_directory='~/.vim/plugged/neosnippet-snippets/neosnippets,  ~/.vim/plugged/angular-vim-snippets/snippets'
+
