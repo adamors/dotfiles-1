@@ -1,3 +1,6 @@
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
 call plug#begin('~/.vim/plugged')
 
 " Rails / Ruby Plugins
@@ -45,29 +48,23 @@ Plug 'scrooloose/nerdtree'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
-" Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 Plug 'gregsexton/MatchTag'
 Plug 'tmhedberg/matchit'
 Plug 'itchyny/lightline.vim'
 Plug 'jgdavey/vim-turbux'
-Plug 'mhinz/vim-janah'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'vim-scripts/Align'
 Plug 'rking/ag.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
-" Plug 'Valloric/YouCompleteMe'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rizzatti/dash.vim'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
 Plug 'ryanoasis/vim-devicons'
 
-
 Plug 'Shougo/deoplete.nvim'
-Plug 'Shougo/neco-vim'
-Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 
@@ -76,26 +73,14 @@ Plug 'mhartington/oceanic-next'
 
 call plug#end()
 
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-
-
-let g:rails_ctags_arguments = ['--languages=-javascript', '--fields=+l', '--exclude=.git', '--exclude=log']
-
-" let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
-" let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
-" let g:ycm_collect_identifiers_from_tags_files = 1
-" let g:SuperTabDefaultCompletionType = '<C-Tab>'
-
-
 filetype plugin indent on
-filetype on
-filetype plugin on
+" filetype on
+" filetype plugin on
 syntax enable
 syntax on
 set number
 set laststatus=2
-" set colorcolumn=120
+set colorcolumn=120
 set backspace=2
 set nowrap
 set ignorecase
@@ -116,7 +101,7 @@ set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 set wildmenu
-set wildmode=full
+set wildmode=longest:full,full
 set wildignorecase
 set complete=.,b,w,u,t,k
 set guioptions-=r
@@ -190,20 +175,9 @@ let NERDTreeIgnore=['\.DS_Store$', '\.vim$']
 autocmd VimEnter * wincmd p
 
 let g:javascript_enable_domhtmlcss=1
-
-" let g:ycm_add_preview_to_completeopt = 1
-" let g:ycm_register_as_syntastic_checker = 0
-" let g:ycm_confirm_extra_conf = 0
-" let g:ycm_collect_identifiers_from_tags_files = 1
-" let g:ycm_collect_identifiers_from_comments_and_strings = 1
-
 let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmine,chai'
 
-imap <Tab> <C-P>
-
-" imap <C-J> <Plug>snipMateNextOrTrigger
-" smap <C-J> <Plug>snipMateNextOrTrigger
-" let g:airline_theme='powerlineish'
+" imap <Tab> <C-P>
 
 " RuboCop Mappings
 map <silent> <leader>ru :RuboCop<CR>
@@ -277,13 +251,9 @@ let g:lightline = {
       \ }
 
 " Neomake Config
-
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_ruby_enabled_makers = ['rubocop']
 autocmd! BufWritePost * Neomake
-
-
-au BufRead,BufNewFile *.scss set filetype=scss.css
 
 " Remember cursor position between sessions
 autocmd BufReadPost *
@@ -295,23 +265,22 @@ autocmd BufRead * normal zz
 hi CursorLineNR guifg=#ffffff
 
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_refresh_always = 1
 let g:neosnippet#enable_snipmate_compatibility = 1
 
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-  \ "\<Plug>(neosnippet_expand_or_jump)"
-  \: pumvisible() ? "\<C-n>" : "\<TAB>"
-  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-  \ "\<Plug>(neosnippet_expand_or_jump)"
-  \: "\<TAB>"
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function() abort
+  return deoplete#mappings#close_popup() . "\<CR>"
+endfunction
 
 let g:vimjs#casesensistive = 1
 let g:vimjs#smartcomplete = 1
+
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType javascript setlocal omnifunc=tern#Complete
 
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-let g:neosnippet#snippets_directory='~/.vim/plugged/neosnippet-snippets/neosnippets,  ~/.vim/plugged/angular-vim-snippets/snippets'
-
+let g:neosnippet#snippets_directory='~/.vim/plugged/angular-vim-snippets/snippets, ~/.vim/plugged/vim-snippets/snippets, ~/.vim/plugged/vim-react-snippets/snippets'
+let b:deoplete_disable_auto_complete=1
+set completeopt+=noinsert
