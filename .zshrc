@@ -6,8 +6,6 @@ ZSH_THEME="ys"
 plugins=(git)
 
 # export NVIM_TUI_ENABLE_TRUE_COLOR=1
-export RACKSPACE_USERNAME=cef-karloakes
-export RACKSPACE_API_KEY=1c2f1cf162794f6e96b09b24b6a95773
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/sbin:$PATH"
 source $ZSH/oh-my-zsh.sh
