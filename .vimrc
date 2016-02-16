@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
 " Rails / Ruby Plugins
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-haml'
 Plug 'ngmy/vim-rubocop', { 'for': 'ruby' }
@@ -70,17 +71,16 @@ Plug 'Shougo/neosnippet-snippets'
 
 " Colorschemes
 Plug 'mhartington/oceanic-next'
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 
 filetype plugin indent on
-" filetype on
-" filetype plugin on
 syntax enable
 syntax on
 set number
 set laststatus=2
-set colorcolumn=120
+" set colorcolumn=120
 set backspace=2
 set nowrap
 set ignorecase
@@ -92,16 +92,14 @@ set smartindent
 set expandtab
 set tabstop=2 shiftwidth=2 softtabstop=2
 set autoindent
-set cursorline
 set smartindent
-set lazyredraw
 set hlsearch
 set incsearch
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
-set wildmenu
 set wildmode=longest:full,full
+set wildmenu
 set wildignorecase
 set complete=.,b,w,u,t,k
 set guioptions-=r
@@ -110,8 +108,8 @@ set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline\ Plus\ Nerd\ File\ Types:h
 set foldmethod=indent
 set foldlevel=128
 set background=dark
-silent! colorscheme OceanicNext
-set synmaxcol=300
+silent! colorscheme gruvbox
+set synmaxcol=200
 set complete-=i
 set autoread
 
@@ -142,9 +140,10 @@ map <leader>go :Dispatch git checkout<Space>
 
 " Ag
 nnoremap <leader>f :Ag<Space>
+nnoremap <leader>F :Ag "<C-R><C-W>"<CR>
 
 " Enable JSX for .js files
-let g:jsx_ext_required = 0
+let g:jsx_ext_required = 1
 
 let g:ctrlp_custom_ignore = { 'dir':  '\v[\/](doc|tmp|node_modules|vendor)' }
 let g:ctrlp_show_hidden = 1
@@ -182,12 +181,12 @@ let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmin
 " RuboCop Mappings
 map <silent> <leader>ru :RuboCop<CR>
 map <silent> <leader>rf :RuboCop --auto-correct<CR>
+let g:vimrubocop_config = '~/.rubocop.yml'
 
 " Rails / Ruby Mappings
 map <silent> <leader>rc :Console<CR>
 map <silent> <leader>rm :Rake db:migrate<CR>
 map <silent> <leader>q :ccl<CR>
-map <silent> <leader>qo :copen<CR>
 map <silent> <leader>rr :!ruby %<CR>
 
 " RSpec
@@ -197,6 +196,7 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+map <silent> <leader>qo :copen<CR>
 
 " Convert HTML to Haml, ensure the html2haml gem is installed
 nmap <leader>h :%!html2haml --erb 2> /dev/null<CR>:set ft=haml<CR>
@@ -218,7 +218,10 @@ nnoremap tl :tabprev<CR>
 nnoremap tn :tabnew<CR>
 
 " View .vimrc
-map <leader>v :sp ~/.vimrc<cr>
+nmap <leader>v :sp $MYVIMRC<CR>
+
+" Source .vimrc
+nmap <Leader>s :source $MYVIMRC<CR>
 
 " Disable K looking up stuff
 map K <Nop>
@@ -270,10 +273,6 @@ let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_refresh_always = 1
 let g:neosnippet#enable_snipmate_compatibility = 1
 
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function() abort
-  return deoplete#mappings#close_popup() . "\<CR>"
-endfunction
 
 let g:vimjs#casesensistive = 1
 let g:vimjs#smartcomplete = 1
