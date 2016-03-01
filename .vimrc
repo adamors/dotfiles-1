@@ -72,6 +72,7 @@ Plug 'Shougo/neosnippet-snippets'
 " Colorschemes
 Plug 'mhartington/oceanic-next'
 Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
 
 call plug#end()
 
@@ -80,7 +81,6 @@ syntax enable
 syntax on
 set number
 set laststatus=2
-" set colorcolumn=120
 set backspace=2
 set nowrap
 set ignorecase
@@ -108,7 +108,7 @@ set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline\ Plus\ Nerd\ File\ Types:h
 set foldmethod=indent
 set foldlevel=128
 set background=dark
-silent! colorscheme gruvbox
+silent! colorscheme OceanicNext
 set synmaxcol=200
 set complete-=i
 set autoread
