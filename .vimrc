@@ -14,6 +14,7 @@ Plug 'thoughtbot/vim-rspec' , { 'for': 'ruby' }
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
+" Plug 'osyo-manga/vim-monster', { 'for': 'ruby' }
 
 " SCSS / CSS Plugs
 Plug 'ap/vim-css-color'
@@ -73,6 +74,7 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'mhartington/oceanic-next'
 Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
+Plug 'tomasr/molokai'
 
 call plug#end()
 
@@ -112,6 +114,7 @@ silent! colorscheme OceanicNext
 set synmaxcol=200
 set complete-=i
 set autoread
+syntax sync minlines=256
 
 " Dash integration
 nmap <silent> <leader>d <Plug>DashSearch
@@ -236,7 +239,7 @@ if has('nvim')
 endif
 
 let g:lightline = {
-      \ 'colorscheme': 'powerline',
+      \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
@@ -246,6 +249,8 @@ let g:lightline = {
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
       \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' },
       \ 'component_visible_condition': {
       \   'readonly': '(&filetype!="help"&& &readonly)',
       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
@@ -266,6 +271,11 @@ autocmd BufReadPost *
 autocmd BufRead * normal zz
 
 hi CursorLineNR guifg=#ffffff
+
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function() abort
+  return deoplete#mappings#close_popup() . "\<CR>"
+endfunction
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
