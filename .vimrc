@@ -8,13 +8,13 @@ Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-haml'
+Plug 'tpope/vim-haml', { 'for': 'haml' }
 Plug 'ngmy/vim-rubocop', { 'for': 'ruby' }
 Plug 'thoughtbot/vim-rspec' , { 'for': 'ruby' }
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
-" Plug 'osyo-manga/vim-monster', { 'for': 'ruby' }
+Plug 'vim-scripts/TailMinusF'
 
 " SCSS / CSS Plugs
 Plug 'ap/vim-css-color'
@@ -72,9 +72,8 @@ Plug 'Shougo/neosnippet-snippets'
 
 " Colorschemes
 Plug 'mhartington/oceanic-next'
-Plug 'morhetz/gruvbox'
-Plug 'joshdick/onedark.vim'
-Plug 'tomasr/molokai'
+Plug 'ajh17/spacegray.vim'
+Plug 'kabbamine/yowish.vim'
 
 call plug#end()
 
@@ -106,15 +105,14 @@ set wildignorecase
 set complete=.,b,w,u,t,k
 set guioptions-=r
 set guioptions-=L
-set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline\ Plus\ Nerd\ File\ Types:h12
 set foldmethod=indent
 set foldlevel=128
 set background=dark
-silent! colorscheme OceanicNext
+silent! colorscheme spacegray
 set synmaxcol=200
 set complete-=i
 set autoread
-syntax sync minlines=256
+" syntax sync minlines=256
 
 " Dash integration
 nmap <silent> <leader>d <Plug>DashSearch
