@@ -74,6 +74,7 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'mhartington/oceanic-next'
 Plug 'ajh17/spacegray.vim'
 Plug 'kabbamine/yowish.vim'
+Plug 'scwood/vim-hybrid'
 
 call plug#end()
 
@@ -108,7 +109,7 @@ set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
 set background=dark
-silent! colorscheme spacegray
+silent! colorscheme hybrid
 set synmaxcol=200
 set complete-=i
 set autoread
