@@ -24,11 +24,13 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'mxw/vim-jsx'
 Plug '1995eaton/vim-better-javascript-completion'
 Plug 'justinj/vim-react-snippets'
+Plug 'samuelsimoes/vim-jsx-utils'
 
 " Plug 'pangloss/vim-javascript'
 Plug 'rschmukler/pangloss-vim-indent'
 Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'marijnh/tern_for_vim'
+" Plug 'marijnh/tern_for_vim'
+Plug 'carlitux/deoplete-ternjs'
 Plug 'burnettk/vim-angular'
 Plug 'othree/yajs.vim'
 Plug 'kchmck/vim-coffee-script'
@@ -72,9 +74,9 @@ Plug 'Shougo/neosnippet-snippets'
 
 " Colorschemes
 Plug 'mhartington/oceanic-next'
-Plug 'ajh17/spacegray.vim'
-Plug 'kabbamine/yowish.vim'
+Plug 'tpope/vim-vividchalk'
 Plug 'scwood/vim-hybrid'
+Plug 'acoustichero/simple_dark'
 
 call plug#end()
 
@@ -109,7 +111,7 @@ set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
 set background=dark
-silent! colorscheme hybrid
+silent! colorscheme vividchalk
 set synmaxcol=200
 set complete-=i
 set autoread
@@ -214,6 +216,9 @@ map <leader>js :%!python -m json.tool<cr>
 map <leader>f{ :normal va{V=<cr>
 map <leader>fa :normal vf"f"<cr>
 
+" select text then f to find across project
+vnoremap f y:Ag <C-R>"<CR>
+
 " Tab Navigation
 nnoremap th :tabnext<CR>
 nnoremap tl :tabprev<CR>
@@ -271,17 +276,11 @@ autocmd BufRead * normal zz
 
 hi CursorLineNR guifg=#ffffff
 
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function() abort
-  return deoplete#mappings#close_popup() . "\<CR>"
-endfunction
-
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_refresh_always = 1
 let g:neosnippet#enable_snipmate_compatibility = 1
-
 
 let g:vimjs#casesensistive = 1
 let g:vimjs#smartcomplete = 1
@@ -291,4 +290,9 @@ autocmd FileType javascript setlocal omnifunc=tern#Complete
 
 let g:neosnippet#snippets_directory='~/.vim/plugged/angular-vim-snippets/snippets, ~/.vim/plugged/vim-snippets/snippets, ~/.vim/plugged/vim-react-snippets/snippets'
 let b:deoplete_disable_auto_complete=1
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = 0
 set completeopt+=noinsert
+
+au BufRead,BufNewFile *.es6 setfiletype javascript
+
