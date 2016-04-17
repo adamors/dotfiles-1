@@ -77,6 +77,8 @@ Plug 'mhartington/oceanic-next'
 Plug 'tpope/vim-vividchalk'
 Plug 'scwood/vim-hybrid'
 Plug 'acoustichero/simple_dark'
+Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
@@ -111,8 +113,8 @@ set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
 set background=dark
-silent! colorscheme vividchalk
-set synmaxcol=200
+silent! colorscheme base16-harmonic16
+set synmaxcol=300
 set complete-=i
 set autoread
 " syntax sync minlines=256
@@ -217,7 +219,7 @@ map <leader>f{ :normal va{V=<cr>
 map <leader>fa :normal vf"f"<cr>
 
 " select text then f to find across project
-vnoremap f y:Ag <C-R>"<CR>
+" vnoremap F y:Ag <C-R>"<CR>
 
 " Tab Navigation
 nnoremap th :tabnext<CR>
@@ -295,4 +297,3 @@ let g:tern_show_signature_in_pum = 0
 set completeopt+=noinsert
 
 au BufRead,BufNewFile *.es6 setfiletype javascript
-
