@@ -76,9 +76,7 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'mhartington/oceanic-next'
 Plug 'tpope/vim-vividchalk'
 Plug 'scwood/vim-hybrid'
-Plug 'acoustichero/simple_dark'
-Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-Plug 'chriskempson/base16-vim'
+Plug 'acarapetis/vim-colors-github'
 
 call plug#end()
 
@@ -113,7 +111,7 @@ set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
 set background=dark
-silent! colorscheme base16-harmonic16
+silent! colorscheme hybrid
 set synmaxcol=300
 set complete-=i
 set autoread

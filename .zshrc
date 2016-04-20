@@ -65,3 +65,6 @@ alias c="clear"
 
 export NVM_DIR="/Users/gavsim/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export VISUAL=nvim
+export EDITOR="$VISUAL"
