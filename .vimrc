@@ -36,7 +36,7 @@ Plug 'othree/yajs.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'elzr/vim-json'
 Plug 'moll/vim-node'
-Plug 'valloric/MatchTagAlways'
+" Plug 'valloric/MatchTagAlways'
 
 " Misc Plugs
 Plug 'benekastah/neomake'
@@ -67,6 +67,7 @@ Plug 'rizzatti/dash.vim'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
 Plug 'ryanoasis/vim-devicons'
+Plug 'milkypostman/vim-togglelist'
 
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet.vim'
@@ -77,6 +78,9 @@ Plug 'mhartington/oceanic-next'
 Plug 'tpope/vim-vividchalk'
 Plug 'scwood/vim-hybrid'
 Plug 'acarapetis/vim-colors-github'
+Plug 'mkarmona/colorsbox'
+Plug 'chriskempson/base16-vim'
+Plug 'brendonrapp/smyck-vim'
 
 call plug#end()
 
@@ -111,11 +115,14 @@ set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
 set background=dark
-silent! colorscheme hybrid
+silent! colorscheme base16-monokai
 set synmaxcol=300
 set complete-=i
 set autoread
-" syntax sync minlines=256
+set nocursorcolumn
+set nocursorline
+set norelativenumber
+syntax sync minlines=256
 
 " Dash integration
 nmap <silent> <leader>d <Plug>DashSearch
@@ -190,7 +197,7 @@ let g:vimrubocop_config = '~/.rubocop.yml'
 " Rails / Ruby Mappings
 map <silent> <leader>rc :Console<CR>
 map <silent> <leader>rm :Rake db:migrate<CR>
-map <silent> <leader>q :ccl<CR>
+map <silent> <leader>q :call ToggleQuickfixList()<CR>
 map <silent> <leader>rr :!ruby %<CR>
 
 " RSpec

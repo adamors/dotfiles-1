@@ -2,8 +2,8 @@ export ZSH=$HOME/.oh-my-zsh
 # export PATH="/usr/local/sbin:$PATH"
 export DYLD_BIND_AT_LAUNCH=1
 
-ZSH_THEME="ys"
-plugins=(git)
+ZSH_THEME="avit"
+plugins=(rails git ruby brew bundler gem)
 
 # export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
