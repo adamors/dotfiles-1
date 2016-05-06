@@ -4,7 +4,7 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 call plug#begin('~/.vim/plugged')
 
 " Rails / Ruby Plugins
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-bundler'
@@ -25,6 +25,8 @@ Plug 'mxw/vim-jsx'
 Plug '1995eaton/vim-better-javascript-completion'
 Plug 'justinj/vim-react-snippets'
 Plug 'samuelsimoes/vim-jsx-utils'
+Plug 'gavocanov/vim-js-indent'
+Plug 'othree/jspc.vim'
 
 " Plug 'pangloss/vim-javascript'
 Plug 'rschmukler/pangloss-vim-indent'
@@ -68,6 +70,8 @@ Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
 Plug 'ryanoasis/vim-devicons'
 Plug 'milkypostman/vim-togglelist'
+Plug 'derekprior/vim-trimmer'
+Plug 'sheerun/vim-polyglot'
 
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet.vim'
@@ -81,6 +85,7 @@ Plug 'acarapetis/vim-colors-github'
 Plug 'mkarmona/colorsbox'
 Plug 'chriskempson/base16-vim'
 Plug 'brendonrapp/smyck-vim'
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 
@@ -115,7 +120,7 @@ set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
 set background=dark
-silent! colorscheme base16-monokai
+silent! colorscheme hybrid
 set synmaxcol=300
 set complete-=i
 set autoread
@@ -295,6 +300,8 @@ let g:vimjs#smartcomplete = 1
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType javascript setlocal omnifunc=tern#Complete
 
+set omnifunc=syntaxcomplete#Complete
+
 let g:neosnippet#snippets_directory='~/.vim/plugged/angular-vim-snippets/snippets, ~/.vim/plugged/vim-snippets/snippets, ~/.vim/plugged/vim-react-snippets/snippets'
 let b:deoplete_disable_auto_complete=1
 let g:tern_request_timeout = 1
@@ -302,3 +309,4 @@ let g:tern_show_signature_in_pum = 0
 set completeopt+=noinsert
 
 au BufRead,BufNewFile *.es6 setfiletype javascript
+au BufRead,BufNewFile *.jbuilder setfiletype ruby
