@@ -1,5 +1,6 @@
 AllCops:
-  RunRailsCops: true
+  Rails:
+    Enabled: true
 
 # Commonly used screens these days easily fit more than 80 characters.
 Metrics/LineLength:
@@ -52,7 +53,6 @@ Style/CollectionMethods:
   PreferredMethods:
     # inject seems more common in the community.
     reduce: "inject"
-
 
 # Either allow this style or don't. Marking it as safe with parenthesis
 # is silly. Let's try to live without them for now.

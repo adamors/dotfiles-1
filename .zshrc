@@ -5,7 +5,7 @@ export DYLD_BIND_AT_LAUNCH=1
 ZSH_THEME="avit"
 plugins=(rails git ruby brew bundler gem)
 
-# export NVIM_TUI_ENABLE_TRUE_COLOR=1
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/sbin:$PATH"
 source $ZSH/oh-my-zsh.sh

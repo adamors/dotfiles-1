@@ -1,4 +1,4 @@
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 call plug#begin('~/.vim/plugged')
@@ -16,6 +16,9 @@ Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
 Plug 'vim-scripts/TailMinusF'
 
+" Testing
+Plug 'janko-m/vim-test'
+
 " SCSS / CSS Plugs
 Plug 'ap/vim-css-color'
 Plug 'cakebaker/scss-syntax.vim'
@@ -28,17 +31,13 @@ Plug 'samuelsimoes/vim-jsx-utils'
 Plug 'gavocanov/vim-js-indent'
 Plug 'othree/jspc.vim'
 
-" Plug 'pangloss/vim-javascript'
 Plug 'rschmukler/pangloss-vim-indent'
 Plug 'othree/javascript-libraries-syntax.vim'
-" Plug 'marijnh/tern_for_vim'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'burnettk/vim-angular'
 Plug 'othree/yajs.vim'
-Plug 'kchmck/vim-coffee-script'
+Plug 'kchmck/vim-coffee-script',  { 'for': 'coffee' }
 Plug 'elzr/vim-json'
-Plug 'moll/vim-node'
-" Plug 'valloric/MatchTagAlways'
 
 " Misc Plugs
 Plug 'benekastah/neomake'
@@ -48,6 +47,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
+Plug 'radenling/vim-dispatch-neovim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree'
@@ -57,8 +57,6 @@ Plug 'tomtom/tlib_vim'
 Plug 'honza/vim-snippets'
 Plug 'gregsexton/MatchTag'
 Plug 'tmhedberg/matchit'
-Plug 'itchyny/lightline.vim'
-Plug 'jgdavey/vim-turbux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'vim-scripts/Align'
@@ -68,8 +66,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rizzatti/dash.vim'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
-Plug 'ryanoasis/vim-devicons'
-Plug 'milkypostman/vim-togglelist'
 Plug 'derekprior/vim-trimmer'
 Plug 'sheerun/vim-polyglot'
 
@@ -81,17 +77,16 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'mhartington/oceanic-next'
 Plug 'tpope/vim-vividchalk'
 Plug 'scwood/vim-hybrid'
-Plug 'acarapetis/vim-colors-github'
-Plug 'mkarmona/colorsbox'
 Plug 'chriskempson/base16-vim'
 Plug 'brendonrapp/smyck-vim'
-Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
 
 call plug#end()
 
 filetype plugin indent on
 syntax enable
 syntax on
+set termguicolors
 set number
 set laststatus=2
 set backspace=2
@@ -120,14 +115,12 @@ set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
 set background=dark
-silent! colorscheme hybrid
-set synmaxcol=300
+silent! colorscheme onedark
+set synmaxcol=200
 set complete-=i
 set autoread
 set nocursorcolumn
 set nocursorline
-set norelativenumber
-syntax sync minlines=256
 
 " Dash integration
 nmap <silent> <leader>d <Plug>DashSearch
@@ -159,7 +152,8 @@ nnoremap <leader>f :Ag<Space>
 nnoremap <leader>F :Ag "<C-R><C-W>"<CR>
 
 " Enable JSX for .js files
-let g:jsx_ext_required = 1
+let g:jsx_ext_required = 0
+let g:neomake_jsx_enabled_makers = ['eslint']
 
 let g:ctrlp_custom_ignore = { 'dir':  '\v[\/](doc|tmp|node_modules|vendor)' }
 let g:ctrlp_show_hidden = 1
@@ -192,8 +186,6 @@ autocmd VimEnter * wincmd p
 let g:javascript_enable_domhtmlcss=1
 let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmine,chai'
 
-" imap <Tab> <C-P>
-
 " RuboCop Mappings
 map <silent> <leader>ru :RuboCop<CR>
 map <silent> <leader>rf :RuboCop --auto-correct<CR>
@@ -206,12 +198,14 @@ map <silent> <leader>q :call ToggleQuickfixList()<CR>
 map <silent> <leader>rr :!ruby %<CR>
 
 " RSpec
-let g:rspec_command = "Dispatch rspec {spec}"
+let g:rspec_command = "Dispatch bundle exec rspec {spec}"
+let test#strategy = "neovim"
+let g:test#preserve_screen = 1
 
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+map <Leader>t :TestFile<CR>
+map <Leader>s :TestNearest<CR>
+map <Leader>l :TestLast<CR>
+map <Leader>a :TestSuite<CR>
 map <silent> <leader>qo :copen<CR>
 
 " Convert HTML to Haml, ensure the html2haml gem is installed
@@ -227,9 +221,6 @@ map <leader>js :%!python -m json.tool<cr>
 " Misc
 map <leader>f{ :normal va{V=<cr>
 map <leader>fa :normal vf"f"<cr>
-
-" select text then f to find across project
-" vnoremap F y:Ag <C-R>"<CR>
 
 " Tab Navigation
 nnoremap th :tabnext<CR>
@@ -254,25 +245,25 @@ if has('nvim')
   nmap <bs> :<c-u>TmuxNavigateLeft<cr>
 endif
 
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ }
-      \ }
+" let g:lightline = {
+"       \ 'colorscheme': 'powerline',
+"       \ 'active': {
+"       \   'left': [ [ 'mode', 'paste' ],
+"       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+"       \ },
+"       \ 'component': {
+"       \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+"       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+"       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+"       \ },
+"       \ 'separator': { 'left': '', 'right': '' },
+"       \ 'subseparator': { 'left': '', 'right': '' },
+"       \ 'component_visible_condition': {
+"       \   'readonly': '(&filetype!="help"&& &readonly)',
+"       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+"       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+"       \ }
+"       \ }
 
 " Neomake Config
 let g:neomake_javascript_enabled_makers = ['eslint']
@@ -310,3 +301,35 @@ set completeopt+=noinsert
 
 au BufRead,BufNewFile *.es6 setfiletype javascript
 au BufRead,BufNewFile *.jbuilder setfiletype ruby
+
+" Status Line
+
+set statusline =%#identifier#
+set statusline+=[%f]    "tail of the filename
+set statusline+=%*
+
+set statusline+=%#warningmsg#
+set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
+set statusline+=%*
+
+set statusline+=%h      "help file flag
+set statusline+=%y      "filetype
+
+"read only flag
+set statusline+=%#identifier#
+set statusline+=%r
+set statusline+=%*
+"
+""modified flag
+set statusline+=%#warningmsg#
+set statusline+=%m
+set statusline+=%*
+set statusline+=%{fugitive#statusline()}
+set statusline+=%#error#
+set statusline+=%{&paste?'[paste]':''}
+set statusline+=%*
+set statusline+=%=      "left/right separator
+set statusline+=%c,     "cursor column
+set statusline+=%l/%L   "cursor line/total lines
+set statusline+=\ %P    "percent through file
+set laststatus=2
