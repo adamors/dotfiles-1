@@ -80,6 +80,7 @@ Plug 'scwood/vim-hybrid'
 Plug 'chriskempson/base16-vim'
 Plug 'brendonrapp/smyck-vim'
 Plug 'joshdick/onedark.vim'
+Plug 'gosukiwi/vim-atom-dark'
 
 call plug#end()
 
@@ -115,7 +116,7 @@ set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
 set background=dark
-silent! colorscheme onedark
+silent! colorscheme atom-dark-256
 set synmaxcol=200
 set complete-=i
 set autoread
@@ -129,11 +130,6 @@ nmap <silent> <leader>d <Plug>DashSearch
 map <silent> <leader>cc :CtrlPClearAllCaches<CR>
 nnoremap <silent> <C-T> :CtrlPTag<CR>
 
-" Tabs
-map <silent> <leader>tn :tabnew<CR>
-map <silent> <leader>nt :tabnext<CR>
-map <silent> <leader>pt :tabprevious<CR>
-
 " Misc
 nmap <silent> <leader>o :only<CR>
 
@@ -145,7 +141,7 @@ map <silent> <leader>gp :Gpush<CR>
 map <silent> <leader>gu :Dispatch git pull<CR>
 map <silent> <leader>gl :terminal git lg<CR>
 map <silent> <leader>gb :Gblame<cr>
-map <leader>go :Dispatch git checkout<Space>
+map <leader>gco :Dispatch git checkout<Space>
 
 " Ag
 nnoremap <leader>f :Ag<Space>
@@ -179,8 +175,8 @@ endif
 
 " Nerdtree Config
 let NERDTreeShowHidden=1
-map <silent> <leader>n :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.DS_Store$', '\.vim$']
+map <silent> <leader>n :NERDTreeToggle<CR>
 autocmd VimEnter * wincmd p
 
 let g:javascript_enable_domhtmlcss=1
@@ -194,11 +190,11 @@ let g:vimrubocop_config = '~/.rubocop.yml'
 " Rails / Ruby Mappings
 map <silent> <leader>rc :Console<CR>
 map <silent> <leader>rm :Rake db:migrate<CR>
-map <silent> <leader>q :call ToggleQuickfixList()<CR>
 map <silent> <leader>rr :!ruby %<CR>
+map <silent> <leader>q :call ToggleQuickfixList()<CR>
 
 " RSpec
-let g:rspec_command = "Dispatch bundle exec rspec {spec}"
+" let g:rspec_command = "Dispatch bundle exec rspec {spec}"
 let test#strategy = "neovim"
 let g:test#preserve_screen = 1
 
@@ -218,14 +214,10 @@ map <leader>ws :FixWhitespace<cr>
 
 " Format JSON
 map <leader>js :%!python -m json.tool<cr>
+
 " Misc
 map <leader>f{ :normal va{V=<cr>
 map <leader>fa :normal vf"f"<cr>
-
-" Tab Navigation
-nnoremap th :tabnext<CR>
-nnoremap tl :tabprev<CR>
-nnoremap tn :tabnew<CR>
 
 " View .vimrc
 nmap <leader>v :sp $MYVIMRC<CR>
@@ -244,26 +236,6 @@ let NERDTreeQuitOnOpen=1
 if has('nvim')
   nmap <bs> :<c-u>TmuxNavigateLeft<cr>
 endif
-
-" let g:lightline = {
-"       \ 'colorscheme': 'powerline',
-"       \ 'active': {
-"       \   'left': [ [ 'mode', 'paste' ],
-"       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-"       \ },
-"       \ 'component': {
-"       \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
-"       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-"       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-"       \ },
-"       \ 'separator': { 'left': '', 'right': '' },
-"       \ 'subseparator': { 'left': '', 'right': '' },
-"       \ 'component_visible_condition': {
-"       \   'readonly': '(&filetype!="help"&& &readonly)',
-"       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-"       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-"       \ }
-"       \ }
 
 " Neomake Config
 let g:neomake_javascript_enabled_makers = ['eslint']
