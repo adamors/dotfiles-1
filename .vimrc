@@ -16,6 +16,14 @@ Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
 Plug 'vim-scripts/TailMinusF'
 
+" Elixir
+
+Plug 'elixir-lang/vim-elixir'
+Plug "c-brenn/phoenix.vim"
+Plug 'tpope/vim-projectionist'
+Plug 'thinca/vim-ref'
+Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
+
 " Testing
 Plug 'janko-m/vim-test'
 
@@ -66,8 +74,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rizzatti/dash.vim'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
-Plug 'derekprior/vim-trimmer'
+" Plug 'derekprior/vim-trimmer'
 Plug 'sheerun/vim-polyglot'
+Plug 'blueyed/vim-diminactive'
 
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet.vim'
@@ -81,6 +90,11 @@ Plug 'chriskempson/base16-vim'
 Plug 'brendonrapp/smyck-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'gosukiwi/vim-atom-dark'
+Plug 'mkarmona/colorsbox'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'frankier/neovim-colors-solarized-truecolor-only'
+Plug 'nanotech/jellybeans.vim'
+Plug 'jonathanfilip/vim-lucius'
 
 call plug#end()
 
@@ -116,12 +130,17 @@ set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
 set background=dark
-silent! colorscheme atom-dark-256
+silent! colorscheme Tomorrow-Night
 set synmaxcol=200
 set complete-=i
 set autoread
 set nocursorcolumn
 set nocursorline
+
+" Plug Update
+map <silent> <leader>pu :PlugUpdate<CR>
+map <silent> <leader>pi :PlugInstall<CR>
+map <silent> <leader>pc :PlugClean<CR>
 
 " Dash integration
 nmap <silent> <leader>d <Plug>DashSearch
