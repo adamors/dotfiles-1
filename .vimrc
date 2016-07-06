@@ -19,7 +19,7 @@ Plug 'vim-scripts/TailMinusF'
 " Elixir
 
 Plug 'elixir-lang/vim-elixir'
-Plug "c-brenn/phoenix.vim"
+Plug 'c-brenn/phoenix.vim'
 Plug 'tpope/vim-projectionist'
 Plug 'thinca/vim-ref'
 Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
@@ -76,7 +76,9 @@ Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
 " Plug 'derekprior/vim-trimmer'
 Plug 'sheerun/vim-polyglot'
-Plug 'blueyed/vim-diminactive'
+" Plug 'blueyed/vim-diminactive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet.vim'
@@ -95,6 +97,7 @@ Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'frankier/neovim-colors-solarized-truecolor-only'
 Plug 'nanotech/jellybeans.vim'
 Plug 'jonathanfilip/vim-lucius'
+Plug 'tomasr/molokai'
 
 call plug#end()
 
@@ -129,13 +132,17 @@ set guioptions-=r
 set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
+
+silent! colorscheme OceanicNext
 set background=dark
-silent! colorscheme Tomorrow-Night
+
 set synmaxcol=200
 set complete-=i
 set autoread
 set nocursorcolumn
 set nocursorline
+
+set ttyfast
 
 " Plug Update
 map <silent> <leader>pu :PlugUpdate<CR>
@@ -218,7 +225,7 @@ let test#strategy = "neovim"
 let g:test#preserve_screen = 1
 
 map <Leader>t :TestFile<CR>
-map <Leader>s :TestNearest<CR>
+map <Leader>tn :TestNearest<CR>
 map <Leader>l :TestLast<CR>
 map <Leader>a :TestSuite<CR>
 map <silent> <leader>qo :copen<CR>
@@ -293,34 +300,5 @@ set completeopt+=noinsert
 au BufRead,BufNewFile *.es6 setfiletype javascript
 au BufRead,BufNewFile *.jbuilder setfiletype ruby
 
-" Status Line
-
-set statusline =%#identifier#
-set statusline+=[%f]    "tail of the filename
-set statusline+=%*
-
-set statusline+=%#warningmsg#
-set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
-set statusline+=%*
-
-set statusline+=%h      "help file flag
-set statusline+=%y      "filetype
-
-"read only flag
-set statusline+=%#identifier#
-set statusline+=%r
-set statusline+=%*
-"
-""modified flag
-set statusline+=%#warningmsg#
-set statusline+=%m
-set statusline+=%*
-set statusline+=%{fugitive#statusline()}
-set statusline+=%#error#
-set statusline+=%{&paste?'[paste]':''}
-set statusline+=%*
-set statusline+=%=      "left/right separator
-set statusline+=%c,     "cursor column
-set statusline+=%l/%L   "cursor line/total lines
-set statusline+=\ %P    "percent through file
-set laststatus=2
+let g:airline_powerline_fonts = 1
+let g:airline_theme='oceanicnext'
