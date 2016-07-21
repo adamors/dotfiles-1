@@ -3,6 +3,7 @@ export ZSH=$HOME/.oh-my-zsh
 export DYLD_BIND_AT_LAUNCH=1
 
 ZSH_THEME="avit"
+
 plugins=(rails git ruby brew bundler gem)
 
 export NVIM_TUI_ENABLE_TRUE_COLOR=1

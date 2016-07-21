@@ -74,9 +74,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rizzatti/dash.vim'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
-" Plug 'derekprior/vim-trimmer'
 Plug 'sheerun/vim-polyglot'
-" Plug 'blueyed/vim-diminactive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -86,18 +84,8 @@ Plug 'Shougo/neosnippet-snippets'
 
 " Colorschemes
 Plug 'mhartington/oceanic-next'
-Plug 'tpope/vim-vividchalk'
-Plug 'scwood/vim-hybrid'
-Plug 'chriskempson/base16-vim'
-Plug 'brendonrapp/smyck-vim'
-Plug 'joshdick/onedark.vim'
-Plug 'gosukiwi/vim-atom-dark'
-Plug 'mkarmona/colorsbox'
-Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'frankier/neovim-colors-solarized-truecolor-only'
-Plug 'nanotech/jellybeans.vim'
-Plug 'jonathanfilip/vim-lucius'
-Plug 'tomasr/molokai'
+Plug 'dracula/vim'
 
 call plug#end()
 
@@ -133,7 +121,7 @@ set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
 
-silent! colorscheme OceanicNext
+silent! colorscheme dracula
 set background=dark
 
 set synmaxcol=200
@@ -221,13 +209,13 @@ map <silent> <leader>q :call ToggleQuickfixList()<CR>
 
 " RSpec
 " let g:rspec_command = "Dispatch bundle exec rspec {spec}"
-let test#strategy = "neovim"
+let test#strategy = "vimux"
 let g:test#preserve_screen = 1
 
 map <Leader>t :TestFile<CR>
 map <Leader>tn :TestNearest<CR>
 map <Leader>l :TestLast<CR>
-map <Leader>a :TestSuite<CR>
+map <Leader>ta :TestSuite<CR>
 map <silent> <leader>qo :copen<CR>
 
 " Convert HTML to Haml, ensure the html2haml gem is installed
@@ -301,4 +289,4 @@ au BufRead,BufNewFile *.es6 setfiletype javascript
 au BufRead,BufNewFile *.jbuilder setfiletype ruby
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme='oceanicnext'
+let g:airline_theme='dracula'
