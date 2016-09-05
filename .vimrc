@@ -1,4 +1,3 @@
-" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 call plug#begin('~/.vim/plugged')
@@ -15,6 +14,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
 Plug 'vim-scripts/TailMinusF'
+Plug 'chase/vim-ansible-yaml'
 
 " Elixir
 
@@ -22,6 +22,7 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'c-brenn/phoenix.vim'
 Plug 'tpope/vim-projectionist'
 Plug 'thinca/vim-ref'
+Plug 'renderedtext/vim-elixir-alternative-files'
 Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
 
 " Testing
@@ -59,7 +60,7 @@ Plug 'radenling/vim-dispatch-neovim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree'
-Plug 'bronson/vim-trailing-whitespace'
+Plug 'ntpeters/vim-better-whitespace'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'honza/vim-snippets'
@@ -84,8 +85,15 @@ Plug 'Shougo/neosnippet-snippets'
 
 " Colorschemes
 Plug 'mhartington/oceanic-next'
+Plug 'joshdick/onedark.vim'
+Plug 'morhetz/gruvbox'
+Plug 'trusktr/seti.vim'
+Plug 'romainl/Apprentice'
+Plug 'sjl/badwolf'
+Plug 'jdkanani/vim-material-theme'
+Plug 'romanzolotarev/vim-dark'
+Plug 'cseelus/vim-colors-clearance'
 Plug 'frankier/neovim-colors-solarized-truecolor-only'
-Plug 'dracula/vim'
 
 call plug#end()
 
@@ -121,10 +129,10 @@ set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
 
-silent! colorscheme dracula
+silent! colorscheme onedark
 set background=dark
 
-set synmaxcol=200
+" set synmaxcol=200
 set complete-=i
 set autoread
 set nocursorcolumn
@@ -287,6 +295,11 @@ set completeopt+=noinsert
 
 au BufRead,BufNewFile *.es6 setfiletype javascript
 au BufRead,BufNewFile *.jbuilder setfiletype ruby
+autocmd BufWritePre * StripWhitespace
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme='dracula'
+let g:airline_theme='dark'
+
+" Command Mode Mappings
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
