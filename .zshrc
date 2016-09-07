@@ -69,3 +69,5 @@ export NVM_DIR="/Users/gavsim/.nvm"
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

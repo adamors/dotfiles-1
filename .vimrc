@@ -2,6 +2,10 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'Konfekt/FastFold'
+
+Plug 'craigemery/vim-autotag'
+
 " Rails / Ruby Plugins
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -17,13 +21,10 @@ Plug 'vim-scripts/TailMinusF'
 Plug 'chase/vim-ansible-yaml'
 
 " Elixir
-
-Plug 'elixir-lang/vim-elixir'
-Plug 'c-brenn/phoenix.vim'
-Plug 'tpope/vim-projectionist'
-Plug 'thinca/vim-ref'
-Plug 'renderedtext/vim-elixir-alternative-files'
-Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
+Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
+Plug 'thinca/vim-ref', { 'for': 'elixir' }
+Plug 'renderedtext/vim-elixir-alternative-files', { 'for': 'elixir' }
+Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh', 'for': 'elixir' }
 
 " Testing
 Plug 'janko-m/vim-test'
@@ -39,7 +40,6 @@ Plug 'justinj/vim-react-snippets'
 Plug 'samuelsimoes/vim-jsx-utils'
 Plug 'gavocanov/vim-js-indent'
 Plug 'othree/jspc.vim'
-
 Plug 'rschmukler/pangloss-vim-indent'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'carlitux/deoplete-ternjs'
@@ -70,8 +70,10 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'vim-scripts/Align'
 Plug 'rking/ag.vim'
-Plug 'FelikZ/ctrlp-py-matcher'
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'FelikZ/ctrlp-py-matcher'
+" Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'rizzatti/dash.vim'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
@@ -86,10 +88,8 @@ Plug 'Shougo/neosnippet-snippets'
 " Colorschemes
 Plug 'mhartington/oceanic-next'
 Plug 'joshdick/onedark.vim'
-Plug 'morhetz/gruvbox'
 Plug 'trusktr/seti.vim'
 Plug 'romainl/Apprentice'
-Plug 'sjl/badwolf'
 Plug 'jdkanani/vim-material-theme'
 Plug 'romanzolotarev/vim-dark'
 Plug 'cseelus/vim-colors-clearance'
@@ -129,7 +129,7 @@ set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
 
-silent! colorscheme onedark
+silent! colorscheme clearance
 set background=dark
 
 " set synmaxcol=200
@@ -151,6 +151,7 @@ nmap <silent> <leader>d <Plug>DashSearch
 " CtrlP Clear Cache
 map <silent> <leader>cc :CtrlPClearAllCaches<CR>
 nnoremap <silent> <C-T> :CtrlPTag<CR>
+nnoremap <silent> <space> :Files<CR>
 
 " Misc
 nmap <silent> <leader>o :only<CR>
@@ -211,13 +212,12 @@ let g:vimrubocop_config = '~/.rubocop.yml'
 
 " Rails / Ruby Mappings
 map <silent> <leader>rc :Console<CR>
-map <silent> <leader>rm :Rake db:migrate<CR>
+map <silent> <leader>rdbm :Rake db:migrate<CR>
 map <silent> <leader>rr :!ruby %<CR>
 map <silent> <leader>q :call ToggleQuickfixList()<CR>
 
 " RSpec
-" let g:rspec_command = "Dispatch bundle exec rspec {spec}"
-let test#strategy = "vimux"
+let test#strategy = "neovim"
 let g:test#preserve_screen = 1
 
 map <Leader>t :TestFile<CR>
@@ -229,10 +229,6 @@ map <silent> <leader>qo :copen<CR>
 " Convert HTML to Haml, ensure the html2haml gem is installed
 nmap <leader>h :%!html2haml --erb 2> /dev/null<CR>:set ft=haml<CR>
 vmap <leader>h :!html2haml --erb 2> /dev/null<CR>
-
-" Ag search for current word under cursor
-map <leader>w :Ag <cword><cr>
-map <leader>ws :FixWhitespace<cr>
 
 " Format JSON
 map <leader>js :%!python -m json.tool<cr>
@@ -298,7 +294,7 @@ au BufRead,BufNewFile *.jbuilder setfiletype ruby
 autocmd BufWritePre * StripWhitespace
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme='dark'
+let g:airline_theme='onedark'
 
 " Command Mode Mappings
 cnoremap <C-a> <Home>
