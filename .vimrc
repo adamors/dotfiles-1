@@ -2,9 +2,12 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'jackiehluo/vim-material'
+
 Plug 'Konfekt/FastFold'
 
 Plug 'craigemery/vim-autotag'
+Plug 'othree/html5.vim'
 
 " Rails / Ruby Plugins
 Plug 'vim-ruby/vim-ruby'
@@ -86,6 +89,7 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 
 " Colorschemes
+Plug 'trevordmiller/nova-vim'
 Plug 'mhartington/oceanic-next'
 Plug 'joshdick/onedark.vim'
 Plug 'trusktr/seti.vim'
@@ -94,6 +98,8 @@ Plug 'jdkanani/vim-material-theme'
 Plug 'romanzolotarev/vim-dark'
 Plug 'cseelus/vim-colors-clearance'
 Plug 'frankier/neovim-colors-solarized-truecolor-only'
+Plug 'NLKNguyen/papercolor-theme'
+
 
 call plug#end()
 
@@ -129,7 +135,7 @@ set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
 
-silent! colorscheme clearance
+silent! colorscheme nova
 set background=dark
 
 " set synmaxcol=200
@@ -290,12 +296,17 @@ let g:tern_show_signature_in_pum = 0
 set completeopt+=noinsert
 
 au BufRead,BufNewFile *.es6 setfiletype javascript
+au BufRead,BufNewFile *.nxml setfiletype ruby
 au BufRead,BufNewFile *.jbuilder setfiletype ruby
 autocmd BufWritePre * StripWhitespace
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme='onedark'
+let g:airline_theme='oceanicnext'
 
 " Command Mode Mappings
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
+
+
+let g:airline_skip_empty_sections = 1
+au BufRead,BufNewFile *.scss set filetype=scss.css
