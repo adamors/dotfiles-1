@@ -2,10 +2,7 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'jackiehluo/vim-material'
-
-Plug 'Konfekt/FastFold'
-
+Plug 'epilande/vim-react-snippets'
 Plug 'craigemery/vim-autotag'
 Plug 'othree/html5.vim'
 
@@ -48,8 +45,10 @@ Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'burnettk/vim-angular'
 Plug 'othree/yajs.vim'
+Plug 'othree/es.next.syntax.vim'
 Plug 'kchmck/vim-coffee-script',  { 'for': 'coffee' }
 Plug 'elzr/vim-json'
+Plug 'majutsushi/tagbar'
 
 " Misc Plugs
 Plug 'benekastah/neomake'
@@ -73,8 +72,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'vim-scripts/Align'
 Plug 'rking/ag.vim'
-" Plug 'FelikZ/ctrlp-py-matcher'
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'rizzatti/dash.vim'
@@ -92,21 +89,23 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'trevordmiller/nova-vim'
 Plug 'mhartington/oceanic-next'
 Plug 'joshdick/onedark.vim'
-Plug 'trusktr/seti.vim'
-Plug 'romainl/Apprentice'
-Plug 'jdkanani/vim-material-theme'
 Plug 'romanzolotarev/vim-dark'
-Plug 'cseelus/vim-colors-clearance'
 Plug 'frankier/neovim-colors-solarized-truecolor-only'
 Plug 'NLKNguyen/papercolor-theme'
 
 
 call plug#end()
 
+
+if (has("termguicolors"))
+  set termguicolors
+endif
+
 filetype plugin indent on
 syntax enable
 syntax on
-set termguicolors
+set background=dark
+colorscheme onedark
 set number
 set laststatus=2
 set backspace=2
@@ -135,15 +134,11 @@ set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
 
-silent! colorscheme nova
-set background=dark
-
 " set synmaxcol=200
 set complete-=i
 set autoread
 set nocursorcolumn
 set nocursorline
-
 set ttyfast
 
 " Plug Update
@@ -171,6 +166,9 @@ map <silent> <leader>gu :Dispatch git pull<CR>
 map <silent> <leader>gl :terminal git lg<CR>
 map <silent> <leader>gb :Gblame<cr>
 map <leader>gco :Dispatch git checkout<Space>
+
+" TagBar
+map <silent> <leader>tb :TagbarToggle<CR>
 
 " Ag
 nnoremap <leader>f :Ag<Space>
@@ -300,13 +298,12 @@ au BufRead,BufNewFile *.nxml setfiletype ruby
 au BufRead,BufNewFile *.jbuilder setfiletype ruby
 autocmd BufWritePre * StripWhitespace
 
-let g:airline_powerline_fonts = 1
-let g:airline_theme='oceanicnext'
+let g:airline_powerline_fonts = 0
+let g:airline_theme='onedark'
 
 " Command Mode Mappings
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-
 
 let g:airline_skip_empty_sections = 1
 au BufRead,BufNewFile *.scss set filetype=scss.css
