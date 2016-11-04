@@ -307,3 +307,6 @@ cnoremap <C-e> <End>
 
 let g:airline_skip_empty_sections = 1
 au BufRead,BufNewFile *.scss set filetype=scss.css
+
+let g:python_host_prog = '/usr/bin/python2.7'
+let g:python3_host_prog = '/usr/local/bin/python3'
