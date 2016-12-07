@@ -1,10 +1,12 @@
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+" let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'szw/vim-tags'
 Plug 'epilande/vim-react-snippets'
 Plug 'craigemery/vim-autotag'
 Plug 'othree/html5.vim'
+Plug 'tyrannicaltoucan/vim-quantum'
 
 " Rails / Ruby Plugins
 Plug 'vim-ruby/vim-ruby'
@@ -35,20 +37,18 @@ Plug 'cakebaker/scss-syntax.vim'
 
 " Javascript Plugs
 Plug 'mxw/vim-jsx'
-Plug '1995eaton/vim-better-javascript-completion'
+" Plug '1995eaton/vim-better-javascript-completion'
 Plug 'justinj/vim-react-snippets'
-Plug 'samuelsimoes/vim-jsx-utils'
-Plug 'gavocanov/vim-js-indent'
+" Plug 'gavocanov/vim-js-indent'
 Plug 'othree/jspc.vim'
-Plug 'rschmukler/pangloss-vim-indent'
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'carlitux/deoplete-ternjs'
-Plug 'burnettk/vim-angular'
+" Plug 'rschmukler/pangloss-vim-indent'
+Plug 'carlitux/deoplete-ternjs', {'for': ['javascript', 'html']}
+Plug 'burnettk/vim-angular', {'for': ['javascript', 'html']}
 Plug 'othree/yajs.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/es.next.syntax.vim'
 Plug 'kchmck/vim-coffee-script',  { 'for': 'coffee' }
 Plug 'elzr/vim-json'
-Plug 'majutsushi/tagbar'
 
 " Misc Plugs
 Plug 'benekastah/neomake'
@@ -86,16 +86,13 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 
 " Colorschemes
-Plug 'trevordmiller/nova-vim'
 Plug 'mhartington/oceanic-next'
 Plug 'joshdick/onedark.vim'
 Plug 'romanzolotarev/vim-dark'
 Plug 'frankier/neovim-colors-solarized-truecolor-only'
 Plug 'NLKNguyen/papercolor-theme'
 
-
 call plug#end()
-
 
 if (has("termguicolors"))
   set termguicolors
@@ -105,7 +102,7 @@ filetype plugin indent on
 syntax enable
 syntax on
 set background=dark
-colorscheme onedark
+colorscheme solarized
 set number
 set laststatus=2
 set backspace=2
@@ -174,8 +171,10 @@ map <silent> <leader>tb :TagbarToggle<CR>
 nnoremap <leader>f :Ag<Space>
 nnoremap <leader>F :Ag "<C-R><C-W>"<CR>
 
+nnoremap <leader>ls :Buffers<CR>
+
 " Enable JSX for .js files
-let g:jsx_ext_required = 0
+let g:jsx_ext_required = 1
 let g:neomake_jsx_enabled_makers = ['eslint']
 
 let g:ctrlp_custom_ignore = { 'dir':  '\v[\/](doc|tmp|node_modules|vendor)' }
@@ -298,8 +297,8 @@ au BufRead,BufNewFile *.nxml setfiletype ruby
 au BufRead,BufNewFile *.jbuilder setfiletype ruby
 autocmd BufWritePre * StripWhitespace
 
-let g:airline_powerline_fonts = 0
-let g:airline_theme='onedark'
+" let g:airline_powerline_fonts = 1
+let g:airline_theme='solarized'
 
 " Command Mode Mappings
 cnoremap <C-a> <Home>
@@ -310,3 +309,7 @@ au BufRead,BufNewFile *.scss set filetype=scss.css
 
 let g:python_host_prog = '/usr/bin/python2.7'
 let g:python3_host_prog = '/usr/local/bin/python3'
+
+if exists('&inccommand')
+  set inccommand=nosplit
+endif
