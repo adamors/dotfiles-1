@@ -1,4 +1,4 @@
-" let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 call plug#begin('~/.vim/plugged')
 
@@ -7,6 +7,7 @@ Plug 'epilande/vim-react-snippets'
 Plug 'craigemery/vim-autotag'
 Plug 'othree/html5.vim'
 Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'chriskempson/base16-vim'
 
 " Rails / Ruby Plugins
 Plug 'vim-ruby/vim-ruby'
@@ -22,35 +23,41 @@ Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
 Plug 'vim-scripts/TailMinusF'
 Plug 'chase/vim-ansible-yaml'
 
-" Elixir
-Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
-Plug 'thinca/vim-ref', { 'for': 'elixir' }
-Plug 'renderedtext/vim-elixir-alternative-files', { 'for': 'elixir' }
-Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh', 'for': 'elixir' }
+" " Elixir
+" Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
+" Plug 'thinca/vim-ref', { 'for': 'elixir' }
+" Plug 'renderedtext/vim-elixir-alternative-files', { 'for': 'elixir' }
+" Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh', 'for': 'elixir' }
 
 " Testing
 Plug 'janko-m/vim-test'
 
-" SCSS / CSS Plugs
+" " SCSS / CSS Plugs
 Plug 'ap/vim-css-color'
 Plug 'cakebaker/scss-syntax.vim'
 
 " Javascript Plugs
+Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
 " Plug '1995eaton/vim-better-javascript-completion'
 Plug 'justinj/vim-react-snippets'
 " Plug 'gavocanov/vim-js-indent'
 Plug 'othree/jspc.vim'
 " Plug 'rschmukler/pangloss-vim-indent'
-Plug 'carlitux/deoplete-ternjs', {'for': ['javascript', 'html']}
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern'}
+Plug 'ternjs/tern_for_vim'
 Plug 'burnettk/vim-angular', {'for': ['javascript', 'html']}
-Plug 'othree/yajs.vim'
+" Plug 'othree/yajs.vim'
+Plug 'pangloss/vim-javascript'
 Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'othree/es.next.syntax.vim'
+" Plug 'othree/es.next.syntax.vim'
 Plug 'kchmck/vim-coffee-script',  { 'for': 'coffee' }
 Plug 'elzr/vim-json'
+Plug 'heavenshell/vim-jsdoc'
+Plug 'ruanyl/vim-fixmyjs'
+Plug 'Shougo/echodoc.vim'
 
-" Misc Plugs
+" " Misc Plugs
 Plug 'benekastah/neomake'
 Plug 'Yggdroot/indentLine'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -77,7 +84,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'rizzatti/dash.vim'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -85,10 +92,10 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 
-" Colorschemes
+" " Colorschemes
 Plug 'mhartington/oceanic-next'
 Plug 'joshdick/onedark.vim'
-Plug 'romanzolotarev/vim-dark'
+Plug 'nanotech/jellybeans.vim'
 Plug 'frankier/neovim-colors-solarized-truecolor-only'
 Plug 'NLKNguyen/papercolor-theme'
 
@@ -98,11 +105,6 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-filetype plugin indent on
-syntax enable
-syntax on
-set background=dark
-colorscheme solarized
 set number
 set laststatus=2
 set backspace=2
@@ -111,12 +113,15 @@ set ignorecase
 set infercase
 set noshowmode
 set fillchars+=stl:\ ,stlnc:\
+set lcs+=space:·
 set termencoding=utf-8
 set smartindent
 set expandtab
 set tabstop=2 shiftwidth=2 softtabstop=2
 set autoindent
 set smartindent
+set copyindent
+set cindent
 set hlsearch
 set incsearch
 set backupdir=~/.vim/backup//
@@ -130,8 +135,6 @@ set guioptions-=r
 set guioptions-=L
 set foldmethod=indent
 set foldlevel=128
-
-" set synmaxcol=200
 set complete-=i
 set autoread
 set nocursorcolumn
@@ -174,7 +177,7 @@ nnoremap <leader>F :Ag "<C-R><C-W>"<CR>
 nnoremap <leader>ls :Buffers<CR>
 
 " Enable JSX for .js files
-let g:jsx_ext_required = 1
+let g:jsx_ext_required = 0
 let g:neomake_jsx_enabled_makers = ['eslint']
 
 let g:ctrlp_custom_ignore = { 'dir':  '\v[\/](doc|tmp|node_modules|vendor)' }
@@ -223,10 +226,10 @@ map <silent> <leader>q :call ToggleQuickfixList()<CR>
 let test#strategy = "neovim"
 let g:test#preserve_screen = 1
 
-map <Leader>t :TestFile<CR>
+map <Leader>tf :TestFile<CR>
 map <Leader>tn :TestNearest<CR>
-map <Leader>l :TestLast<CR>
-map <Leader>ta :TestSuite<CR>
+map <Leader>tl :TestLast<CR>
+map <Leader>ts :TestSuite<CR>
 map <silent> <leader>qo :copen<CR>
 
 " Convert HTML to Haml, ensure the html2haml gem is installed
@@ -270,7 +273,6 @@ autocmd BufReadPost *
       \ endif
 autocmd BufRead * normal zz
 
-hi CursorLineNR guifg=#ffffff
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
@@ -281,31 +283,50 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 let g:vimjs#casesensistive = 1
 let g:vimjs#smartcomplete = 1
 
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType javascript setlocal omnifunc=tern#Complete
+let g:deoplete#sources = {}
+let g:deoplete#sources.javascript = ['ternjs']
+
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.javascript = '\h\w*\|\h\w*\.\%(\h\w*\)\|[^. \t]\.\%(\h\w*\)'
+
+let g:tern#filetypes = [
+                \ 'jsx',
+                \ 'javascript.jsx',
+                \ 'vue',
+                \ ]
 
 set omnifunc=syntaxcomplete#Complete
 
 let g:neosnippet#snippets_directory='~/.vim/plugged/angular-vim-snippets/snippets, ~/.vim/plugged/vim-snippets/snippets, ~/.vim/plugged/vim-react-snippets/snippets'
 let b:deoplete_disable_auto_complete=1
 let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = 0
+let g:tern_show_signature_in_pum = '0'
+
+
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = [
+      \ 'tern#Complete'
+      \]
+
+
 set completeopt+=noinsert
 
 au BufRead,BufNewFile *.es6 setfiletype javascript
 au BufRead,BufNewFile *.nxml setfiletype ruby
 au BufRead,BufNewFile *.jbuilder setfiletype ruby
+au BufRead,BufNewFile *.scss set filetype=scss.css
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd BufWritePre * StripWhitespace
 
-" let g:airline_powerline_fonts = 1
-let g:airline_theme='solarized'
+let g:airline_powerline_fonts = 1
+let g:airline_theme='quantum'
+let g:airline_skip_empty_sections = 1
 
 " Command Mode Mappings
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
-let g:airline_skip_empty_sections = 1
-au BufRead,BufNewFile *.scss set filetype=scss.css
 
 let g:python_host_prog = '/usr/bin/python2.7'
 let g:python3_host_prog = '/usr/local/bin/python3'
@@ -313,3 +334,12 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 if exists('&inccommand')
   set inccommand=nosplit
 endif
+
+let g:javascript_plugin_jsdoc = 1
+set conceallevel=1
+
+filetype plugin indent on
+syntax enable
+syntax on
+set background=dark
+colorscheme quantum
