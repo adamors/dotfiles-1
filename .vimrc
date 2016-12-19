@@ -24,10 +24,10 @@ Plug 'vim-scripts/TailMinusF'
 Plug 'chase/vim-ansible-yaml'
 
 " " Elixir
-" Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
-" Plug 'thinca/vim-ref', { 'for': 'elixir' }
-" Plug 'renderedtext/vim-elixir-alternative-files', { 'for': 'elixir' }
-" Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh', 'for': 'elixir' }
+Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
+Plug 'thinca/vim-ref', { 'for': 'elixir' }
+Plug 'renderedtext/vim-elixir-alternative-files', { 'for': 'elixir' }
+Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh', 'for': 'elixir' }
 
 " Testing
 Plug 'janko-m/vim-test'
@@ -87,6 +87,7 @@ Plug 'ervandew/supertab'
 " Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'gcmt/taboo.vim'
 
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet.vim'
@@ -308,7 +309,6 @@ let g:deoplete#omni#functions.javascript = [
       \ 'tern#Complete'
       \]
 
-
 set completeopt+=noinsert
 
 au BufRead,BufNewFile *.es6 setfiletype javascript
@@ -342,4 +342,24 @@ filetype plugin indent on
 syntax enable
 syntax on
 set background=dark
-colorscheme quantum
+colorscheme base16-ocean
+" let g:quantum_black = 1
+
+" Tabs
+map <silent> <leader>te :$tabnew<CR>
+" map <silent> <leader>td :Ag TODO<CR>
+
+" map <silent> <S-h> <C-w>>
+" map <silent> <S-j> <C-W>+
+" map <silent> <S-k> <C-W>-
+" map <silent> <S-l> <C-w><
+
+set noea
+
+" Neovim Terminal Mappings
+" tnoremap <Esc> <C-\><C-n>
+"
+
+" Note: brew install highlight
+let g:fzf_files_options =
+  \ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
