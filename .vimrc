@@ -3,11 +3,8 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 call plug#begin('~/.vim/plugged')
 
 Plug 'szw/vim-tags'
-Plug 'epilande/vim-react-snippets'
 Plug 'craigemery/vim-autotag'
 Plug 'othree/html5.vim'
-Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'chriskempson/base16-vim'
 
 " Rails / Ruby Plugins
 Plug 'vim-ruby/vim-ruby'
@@ -20,10 +17,9 @@ Plug 'thoughtbot/vim-rspec' , { 'for': 'ruby' }
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
-Plug 'vim-scripts/TailMinusF'
 Plug 'chase/vim-ansible-yaml'
 
-" " Elixir
+" Elixir
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 Plug 'thinca/vim-ref', { 'for': 'elixir' }
 Plug 'renderedtext/vim-elixir-alternative-files', { 'for': 'elixir' }
@@ -32,36 +28,33 @@ Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh', 'for': 'elixir' }
 " Testing
 Plug 'janko-m/vim-test'
 
-" " SCSS / CSS Plugs
+" SCSS / CSS Plugins
 Plug 'ap/vim-css-color'
 Plug 'cakebaker/scss-syntax.vim'
 
-" Javascript Plugs
+" Javascript / JSX Plugins
+Plug 'sbdchd/neoformat'
 Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
-" Plug '1995eaton/vim-better-javascript-completion'
 Plug 'justinj/vim-react-snippets'
-" Plug 'gavocanov/vim-js-indent'
 Plug 'othree/jspc.vim'
-" Plug 'rschmukler/pangloss-vim-indent'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern'}
 Plug 'ternjs/tern_for_vim'
 Plug 'burnettk/vim-angular', {'for': ['javascript', 'html']}
-" Plug 'othree/yajs.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'othree/javascript-libraries-syntax.vim'
-" Plug 'othree/es.next.syntax.vim'
 Plug 'kchmck/vim-coffee-script',  { 'for': 'coffee' }
-Plug 'elzr/vim-json'
-Plug 'heavenshell/vim-jsdoc'
+Plug 'elzr/vim-json', { 'for': ['json', 'javascript', 'jsx'] }
+Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'jsx'] }
 Plug 'ruanyl/vim-fixmyjs'
 Plug 'Shougo/echodoc.vim'
 
-" " Misc Plugs
+" Misc Plugs
+Plug 'tpope/vim-sensible'
 Plug 'benekastah/neomake'
-Plug 'Yggdroot/indentLine'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
@@ -84,28 +77,34 @@ Plug 'junegunn/fzf.vim'
 Plug 'rizzatti/dash.vim'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
-" Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'gcmt/taboo.vim'
+Plug 'vim-scripts/TailMinusF'
 
+" Autocompletion Plugins
 Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/neco-vim'
+Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 
-" " Colorschemes
-Plug 'mhartington/oceanic-next'
-Plug 'joshdick/onedark.vim'
-Plug 'nanotech/jellybeans.vim'
-Plug 'frankier/neovim-colors-solarized-truecolor-only'
-Plug 'NLKNguyen/papercolor-theme'
+" Colorschemes
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
+" True Color Supprt for Neovim
 if (has("termguicolors"))
   set termguicolors
 endif
 
+syntax enable
+syntax on
+filetype plugin indent on
+set background=dark
+colorscheme base16-phd
+set relativenumber
 set number
 set laststatus=2
 set backspace=2
@@ -114,7 +113,8 @@ set ignorecase
 set infercase
 set noshowmode
 set fillchars+=stl:\ ,stlnc:\
-set lcs+=space:·
+set lcs=tab:\-\
+set list
 set termencoding=utf-8
 set smartindent
 set expandtab
@@ -142,7 +142,7 @@ set nocursorcolumn
 set nocursorline
 set ttyfast
 
-" Plug Update
+" Plug Mappings
 map <silent> <leader>pu :PlugUpdate<CR>
 map <silent> <leader>pi :PlugInstall<CR>
 map <silent> <leader>pc :PlugClean<CR>
@@ -150,10 +150,9 @@ map <silent> <leader>pc :PlugClean<CR>
 " Dash integration
 nmap <silent> <leader>d <Plug>DashSearch
 
-" CtrlP Clear Cache
-map <silent> <leader>cc :CtrlPClearAllCaches<CR>
-nnoremap <silent> <C-T> :CtrlPTag<CR>
+" Fzf Mappings
 nnoremap <silent> <space> :Files<CR>
+nnoremap <leader>ls :Buffers<CR>
 
 " Misc
 nmap <silent> <leader>o :only<CR>
@@ -168,49 +167,47 @@ map <silent> <leader>gl :terminal git lg<CR>
 map <silent> <leader>gb :Gblame<cr>
 map <leader>gco :Dispatch git checkout<Space>
 
-" TagBar
-map <silent> <leader>tb :TagbarToggle<CR>
-
 " Ag
 nnoremap <leader>f :Ag<Space>
 nnoremap <leader>F :Ag "<C-R><C-W>"<CR>
 
-nnoremap <leader>ls :Buffers<CR>
-
-" Enable JSX for .js files
+" Javascript Settings / Config
 let g:jsx_ext_required = 0
 let g:neomake_jsx_enabled_makers = ['eslint']
+let g:javascript_enable_domhtmlcss=1
+let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmine,chai'
+let g:javascript_plugin_jsdoc = 1
 
-let g:ctrlp_custom_ignore = { 'dir':  '\v[\/](doc|tmp|node_modules|vendor)' }
-let g:ctrlp_show_hidden = 1
+" TODO: Are these needed now I use FZF?
+" let g:ctrlp_custom_ignore = { 'dir':  '\v[\/](doc|tmp|node_modules|vendor)' }
+" let g:ctrlp_show_hidden = 1
+" let g:ctrlp_lazy_update = 0
+" let g:ctrlp_clear_cache_on_exit = 0
+" let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+"       \ --ignore .git
+"       \ --ignore .svn
+"       \ --ignore .hg
+"       \ --ignore .DS_Store
+"       \ --ignore "**/*.pyc"
+"       \ -g ""'
+" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
-let g:ackprg = 'ag --nogroup --nocolor --column'
-let g:ctrlp_lazy_update = 0
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .svn
-      \ --ignore .hg
-      \ --ignore .DS_Store
-      \ --ignore "**/*.pyc"
-      \ -g ""'
-
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
+  let g:ackprg = 'ag --nogroup --nocolor --column'
+  " TODO: Are these needed now I use FZF?
+  " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " let g:ctrlp_use_caching = 0
 endif
 
 " Nerdtree Config
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.DS_Store$', '\.vim$']
+let NERDTreeQuitOnOpen=1
 map <silent> <leader>n :NERDTreeToggle<CR>
 autocmd VimEnter * wincmd p
 
-let g:javascript_enable_domhtmlcss=1
-let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmine,chai'
 
 " RuboCop Mappings
 map <silent> <leader>ru :RuboCop<CR>
@@ -226,7 +223,6 @@ map <silent> <leader>q :call ToggleQuickfixList()<CR>
 " RSpec
 let test#strategy = "neovim"
 let g:test#preserve_screen = 1
-
 map <Leader>tf :TestFile<CR>
 map <Leader>tn :TestNearest<CR>
 map <Leader>tl :TestLast<CR>
@@ -244,10 +240,8 @@ map <leader>js :%!python -m json.tool<cr>
 map <leader>f{ :normal va{V=<cr>
 map <leader>fa :normal vf"f"<cr>
 
-" View .vimrc
+" .vimrc editing
 nmap <leader>v :sp $MYVIMRC<CR>
-
-" Source .vimrc
 nmap <Leader>s :source $MYVIMRC<CR>
 
 " Disable K looking up stuff
@@ -255,8 +249,8 @@ map K <Nop>
 
 command! W :w
 command! Q :q
+command! Qa :qa
 
-let NERDTreeQuitOnOpen=1
 
 if has('nvim')
   nmap <bs> :<c-u>TmuxNavigateLeft<cr>
@@ -307,7 +301,7 @@ let g:tern_show_signature_in_pum = '0'
 let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.javascript = [
       \ 'tern#Complete'
-      \]
+      \ ]
 
 set completeopt+=noinsert
 
@@ -320,7 +314,7 @@ autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd BufWritePre * StripWhitespace
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme='quantum'
+let g:airline_theme='base16'
 let g:airline_skip_empty_sections = 1
 
 " Command Mode Mappings
@@ -328,38 +322,24 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
 
-let g:python_host_prog = '/usr/bin/python2.7'
-let g:python3_host_prog = '/usr/local/bin/python3'
+" let g:python_host_prog = '/usr/bin/python2.7'
+" let g:python3_host_prog = '/usr/local/bin/python3'
 
 if exists('&inccommand')
   set inccommand=nosplit
 endif
 
-let g:javascript_plugin_jsdoc = 1
 set conceallevel=1
-
-filetype plugin indent on
-syntax enable
-syntax on
-set background=dark
-colorscheme base16-ocean
-" let g:quantum_black = 1
 
 " Tabs
 map <silent> <leader>te :$tabnew<CR>
-" map <silent> <leader>td :Ag TODO<CR>
-
-" map <silent> <S-h> <C-w>>
-" map <silent> <S-j> <C-W>+
-" map <silent> <S-k> <C-W>-
-" map <silent> <S-l> <C-w><
-
 set noea
 
-" Neovim Terminal Mappings
-" tnoremap <Esc> <C-\><C-n>
-"
 
 " Note: brew install highlight
 let g:fzf_files_options =
   \ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
+
+function FixRubyhash()
+  %s/:\([^ ]*\)\(\s*\)=>/\1:/g
+endfunction
