@@ -1,6 +1,7 @@
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 call plug#begin('~/.vim/plugged')
+
+Plug 'equalsraf/neovim-gui-shim'
 
 " Vim language pack
 Plug 'sheerun/vim-polyglot'
@@ -9,6 +10,7 @@ Plug 'pangloss/vim-javascript'
 
 Plug 'szw/vim-tags'
 Plug 'craigemery/vim-autotag'
+Plug 'tpope/vim-eunuch'
 
 " Rails / Ruby Plugins
 Plug 'tpope/vim-rails'
@@ -41,8 +43,8 @@ Plug 'sbdchd/neoformat'
 Plug 'moll/vim-node'
 Plug 'justinj/vim-react-snippets'
 Plug 'othree/jspc.vim'
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern'}
-Plug 'ternjs/tern_for_vim'
+" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern'}
+" Plug 'ternjs/tern_for_vim'
 Plug 'burnettk/vim-angular', {'for': ['javascript', 'html']}
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'jsx'] }
@@ -51,10 +53,11 @@ Plug 'Shougo/echodoc.vim'
 
 " Misc Plugs
 Plug 'AndrewRadev/switch.vim'
-Plug 'benekastah/neomake'
+" Plug 'benekastah/neomake'
+Plug 'w0rp/ale'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
@@ -71,7 +74,8 @@ Plug 'tmhedberg/matchit'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'benmills/vimux'
-Plug 'vim-scripts/Align'
+" Plug 'vim-scripts/Align'
+Plug 'junegunn/vim-easy-align'
 Plug 'ggreer/the_silver_searcher'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -92,18 +96,21 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'dietsche/vim-lastplace'
 
 " Colorschemes
-Plug 'joshdick/onedark.vim'
-Plug 'chriskempson/base16-vim'
 Plug 'rakr/vim-one'
+Plug 'rafi/awesome-vim-colorschemes'
 
 call plug#end()
 
+" True Color Supprt for Neovim
+if (has("termguicolors"))
+  set termguicolors
+endif
 
 syntax enable
 syntax on
 filetype plugin indent on
-set background=dark
 colorscheme one
+set background=dark
 set relativenumber
 set number
 set laststatus=2
@@ -142,10 +149,6 @@ set nocursorcolumn
 set nocursorline
 set ttyfast
 
-" True Color Supprt for Neovim
-if (has("termguicolors"))
-  set termguicolors
-endif
 
 " Disable some polygot language packs
 let g:polyglot_disabled = ['javascript', 'jsx']
@@ -181,7 +184,7 @@ nnoremap <leader>F :Ag "<C-R><C-W>"<CR>
 
 " Javascript Settings / Config
 let g:jsx_ext_required = 0
-let g:neomake_jsx_enabled_makers = ['eslint']
+" let g:neomake_jsx_enabled_makers = ['eslint']
 let g:neoformat_enabled_javascript = ['prettier']
 " let g:neoformat_enabled_jsx = ['prettier']
 let g:javascript_enable_domhtmlcss=1
@@ -250,9 +253,9 @@ if has('nvim')
 endif
 
 " Neomake Config
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_ruby_enabled_makers = ['rubocop']
-autocmd! BufWritePost * Neomake
+" let g:neomake_javascript_enabled_makers = ['eslint']
+" let g:neomake_ruby_enabled_makers = ['rubocop']
+" autocmd! BufWritePost * Neomake
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
@@ -264,27 +267,27 @@ let g:vimjs#casesensistive = 1
 let g:vimjs#smartcomplete = 1
 
 let g:deoplete#sources = {}
-let g:deoplete#sources.javascript = ['ternjs']
+" let g:deoplete#sources.javascript = ['ternjs']
 
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.javascript = '\h\w*\|\h\w*\.\%(\h\w*\)\|[^. \t]\.\%(\h\w*\)'
+" let g:deoplete#omni_patterns = {}
+" let g:deoplete#omni_patterns.javascript = '\h\w*\|\h\w*\.\%(\h\w*\)\|[^. \t]\.\%(\h\w*\)'
 
-let g:tern#filetypes = [
-                \ 'jsx',
-                \ 'javascript.jsx',
-                \ 'vue',
-                \ ]
+" let g:tern#filetypes = [
+"                 \ 'jsx',
+"                 \ 'javascript.jsx',
+"                 \ 'vue',
+"                 \ ]
 
 set omnifunc=syntaxcomplete#Complete
 
 let g:neosnippet#snippets_directory='~/.vim/plugged/angular-vim-snippets/snippets, ~/.vim/plugged/vim-snippets/snippets, ~/.vim/plugged/vim-react-snippets/snippets'
 let b:deoplete_disable_auto_complete=1
 let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-      \ 'tern#Complete'
-      \ ]
-let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = '0'
+" let g:deoplete#omni#functions.javascript = [
+"       \ 'tern#Complete'
+"       \ ]
+" let g:tern_request_timeout = 1
+" let g:tern_show_signature_in_pum = '0'
 
 set completeopt+=noinsert
 
@@ -293,7 +296,7 @@ au BufRead,BufNewFile *.nxml setfiletype ruby
 au BufRead,BufNewFile *.jbuilder setfiletype ruby
 au BufRead,BufNewFile *.scss set filetype=scss.css
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType javascript setlocal omnifunc=tern#Complete
+" autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd BufWritePre * StripWhitespace
 
 let g:airline_powerline_fonts = 1
@@ -320,3 +323,18 @@ nnoremap <silent> <cr> :nohlsearch<cr>
 " Note: brew install highlight
 let g:fzf_files_options =
   \ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
+
+
+" ALE Configuration
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
+
+
+
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc

@@ -3,27 +3,7 @@
   "globals": {
       "console": true,
       "_": true,
-      "$"
-  },
-  "rules": {
-      "indent": [
-          2,
-          2
-      ],
-      "quotes": [
-          2,
-          "double"
-      ],
-      "linebreak-style": [
-          2,
-          "unix"
-      ],
-      "semi": [
-          0,
-          "always"
-      ],
-      "no-extra-semi": 0,
-      "no-console": 0
+      "$": true
   },
   "env": {
       "es6": true,
@@ -31,12 +11,20 @@
       "node": true,
       "jquery": true
   },
-  "extends": "eslint:recommended",
+  "extends":[
+    "prettier"
+  ],
   "ecmaFeatures": {
       "jsx": true,
       "experimentalObjectRestSpread": true
   },
   "plugins": [
-      "react"
-  ]
+      "react",
+      "prettier",
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  }
 }
