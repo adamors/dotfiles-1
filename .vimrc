@@ -1,15 +1,13 @@
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'equalsraf/neovim-gui-shim'
-
 " Vim language pack
 Plug 'sheerun/vim-polyglot'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 
-Plug 'szw/vim-tags'
-Plug 'craigemery/vim-autotag'
+" Plug 'szw/vim-tags'
+" Plug 'craigemery/vim-autotag'
 Plug 'tpope/vim-eunuch'
 
 " Rails / Ruby Plugins
@@ -20,16 +18,8 @@ Plug 'ngmy/vim-rubocop', { 'for': 'ruby' }
 Plug 'thoughtbot/vim-rspec' , { 'for': 'ruby' }
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
-Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
+" Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
 Plug 'chase/vim-ansible-yaml'
-
-" Elixir
-" Plug 'thinca/vim-ref', { 'for': 'elixir' }
-" Plug 'renderedtext/vim-elixir-alternative-files', { 'for': 'elixir' }
-" Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh', 'for': 'elixir' }
-" Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
-" Plug 'tpope/vim-projectionist'
-" Plug 'c-brenn/phoenix.vim'
 
 " Testing
 Plug 'janko-m/vim-test'
@@ -41,23 +31,14 @@ Plug 'cakebaker/scss-syntax.vim'
 " Javascript / JSX Plugins
 Plug 'sbdchd/neoformat'
 Plug 'moll/vim-node'
-Plug 'justinj/vim-react-snippets'
-Plug 'othree/jspc.vim'
-" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern'}
-" Plug 'ternjs/tern_for_vim'
 Plug 'burnettk/vim-angular', {'for': ['javascript', 'html']}
 Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'jsx'] }
-Plug 'ruanyl/vim-fixmyjs'
-Plug 'Shougo/echodoc.vim'
 
 " Misc Plugs
 Plug 'AndrewRadev/switch.vim'
-" Plug 'benekastah/neomake'
 Plug 'w0rp/ale'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-fugitive'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
@@ -74,30 +55,23 @@ Plug 'tmhedberg/matchit'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'benmills/vimux'
-" Plug 'vim-scripts/Align'
 Plug 'junegunn/vim-easy-align'
 Plug 'ggreer/the_silver_searcher'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'rizzatti/dash.vim'
 Plug 'SirVer/ultisnips'
-Plug 'ervandew/supertab'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'gcmt/taboo.vim'
-Plug 'vim-scripts/TailMinusF'
 
 " Autocompletion Plugins
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/neoinclude.vim'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
 Plug 'dietsche/vim-lastplace'
 
 " Colorschemes
 Plug 'rakr/vim-one'
-Plug 'rafi/awesome-vim-colorschemes'
 
 call plug#end()
 
@@ -150,7 +124,7 @@ set nocursorline
 set ttyfast
 
 
-" Disable some polygot language packs
+" Disable some polyglot language packs
 let g:polyglot_disabled = ['javascript', 'jsx']
 
 " Plug Mappings
@@ -178,15 +152,9 @@ map <silent> <leader>gl :terminal git lg<CR>
 map <silent> <leader>gb :Gblame<cr>
 map <leader>gco :Dispatch git checkout<Space>
 
-" Ag
-nnoremap <leader>f :Ag<Space>
-nnoremap <leader>F :Ag "<C-R><C-W>"<CR>
-
 " Javascript Settings / Config
 let g:jsx_ext_required = 0
-" let g:neomake_jsx_enabled_makers = ['eslint']
 let g:neoformat_enabled_javascript = ['prettier']
-" let g:neoformat_enabled_jsx = ['prettier']
 let g:javascript_enable_domhtmlcss=1
 let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmine,chai'
 let g:javascript_plugin_jsdoc = 1
@@ -252,44 +220,22 @@ if has('nvim')
   nmap <bs> :<c-u>TmuxNavigateLeft<cr>
 endif
 
-" Neomake Config
-" let g:neomake_javascript_enabled_makers = ['eslint']
-" let g:neomake_ruby_enabled_makers = ['rubocop']
-" autocmd! BufWritePost * Neomake
-
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_refresh_always = 1
-let g:neosnippet#enable_snipmate_compatibility = 1
 
 let g:vimjs#casesensistive = 1
 let g:vimjs#smartcomplete = 1
 
-let g:deoplete#sources = {}
-" let g:deoplete#sources.javascript = ['ternjs']
-
-" let g:deoplete#omni_patterns = {}
-" let g:deoplete#omni_patterns.javascript = '\h\w*\|\h\w*\.\%(\h\w*\)\|[^. \t]\.\%(\h\w*\)'
-
-" let g:tern#filetypes = [
-"                 \ 'jsx',
-"                 \ 'javascript.jsx',
-"                 \ 'vue',
-"                 \ ]
-
 set omnifunc=syntaxcomplete#Complete
 
-let g:neosnippet#snippets_directory='~/.vim/plugged/angular-vim-snippets/snippets, ~/.vim/plugged/vim-snippets/snippets, ~/.vim/plugged/vim-react-snippets/snippets'
 let b:deoplete_disable_auto_complete=1
 let g:deoplete#omni#functions = {}
-" let g:deoplete#omni#functions.javascript = [
-"       \ 'tern#Complete'
-"       \ ]
-" let g:tern_request_timeout = 1
-" let g:tern_show_signature_in_pum = '0'
 
 set completeopt+=noinsert
+
+" File Types Specific
 
 au BufRead,BufNewFile *.es6 setfiletype javascript
 au BufRead,BufNewFile *.nxml setfiletype ruby
@@ -312,9 +258,6 @@ if exists('&inccommand')
 endif
 
 set conceallevel=1
-
-" Tabs
-map <silent> <leader>te :$tabnew<CR>
 set noea
 
 " Turn hlsearch off when pressing return
@@ -331,6 +274,7 @@ let g:ale_linters = {
 \}
 
 
+" Misc Stuff
 
 function! SynStack()
   if !exists("*synstack")
