@@ -9,14 +9,16 @@ Plug 'pangloss/vim-javascript'
 
 " Rails / Ruby Plugins
 
+Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-bundler', { 'for': 'ruby' }
 Plug 'ngmy/vim-rubocop', { 'for': 'ruby' }
 Plug 'thoughtbot/vim-rspec' , { 'for': 'ruby' }
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
-Plug 'chase/vim-ansible-yaml'
+Plug 'pearofducks/ansible-vim'
+
 
 " Testing
 
@@ -24,14 +26,15 @@ Plug 'janko-m/vim-test'
 
 " SCSS / CSS Plugins
 
-Plug 'ap/vim-css-color'
-Plug 'cakebaker/scss-syntax.vim'
+Plug 'ap/vim-css-color', {'for': ['javascript', 'html', 'scss', 'css']}
+Plug 'cakebaker/scss-syntax.vim', {'for': ['css', 'scss']}
+Plug 'digitaltoad/vim-pug'
 
 " Javascript / JSX Plugins
 
+Plug 'heavenshell/vim-jsdoc'
 Plug 'sbdchd/neoformat'
 Plug 'moll/vim-node'
-Plug 'burnettk/vim-angular', {'for': ['javascript', 'html']}
 Plug 'othree/javascript-libraries-syntax.vim'
 
 " Misc Plugs
@@ -50,11 +53,11 @@ Plug 'scrooloose/nerdtree'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 Plug 'gregsexton/MatchTag'
 Plug 'tmhedberg/matchit'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'christoomey/vim-tmux-runner'
+" Plug 'christoomey/vim-tmux-runner'
 Plug 'benmills/vimux'
 Plug 'junegunn/vim-easy-align'
 Plug 'ggreer/the_silver_searcher'
@@ -64,10 +67,12 @@ Plug 'SirVer/ultisnips'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-eunuch'
+Plug 'machakann/vim-highlightedyank'
 
 " Autocompletion Plugins
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'carlitux/deoplete-ternjs'
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/neoinclude.vim'
 Plug 'dietsche/vim-lastplace'
@@ -75,11 +80,13 @@ Plug 'dietsche/vim-lastplace'
 " Colorschemes
 
 Plug 'rakr/vim-one'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'trevordmiller/nova-vim'
+Plug 'toiffel/vim-hybrid'
 
 call plug#end()
 
 " True Color Supprt for Neovim
-
 if (has("termguicolors"))
   set termguicolors
 endif
@@ -87,8 +94,8 @@ endif
 syntax enable
 syntax on
 filetype plugin indent on
-colorscheme one
 set background=dark
+colorscheme hybrid_material
 set relativenumber
 set number
 set laststatus=2
@@ -163,6 +170,7 @@ map <leader>gco :Dispatch git checkout<Space>
 
 let g:jsx_ext_required = 0
 let g:neoformat_enabled_javascript = ['prettier']
+let g:neoformat_try_formatprg = 1
 let g:javascript_enable_domhtmlcss=1
 let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmine,chai'
 let g:javascript_plugin_jsdoc = 1
@@ -235,12 +243,17 @@ command! Qa :qa
 
 if has('nvim')
   nmap <bs> :<c-u>TmuxNavigateLeft<cr>
+  " Terminal Emulator Config
+  autocmd TermClose * bd! " quit when a terminal closes instead of showing exit code and waiting
 endif
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_refresh_always = 1
+
+let g:tern_show_signature_in_pum = '0'
+set completeopt-=preview
 
 set omnifunc=syntaxcomplete#Complete
 
@@ -260,18 +273,30 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd BufWritePre * StripWhitespace
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme='one'
+let g:airline_theme='hybrid'
 let g:airline_skip_empty_sections = 1
 
 " Turn hlsearch off when pressing return
 
 nnoremap <silent> <cr> :nohlsearch<cr>
 
-" ALE
+" ALE Config
 
 let g:ale_linters = {
-\   'javascript': ['eslint'],
-\}
+\  'javascript': [
+\     'eslint'
+\   ],
+\  }
+
+let g:ale_fixers = {
+\  'javascript': [
+\    'prettier',
+\    'eslint'
+\   ]
+\  }
+
+nmap <leader>d <Plug>(ale_fix)
+let g:ale_sign_column_always = 1
 
 " Misc Stuff
 
@@ -292,3 +317,5 @@ function! SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+let g:rubycomplete_rails = 1
