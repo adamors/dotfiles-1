@@ -13,19 +13,11 @@ source $ZSH/oh-my-zsh.sh
 
 # Load zsh-syntax-highlighting.
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#
+
 # Load zsh-autosuggestions.
 source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
 
 source "/Applications/SQLAnywhere12/System/bin64/sa_config.sh"
-
-# Enable autosuggestions automatically.
-# zle-line-init() {
-#   zle autosuggest-start
-# }
-# zle -N zle-line-init
-
-# bindkey '^f' vi-forward-word
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
@@ -47,16 +39,6 @@ fhist() {
     sed 's/ *[0-9]* *//')
 }
 bindkey -s '^r' 'fhist\n'
-
-# Pick up Node Version on Directory Entry
-
-# autoload -U add-zsh-hook
-# load-nvmrc() {
-#   if [[ -f .nvmrc && -r .nvmrc ]]; then
-#     nvm use
-#   fi
-# }
-# add-zsh-hook chpwd load-nvmrc
 
 # =======
 # Aliases
