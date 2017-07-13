@@ -6,7 +6,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 
-
 " Rails / Ruby Plugins
 
 Plug 'vim-ruby/vim-ruby'
@@ -19,14 +18,13 @@ Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 Plug 'pearofducks/ansible-vim'
 
-
 " Testing
 
 Plug 'janko-m/vim-test'
 
-" SCSS / CSS Plugins
+" SCSS / CSS / Layout Plugins
 
-Plug 'ap/vim-css-color', {'for': ['javascript', 'html', 'scss', 'css']}
+Plug 'ap/vim-css-color', {'for': ['scss', 'css']}
 Plug 'cakebaker/scss-syntax.vim', {'for': ['css', 'scss']}
 Plug 'digitaltoad/vim-pug'
 
@@ -45,19 +43,15 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-dispatch'
-Plug 'radenling/vim-dispatch-neovim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
-" Plug 'honza/vim-snippets'
 Plug 'gregsexton/MatchTag'
 Plug 'tmhedberg/matchit'
 Plug 'christoomey/vim-tmux-navigator'
-" Plug 'christoomey/vim-tmux-runner'
 Plug 'benmills/vimux'
 Plug 'junegunn/vim-easy-align'
 Plug 'ggreer/the_silver_searcher'
@@ -80,22 +74,16 @@ Plug 'dietsche/vim-lastplace'
 " Colorschemes
 
 Plug 'rakr/vim-one'
-Plug 'rafi/awesome-vim-colorschemes'
 Plug 'trevordmiller/nova-vim'
 Plug 'toiffel/vim-hybrid'
 
 call plug#end()
 
-" True Color Supprt for Neovim
-if (has("termguicolors"))
-  set termguicolors
-endif
-
 syntax enable
 syntax on
 filetype plugin indent on
 set background=dark
-colorscheme hybrid_material
+colorscheme one
 set relativenumber
 set number
 set laststatus=2
@@ -161,10 +149,10 @@ map <silent> <leader>gs :Gstatus<CR>
 map <silent> <leader>gd :Gdiff<CR>
 map <silent> <leader>gc :Gcommit<CR>
 map <silent> <leader>gp :Gpush<CR>
-map <silent> <leader>gu :Dispatch git pull<CR>
+map <silent> <leader>gu :terminal git pull<CR>
 map <silent> <leader>gl :terminal git lg<CR>
 map <silent> <leader>gb :Gblame<cr>
-map <leader>gco :Dispatch git checkout<Space>
+map <leader>gco :terminal git checkout<Space>
 
 " Javascript Settings / Config
 
@@ -214,6 +202,8 @@ map <Leader>tl :TestLast<CR>
 map <Leader>ts :TestSuite<CR>
 map <silent> <leader>qo :copen<CR>
 
+map <Leader>af :ALEFix<CR>
+
 " Convert HTML to Haml, ensure the html2haml gem is installed
 
 nmap <leader>h :%!html2haml --erb 2> /dev/null<CR>:set ft=haml<CR>
@@ -243,8 +233,12 @@ command! Qa :qa
 
 if has('nvim')
   nmap <bs> :<c-u>TmuxNavigateLeft<cr>
-  " Terminal Emulator Config
   autocmd TermClose * bd! " quit when a terminal closes instead of showing exit code and waiting
+  tnoremap <Leader><ESC> <C-\><C-n>
+endif
+
+if (has("termguicolors"))
+  set termguicolors
 endif
 
 let g:deoplete#enable_at_startup = 1
@@ -273,7 +267,7 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd BufWritePre * StripWhitespace
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme='hybrid'
+let g:airline_theme='onedark'
 let g:airline_skip_empty_sections = 1
 
 " Turn hlsearch off when pressing return
