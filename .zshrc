@@ -78,9 +78,6 @@ alias vimr="vimr --cwd ."
 export NVM_DIR="/Users/gavsim/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-export RACKSPACE_API_KEY=1c2f1cf162794f6e96b09b24b6a95773
-export RACKSPACE_USERNAME=cef-karloakes
-
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
