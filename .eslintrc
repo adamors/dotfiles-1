@@ -15,10 +15,6 @@ module.exports = {
     "eslint:recommended",
     "prettier"
   ],
-  ecmaFeatures: {
-    jsx: true,
-    experimentalObjectRestSpread: true
-  },
   plugins: ["react", "prettier"],
   parserOptions: {
     ecmaFeatures: {

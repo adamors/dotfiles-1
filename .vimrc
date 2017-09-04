@@ -6,6 +6,10 @@ Plug 'sheerun/vim-polyglot'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 
+" Markdown
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+
 " Rails / Ruby Plugins
 
 Plug 'vim-ruby/vim-ruby'
@@ -31,12 +35,16 @@ Plug 'digitaltoad/vim-pug'
 " Javascript / JSX Plugins
 
 Plug 'heavenshell/vim-jsdoc'
-Plug 'sbdchd/neoformat'
+" Plug 'sbdchd/neoformat'
 Plug 'moll/vim-node'
 Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mkitt/tabline.vim'
+Plug 'flowtype/vim-flow'
 
 " Misc Plugs
 
+Plug 'rizzatti/dash.vim'
 Plug 'AndrewRadev/switch.vim'
 Plug 'w0rp/ale'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -71,11 +79,19 @@ Plug 'Shougo/neco-vim'
 Plug 'Shougo/neoinclude.vim'
 Plug 'dietsche/vim-lastplace'
 
+" Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+
 " Colorschemes
 
 Plug 'rakr/vim-one'
 Plug 'trevordmiller/nova-vim'
-Plug 'toiffel/vim-hybrid'
+Plug 'ayu-theme/ayu-vim'
+Plug 'ayu-theme/ayu-vim-airline'
+Plug 'bluz71/vim-moonfly-colors'
+
+if (has("termguicolors"))
+  set termguicolors
+endif
 
 call plug#end()
 
@@ -83,11 +99,14 @@ syntax enable
 syntax on
 filetype plugin indent on
 set background=dark
-colorscheme one
+let ayucolor="mirage"
+colorscheme ayu
+set hidden
 set relativenumber
 set number
 set laststatus=2
 set backspace=2
+set noshowmode
 set nowrap
 set ignorecase
 set infercase
@@ -126,6 +145,8 @@ set noea
 " Disable some polyglot language packs
 
 let g:polyglot_disabled = ['javascript', 'jsx']
+nmap <silent> <leader>d <Plug>DashSearch
+nmap <silent> <leader>bn :bn<CR>
 
 " Plug Mappings
 
@@ -190,7 +211,8 @@ map <silent> <leader>rdbm :Rake db:migrate<CR>
 map <silent> <leader>rr :!ruby %<CR>
 map <silent> <leader>q :call ToggleQuickfixList()<CR>
 
-map <silent> <leader>nf :Neoformat<CR>
+map <silent> <leader>nf :ALEFix<CR>
+map <silent> <leader>af :ALEFix<CR>
 
 " Testing
 
@@ -202,16 +224,11 @@ map <Leader>tl :TestLast<CR>
 map <Leader>ts :TestSuite<CR>
 map <silent> <leader>qo :copen<CR>
 
-map <Leader>af :ALEFix<CR>
 
 " Convert HTML to Haml, ensure the html2haml gem is installed
 
 nmap <leader>h :%!html2haml --erb 2> /dev/null<CR>:set ft=haml<CR>
 vmap <leader>h :!html2haml --erb 2> /dev/null<CR>
-
-" Format JSON
-
-map <leader>js :%!python -m json.tool<cr>
 
 " Misc
 
@@ -237,9 +254,6 @@ if has('nvim')
   tnoremap <Leader><ESC> <C-\><C-n>
 endif
 
-if (has("termguicolors"))
-  set termguicolors
-endif
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
@@ -267,18 +281,24 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd BufWritePre * StripWhitespace
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme='onedark'
+let g:airline_theme='aurora'
 let g:airline_skip_empty_sections = 1
 
 " Turn hlsearch off when pressing return
-
 nnoremap <silent> <cr> :nohlsearch<cr>
 
 " ALE Config
 
 let g:ale_linters = {
 \  'javascript': [
-\     'eslint'
+\     'eslint',
+\     'flow'
+\   ],
+\  'scss': [
+\     'stylelint'
+\   ],
+\  'ruby': [
+\     'rubocop'
 \   ],
 \  }
 
@@ -289,12 +309,15 @@ let g:ale_fixers = {
 \   ]
 \  }
 
-nmap <leader>d <Plug>(ale_fix)
 let g:ale_sign_column_always = 1
+let g:airline#extensions#ale#enabled = 1
+nmap <silent> <leader>ne <Plug>(ale_previous_wrap)
+nmap <silent> <leader>pe <Plug>(ale_next_wrap)
 
 " Misc Stuff
 
-nmap <silent> <leader>o :only<CR>
+nmap <silent> <leader>o :tabedit %<cr>
+nnoremap tc :tabclose<cr>
 
 " Command Mode Mappings
 
@@ -313,3 +336,13 @@ function! SynStack()
 endfunc
 
 let g:rubycomplete_rails = 1
+
+" let g:LanguageClient_serverCommands = {
+"     \ 'javascript.jsx': ['~/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+"     \ 'javascript': ['~/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+"     \ }
+
+" let g:LanguageClient_autoStart = 1
+
+let g:javascript_plugin_flow = 1
+let g:flow#showquickfix = 0
