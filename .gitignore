@@ -1,3 +1,4 @@
 /tags
 .DS_store
 .byebug_history
+priv/

@@ -35,7 +35,7 @@ Plug 'digitaltoad/vim-pug'
 " Javascript / JSX Plugins
 
 Plug 'heavenshell/vim-jsdoc'
-" Plug 'sbdchd/neoformat'
+Plug 'sbdchd/neoformat'
 Plug 'moll/vim-node'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'HerringtonDarkholme/yats.vim'
@@ -75,6 +75,7 @@ Plug 'machakann/vim-highlightedyank'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'carlitux/deoplete-ternjs'
+Plug 'wokalski/autocomplete-flow'
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/neoinclude.vim'
 Plug 'dietsche/vim-lastplace'
@@ -211,7 +212,7 @@ map <silent> <leader>rdbm :Rake db:migrate<CR>
 map <silent> <leader>rr :!ruby %<CR>
 map <silent> <leader>q :call ToggleQuickfixList()<CR>
 
-map <silent> <leader>nf :ALEFix<CR>
+map <silent> <leader>nf :Neoformat<CR>
 map <silent> <leader>af :ALEFix<CR>
 
 " Testing
