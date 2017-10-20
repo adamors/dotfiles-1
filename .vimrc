@@ -1,5 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'tpope/vim-dispatch'
+
 " Vim language pack
 
 Plug 'sheerun/vim-polyglot'
@@ -35,12 +37,12 @@ Plug 'digitaltoad/vim-pug'
 " Javascript / JSX Plugins
 
 Plug 'heavenshell/vim-jsdoc'
-Plug 'sbdchd/neoformat'
+" Plug 'sbdchd/neoformat'
 Plug 'moll/vim-node'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mkitt/tabline.vim'
-Plug 'flowtype/vim-flow'
+" Plug 'flowtype/vim-flow'
 
 " Misc Plugs
 
@@ -66,32 +68,34 @@ Plug 'ggreer/the_silver_searcher'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'SirVer/ultisnips'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-eunuch'
 Plug 'machakann/vim-highlightedyank'
+Plug 'itchyny/lightline.vim'
 
 " Autocompletion Plugins
+Plug 'roxma/nvim-completion-manager'
+Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+Plug 'roxma/ncm-flow'
+Plug 'roxma/ncm-rct-complete'
+Plug 'calebeby/ncm-css'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'carlitux/deoplete-ternjs'
-Plug 'wokalski/autocomplete-flow'
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/neoinclude.vim'
 Plug 'dietsche/vim-lastplace'
-
-" Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
 " Colorschemes
 
-Plug 'rakr/vim-one'
-Plug 'trevordmiller/nova-vim'
+" Plug 'rakr/vim-one'
+Plug 'joshdick/onedark.vim'
 Plug 'ayu-theme/ayu-vim'
-Plug 'ayu-theme/ayu-vim-airline'
-Plug 'bluz71/vim-moonfly-colors'
+" Plug 'ayu-theme/ayu-vim-airline'
+Plug 'kodemeister/vim-hybrid'
 
 if (has("termguicolors"))
-  set termguicolors
+  " set termguicolors
 endif
 
 call plug#end()
@@ -100,8 +104,7 @@ syntax enable
 syntax on
 filetype plugin indent on
 set background=dark
-let ayucolor="mirage"
-colorscheme ayu
+colorscheme hybrid
 set hidden
 set relativenumber
 set number
@@ -161,7 +164,6 @@ nnoremap <silent> <space> :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 
 " Note: brew install highlight
-
 let g:fzf_files_options =
   \ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 
@@ -179,8 +181,8 @@ map <leader>gco :terminal git checkout<Space>
 " Javascript Settings / Config
 
 let g:jsx_ext_required = 0
-let g:neoformat_enabled_javascript = ['prettier']
-let g:neoformat_try_formatprg = 1
+" let g:neoformat_enabled_javascript = ['prettier']
+" let g:neoformat_try_formatprg = 1
 let g:javascript_enable_domhtmlcss=1
 let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmine,chai'
 let g:javascript_plugin_jsdoc = 1
@@ -197,7 +199,6 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.DS_Store$', '\.vim$']
 let NERDTreeQuitOnOpen=1
 map <silent> <leader>n :NERDTreeToggle<CR>
-autocmd VimEnter * wincmd p
 
 " RuboCop Mappings
 
@@ -212,7 +213,7 @@ map <silent> <leader>rdbm :Rake db:migrate<CR>
 map <silent> <leader>rr :!ruby %<CR>
 map <silent> <leader>q :call ToggleQuickfixList()<CR>
 
-map <silent> <leader>nf :Neoformat<CR>
+" map <silent> <leader>nf :Neoformat<CR>
 map <silent> <leader>af :ALEFix<CR>
 
 " Testing
@@ -251,24 +252,14 @@ command! Qa :qa
 
 if has('nvim')
   nmap <bs> :<c-u>TmuxNavigateLeft<cr>
-  autocmd TermClose * bd! " quit when a terminal closes instead of showing exit code and waiting
+  " autocmd TermClose * bd! " quit when a terminal closes instead of showing exit code and waiting
   tnoremap <Leader><ESC> <C-\><C-n>
 endif
 
+" let g:tern_show_signature_in_pum = '0'
 
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_refresh_always = 1
-
-let g:tern_show_signature_in_pum = '0'
 set completeopt-=preview
-
 set omnifunc=syntaxcomplete#Complete
-
-let b:deoplete_disable_auto_complete=1
-let g:deoplete#omni#functions = {}
-
 set completeopt+=noinsert
 
 " File Types Specific
@@ -276,14 +267,13 @@ set completeopt+=noinsert
 au BufRead,BufNewFile *.es6 setfiletype javascript
 au BufRead,BufNewFile *.nxml setfiletype ruby
 au BufRead,BufNewFile *.jbuilder setfiletype ruby
-au BufRead,BufNewFile *.scss set filetype=scss.css
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd BufWritePre * StripWhitespace
 
-let g:airline_powerline_fonts = 1
-let g:airline_theme='aurora'
-let g:airline_skip_empty_sections = 1
+" let g:airline_powerline_fonts = 1
+" let g:airline_theme='hybrid'
+" let g:airline_skip_empty_sections = 1
 
 " Turn hlsearch off when pressing return
 nnoremap <silent> <cr> :nohlsearch<cr>
@@ -292,8 +282,8 @@ nnoremap <silent> <cr> :nohlsearch<cr>
 
 let g:ale_linters = {
 \  'javascript': [
-\     'eslint',
-\     'flow'
+\     'flow',
+\     'eslint'
 \   ],
 \  'scss': [
 \     'stylelint'
@@ -307,11 +297,19 @@ let g:ale_fixers = {
 \  'javascript': [
 \    'prettier',
 \    'eslint'
+\   ],
+\  'scss': [
+\    'prettier',
 \   ]
 \  }
 
 let g:ale_sign_column_always = 1
-let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_warning = '▲'
+let g:ale_sign_error = '✗'
+highlight link ALEWarningSign String
+highlight link ALEErrorSign Title
+" let g:airline#extensions#ale#enabled = 1
+
 nmap <silent> <leader>ne <Plug>(ale_previous_wrap)
 nmap <silent> <leader>pe <Plug>(ale_next_wrap)
 
@@ -319,6 +317,13 @@ nmap <silent> <leader>pe <Plug>(ale_next_wrap)
 
 nmap <silent> <leader>o :tabedit %<cr>
 nnoremap tc :tabclose<cr>
+
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 
 " Command Mode Mappings
 
@@ -329,21 +334,77 @@ if exists('&inccommand')
   set inccommand=nosplit
 endif
 
-function! SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
 
 let g:rubycomplete_rails = 1
 
-" let g:LanguageClient_serverCommands = {
-"     \ 'javascript.jsx': ['~/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
-"     \ 'javascript': ['~/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
-"     \ }
+let g:LanguageClient_serverCommands = {
+    \ 'javascript.jsx': ['~/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ 'javascript': ['~/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ }
 
-" let g:LanguageClient_autoStart = 1
+let g:LanguageClient_autoStart = 1
 
 let g:javascript_plugin_flow = 1
 let g:flow#showquickfix = 0
+
+inoremap <C-Space> <C-x><C-o>
+inoremap <C-@> <C-Space>
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --ignore-case --follow --fixed-strings --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+" Lightline
+let g:lightline = {
+\ 'colorscheme': 'wombat',
+\ 'active': {
+\   'left': [['mode', 'paste'], ['filename', 'modified']],
+\   'right': [['gitbranch'], ['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
+\ },
+\ 'component_expand': {
+\   'linter_warnings': 'LightlineLinterWarnings',
+\   'linter_errors': 'LightlineLinterErrors',
+\   'linter_ok': 'LightlineLinterOK'
+\ },
+\ 'component_type': {
+\   'readonly': 'error',
+\   'linter_warnings': 'warning',
+\   'linter_errors': 'error'
+\ },
+\ 'component_function': {
+\   'gitbranch': 'fugitive#head'
+\ },
+\ }
+
+function! LightlineLinterWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
+endfunction
+
+function! LightlineLinterErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+endfunction
+
+function! LightlineLinterOK() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '✓ ' : ''
+endfunction
+
+autocmd User ALELint call s:MaybeUpdateLightline()
+
+" Update and show lightline but only if it's visible (e.g., not in Goyo)
+function! s:MaybeUpdateLightline()
+  if exists('#lightline')
+    call lightline#update()
+  end
+endfunction
