@@ -37,15 +37,14 @@ Plug 'digitaltoad/vim-pug'
 " Javascript / JSX Plugins
 
 Plug 'heavenshell/vim-jsdoc'
-" Plug 'sbdchd/neoformat'
 Plug 'moll/vim-node'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mkitt/tabline.vim'
-" Plug 'flowtype/vim-flow'
 
 " Misc Plugs
 
+Plug 'kassio/neoterm'
 Plug 'rizzatti/dash.vim'
 Plug 'AndrewRadev/switch.vim'
 Plug 'w0rp/ale'
@@ -88,14 +87,20 @@ Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
 " Colorschemes
 
-" Plug 'rakr/vim-one'
 Plug 'joshdick/onedark.vim'
-Plug 'ayu-theme/ayu-vim'
-" Plug 'ayu-theme/ayu-vim-airline'
-Plug 'kodemeister/vim-hybrid'
+" Plug 'kodemeister/vim-hybrid'
+Plug 'cocopon/iceberg.vim'
+" Plug 'trevordmiller/nova-vim'
+" Plug 'rafi/awesome-vim-colorschemes'
+" Plug 'nanotech/jellybeans.vim'
+" Plug 'chriskempson/base16-vim'
+
+" Elixir
+
+Plug 'slashmili/alchemist.vim'
 
 if (has("termguicolors"))
-  " set termguicolors
+  set termguicolors
 endif
 
 call plug#end()
@@ -104,7 +109,8 @@ syntax enable
 syntax on
 filetype plugin indent on
 set background=dark
-colorscheme hybrid
+colorscheme onedark
+
 set hidden
 set relativenumber
 set number
@@ -290,7 +296,7 @@ let g:ale_linters = {
 \   ],
 \  'ruby': [
 \     'rubocop'
-\   ],
+\   ]
 \  }
 
 let g:ale_fixers = {
@@ -299,7 +305,7 @@ let g:ale_fixers = {
 \    'eslint'
 \   ],
 \  'scss': [
-\    'prettier',
+\    'prettier'
 \   ]
 \  }
 
@@ -308,7 +314,6 @@ let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
-" let g:airline#extensions#ale#enabled = 1
 
 nmap <silent> <leader>ne <Plug>(ale_previous_wrap)
 nmap <silent> <leader>pe <Plug>(ale_next_wrap)
@@ -316,7 +321,7 @@ nmap <silent> <leader>pe <Plug>(ale_next_wrap)
 " Misc Stuff
 
 nmap <silent> <leader>o :tabedit %<cr>
-nnoremap tc :tabclose<cr>
+nnoremap tc :-tabclose<cr>
 
 function! SynStack()
   if !exists("*synstack")
@@ -337,12 +342,26 @@ endif
 
 let g:rubycomplete_rails = 1
 
+" let g:LanguageClient_serverCommands = {
+"     \ 'javascript.jsx': ['~/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+"     \ 'javascript': ['~/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+"     \ }
 let g:LanguageClient_serverCommands = {
-    \ 'javascript.jsx': ['~/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
-    \ 'javascript': ['~/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ 'javascript': ['javascript-typescript-stdio'],
     \ }
 
 let g:LanguageClient_autoStart = 1
+
+" <leader>ld to go to definition
+autocmd FileType javascript nnoremap <buffer>
+  \ <leader>ld :call LanguageClient_textDocument_definition()<cr>
+" <leader>lh for type info under cursor
+autocmd FileType javascript nnoremap <buffer>
+  \ <leader>lh :call LanguageClient_textDocument_hover()<cr>
+" <leader>lr to rename variable under cursor
+autocmd FileType javascript nnoremap <buffer>
+  \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
 
 let g:javascript_plugin_flow = 1
 let g:flow#showquickfix = 0
@@ -408,3 +427,9 @@ function! s:MaybeUpdateLightline()
     call lightline#update()
   end
 endfunction
+
+map <leader>fw :exec 'Rg' expand("<cword>")<CR>
+
+
+" highlight jsClassFuncName cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guifg=#e2a478
+highlight ALEWarning cterm=NONE gui=NONE guibg=#c66063 guifg=#ffffff
