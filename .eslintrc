@@ -12,10 +12,9 @@ module.exports = {
     jquery: true
   },
   extends: [
-    "eslint:recommended",
-    "prettier"
+    "eslint:recommended"
   ],
-  plugins: ["react", "prettier"],
+  plugins: ["react"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true

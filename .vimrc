@@ -1,12 +1,16 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-db'
+
+Plug 'slashmili/alchemist.vim'
 
 " Vim language pack
 
 Plug 'sheerun/vim-polyglot'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
+Plug 'styled-components/vim-styled-components'
 
 " Markdown
 Plug 'godlygeek/tabular'
@@ -67,8 +71,6 @@ Plug 'ggreer/the_silver_searcher'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'SirVer/ultisnips'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-eunuch'
 Plug 'machakann/vim-highlightedyank'
 Plug 'itchyny/lightline.vim'
@@ -79,25 +81,26 @@ Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'roxma/ncm-flow'
 Plug 'roxma/ncm-rct-complete'
 Plug 'calebeby/ncm-css'
+Plug 'flowtype/vim-flow'
 
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/neoinclude.vim'
 Plug 'dietsche/vim-lastplace'
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim',
+      \ {
+      \   'branch': 'next',
+      \   'do': 'bash install.sh',
+      \ }
 
 " Colorschemes
 
-Plug 'joshdick/onedark.vim'
-" Plug 'kodemeister/vim-hybrid'
-Plug 'cocopon/iceberg.vim'
-" Plug 'trevordmiller/nova-vim'
-" Plug 'rafi/awesome-vim-colorschemes'
-" Plug 'nanotech/jellybeans.vim'
-" Plug 'chriskempson/base16-vim'
+Plug 'kaicataldo/material.vim'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+
+let g:material_theme_style = 'palenight'
+
 
 " Elixir
-
-Plug 'slashmili/alchemist.vim'
 
 if (has("termguicolors"))
   set termguicolors
@@ -109,7 +112,8 @@ syntax enable
 syntax on
 filetype plugin indent on
 set background=dark
-colorscheme onedark
+
+colorscheme challenger_deep
 
 set hidden
 set relativenumber
@@ -277,10 +281,6 @@ au BufRead,BufNewFile *.jbuilder setfiletype ruby
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd BufWritePre * StripWhitespace
 
-" let g:airline_powerline_fonts = 1
-" let g:airline_theme='hybrid'
-" let g:airline_skip_empty_sections = 1
-
 " Turn hlsearch off when pressing return
 nnoremap <silent> <cr> :nohlsearch<cr>
 
@@ -295,7 +295,11 @@ let g:ale_linters = {
 \     'stylelint'
 \   ],
 \  'ruby': [
-\     'rubocop'
+\     'rubocop',
+\     'reek'
+\   ],
+\  'elixir': [
+\     'mix_dialyxir'
 \   ]
 \  }
 
@@ -306,6 +310,9 @@ let g:ale_fixers = {
 \   ],
 \  'scss': [
 \    'prettier'
+\   ],
+\  'elixir': [
+\    'mix_format'
 \   ]
 \  }
 
@@ -314,6 +321,12 @@ let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
+
+" Ale completion
+" let g:ale_completion_enabled = 1
+nmap <silent> <C-p> <Plug>(ale_previous_wrap)
+nmap <silent> <C-n> <Plug>(ale_next_wrap)
+
 
 nmap <silent> <leader>ne <Plug>(ale_previous_wrap)
 nmap <silent> <leader>pe <Plug>(ale_next_wrap)
@@ -339,6 +352,12 @@ if exists('&inccommand')
   set inccommand=nosplit
 endif
 
+" Visual Mappings
+
+" Search selected text
+vnoremap // y/<C-R>"<CR>
+
+
 
 let g:rubycomplete_rails = 1
 
@@ -351,6 +370,7 @@ let g:LanguageClient_serverCommands = {
     \ 'javascript': ['javascript-typescript-stdio'],
     \ }
 
+" \ 'elixir': ['eli-ls'],
 let g:LanguageClient_autoStart = 1
 
 " <leader>ld to go to definition
@@ -378,7 +398,7 @@ command! -bang -nargs=* Rg
 
 " Lightline
 let g:lightline = {
-\ 'colorscheme': 'wombat',
+\ 'colorscheme': 'challenger_deep',
 \ 'active': {
 \   'left': [['mode', 'paste'], ['filename', 'modified']],
 \   'right': [['gitbranch'], ['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
@@ -433,3 +453,8 @@ map <leader>fw :exec 'Rg' expand("<cword>")<CR>
 
 " highlight jsClassFuncName cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guifg=#e2a478
 highlight ALEWarning cterm=NONE gui=NONE guibg=#c66063 guifg=#ffffff
+
+autocmd Filetype haml setlocal cursorcolumn
+autocmd Filetype yaml setlocal cursorcolumn
+noremap g= mmgg=G`m
+
