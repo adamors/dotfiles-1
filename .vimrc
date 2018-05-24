@@ -96,11 +96,9 @@ Plug 'autozimu/LanguageClient-neovim',
 
 Plug 'kaicataldo/material.vim'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
-
-let g:material_theme_style = 'palenight'
-
-
-" Elixir
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'cocopon/iceberg.vim'
+Plug 'icymind/NeoSolarized'
 
 if (has("termguicolors"))
   set termguicolors
@@ -113,7 +111,7 @@ syntax on
 filetype plugin indent on
 set background=dark
 
-colorscheme challenger_deep
+colorscheme iceberg
 
 set hidden
 set relativenumber
@@ -236,7 +234,6 @@ map <Leader>tl :TestLast<CR>
 map <Leader>ts :TestSuite<CR>
 map <silent> <leader>qo :copen<CR>
 
-
 " Convert HTML to Haml, ensure the html2haml gem is installed
 
 nmap <leader>h :%!html2haml --erb 2> /dev/null<CR>:set ft=haml<CR>
@@ -327,7 +324,6 @@ highlight link ALEErrorSign Title
 nmap <silent> <C-p> <Plug>(ale_previous_wrap)
 nmap <silent> <C-n> <Plug>(ale_next_wrap)
 
-
 nmap <silent> <leader>ne <Plug>(ale_previous_wrap)
 nmap <silent> <leader>pe <Plug>(ale_next_wrap)
 
@@ -357,14 +353,8 @@ endif
 " Search selected text
 vnoremap // y/<C-R>"<CR>
 
-
-
 let g:rubycomplete_rails = 1
 
-" let g:LanguageClient_serverCommands = {
-"     \ 'javascript.jsx': ['~/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
-"     \ 'javascript': ['~/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
-"     \ }
 let g:LanguageClient_serverCommands = {
     \ 'javascript.jsx': ['javascript-typescript-stdio'],
     \ 'javascript': ['javascript-typescript-stdio'],
@@ -398,7 +388,7 @@ command! -bang -nargs=* Rg
 
 " Lightline
 let g:lightline = {
-\ 'colorscheme': 'challenger_deep',
+\ 'colorscheme': 'wombat',
 \ 'active': {
 \   'left': [['mode', 'paste'], ['filename', 'modified']],
 \   'right': [['gitbranch'], ['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
@@ -450,11 +440,15 @@ endfunction
 
 map <leader>fw :exec 'Rg' expand("<cword>")<CR>
 
-
 " highlight jsClassFuncName cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guifg=#e2a478
-highlight ALEWarning cterm=NONE gui=NONE guibg=#c66063 guifg=#ffffff
+highlight ALEWarning cterm=NONE gui=NONE guibg=#ffcdd2 guifg=#f44336
+highlight jsThis cterm=NONE gui=NONE guifg=#ffffff
 
 autocmd Filetype haml setlocal cursorcolumn
 autocmd Filetype yaml setlocal cursorcolumn
 noremap g= mmgg=G`m
 
+nnoremap <Up>    :resize +5<CR>
+nnoremap <Down>  :resize -5<CR>
+nnoremap <Left>  :vertical resize -5<CR>
+nnoremap <Right> :vertical resize +5<CR>
