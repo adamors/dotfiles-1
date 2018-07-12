@@ -1,18 +1,13 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-db'
-
 Plug 'slashmili/alchemist.vim'
 
 " Vim language pack
 
 Plug 'sheerun/vim-polyglot'
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
-Plug 'styled-components/vim-styled-components'
 
 " Markdown
+
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
@@ -20,13 +15,11 @@ Plug 'plasticboy/vim-markdown'
 
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-bundler', { 'for': 'ruby' }
 Plug 'ngmy/vim-rubocop', { 'for': 'ruby' }
 Plug 'thoughtbot/vim-rspec' , { 'for': 'ruby' }
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
-Plug 'pearofducks/ansible-vim'
 
 " Testing
 
@@ -36,19 +29,18 @@ Plug 'janko-m/vim-test'
 
 Plug 'ap/vim-css-color', {'for': ['scss', 'css']}
 Plug 'cakebaker/scss-syntax.vim', {'for': ['css', 'scss']}
-Plug 'digitaltoad/vim-pug'
 
 " Javascript / JSX Plugins
 
-Plug 'heavenshell/vim-jsdoc'
 Plug 'moll/vim-node'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mkitt/tabline.vim'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'styled-components/vim-styled-components'
 
 " Misc Plugs
 
-Plug 'kassio/neoterm'
 Plug 'rizzatti/dash.vim'
 Plug 'AndrewRadev/switch.vim'
 Plug 'w0rp/ale'
@@ -73,18 +65,22 @@ Plug 'junegunn/fzf.vim'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-eunuch'
 Plug 'machakann/vim-highlightedyank'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Autocompletion Plugins
-Plug 'roxma/nvim-completion-manager'
+" Plug 'roxma/nvim-completion-manager'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+Plug 'Shougo/neoinclude.vim'
+Plug 'Shougo/neco-syntax'
 Plug 'roxma/ncm-flow'
 Plug 'roxma/ncm-rct-complete'
 Plug 'calebeby/ncm-css'
 Plug 'flowtype/vim-flow'
 
-Plug 'Shougo/neco-vim'
-Plug 'Shougo/neoinclude.vim'
 Plug 'dietsche/vim-lastplace'
 Plug 'autozimu/LanguageClient-neovim',
       \ {
@@ -93,12 +89,9 @@ Plug 'autozimu/LanguageClient-neovim',
       \ }
 
 " Colorschemes
-
-Plug 'kaicataldo/material.vim'
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'cocopon/iceberg.vim'
-Plug 'icymind/NeoSolarized'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'ayu-theme/ayu-vim'
+Plug 'yfiua/vim-github-colorscheme'
 
 if (has("termguicolors"))
   set termguicolors
@@ -110,8 +103,7 @@ syntax enable
 syntax on
 filetype plugin indent on
 set background=dark
-
-colorscheme iceberg
+colorscheme ayu
 
 set hidden
 set relativenumber
@@ -125,6 +117,8 @@ set infercase
 set noshowmode
 set fillchars+=stl:\ ,stlnc:\
 set lcs=tab:\-\
+set splitright
+set splitbelow
 set list
 set termencoding=utf-8
 set smartindent
@@ -153,6 +147,8 @@ set nocursorcolumn
 set nocursorline
 set conceallevel=1
 set noea
+set shortmess+=c
+
 
 " Disable some polyglot language packs
 
@@ -189,8 +185,6 @@ map <leader>gco :terminal git checkout<Space>
 " Javascript Settings / Config
 
 let g:jsx_ext_required = 0
-" let g:neoformat_enabled_javascript = ['prettier']
-" let g:neoformat_try_formatprg = 1
 let g:javascript_enable_domhtmlcss=1
 let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmine,chai'
 let g:javascript_plugin_jsdoc = 1
@@ -262,8 +256,6 @@ if has('nvim')
   " autocmd TermClose * bd! " quit when a terminal closes instead of showing exit code and waiting
   tnoremap <Leader><ESC> <C-\><C-n>
 endif
-
-" let g:tern_show_signature_in_pum = '0'
 
 set completeopt-=preview
 set omnifunc=syntaxcomplete#Complete
@@ -345,33 +337,13 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
 if exists('&inccommand')
-  set inccommand=nosplit
+  set inccommand=split
 endif
-
-" Visual Mappings
 
 " Search selected text
 vnoremap // y/<C-R>"<CR>
 
 let g:rubycomplete_rails = 1
-
-let g:LanguageClient_serverCommands = {
-    \ 'javascript.jsx': ['javascript-typescript-stdio'],
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ }
-
-" \ 'elixir': ['eli-ls'],
-let g:LanguageClient_autoStart = 1
-
-" <leader>ld to go to definition
-autocmd FileType javascript nnoremap <buffer>
-  \ <leader>ld :call LanguageClient_textDocument_definition()<cr>
-" <leader>lh for type info under cursor
-autocmd FileType javascript nnoremap <buffer>
-  \ <leader>lh :call LanguageClient_textDocument_hover()<cr>
-" <leader>lr to rename variable under cursor
-autocmd FileType javascript nnoremap <buffer>
-  \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
 
 let g:javascript_plugin_flow = 1
 let g:flow#showquickfix = 0
@@ -386,58 +358,6 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-" Lightline
-let g:lightline = {
-\ 'colorscheme': 'wombat',
-\ 'active': {
-\   'left': [['mode', 'paste'], ['filename', 'modified']],
-\   'right': [['gitbranch'], ['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
-\ },
-\ 'component_expand': {
-\   'linter_warnings': 'LightlineLinterWarnings',
-\   'linter_errors': 'LightlineLinterErrors',
-\   'linter_ok': 'LightlineLinterOK'
-\ },
-\ 'component_type': {
-\   'readonly': 'error',
-\   'linter_warnings': 'warning',
-\   'linter_errors': 'error'
-\ },
-\ 'component_function': {
-\   'gitbranch': 'fugitive#head'
-\ },
-\ }
-
-function! LightlineLinterWarnings() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
-endfunction
-
-function! LightlineLinterErrors() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
-endfunction
-
-function! LightlineLinterOK() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '✓ ' : ''
-endfunction
-
-autocmd User ALELint call s:MaybeUpdateLightline()
-
-" Update and show lightline but only if it's visible (e.g., not in Goyo)
-function! s:MaybeUpdateLightline()
-  if exists('#lightline')
-    call lightline#update()
-  end
-endfunction
-
 map <leader>fw :exec 'Rg' expand("<cword>")<CR>
 
 " highlight jsClassFuncName cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guifg=#e2a478
@@ -448,7 +368,32 @@ autocmd Filetype haml setlocal cursorcolumn
 autocmd Filetype yaml setlocal cursorcolumn
 noremap g= mmgg=G`m
 
-nnoremap <Up>    :resize +5<CR>
-nnoremap <Down>  :resize -5<CR>
-nnoremap <Left>  :vertical resize -5<CR>
-nnoremap <Right> :vertical resize +5<CR>
+" Terminal Mappings
+
+nnoremap <C-T><C-V> :vsp<cr>:terminal<cr>i
+nnoremap <C-T>v :vsp<cr>:terminal<cr>i
+nnoremap <C-T><C-S> :sp<cr>:terminal<cr>i
+nnoremap <C-T>s :sp<cr>:terminal<cr>i
+nnoremap <C-T><C-T> :tabe<cr>:terminal<cr>i
+nnoremap <C-T>t :tabe<cr>:terminal<cr>i
+nnoremap <C-T><C-E> :terminal<cr>i
+nnoremap <C-T>e :terminal<cr>i
+
+let g:deoplete#enable_at_startup = 1
+
+let g:LanguageClient_loggingLevel = 'DEBUG'
+let g:LanguageClient_autoStart = 1
+
+
+" LSP Configuration
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'ruby': ['solargraph', 'stdio'],
+    \ }
+
+nnoremap <silent> lc :call LanguageClient_contextMenu()<CR>
+
+let ayucolor='dark'
+let g:airline_powerline_fonts = 1
+let g:airline_theme='kalisi'
+
