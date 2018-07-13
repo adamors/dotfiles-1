@@ -92,6 +92,7 @@ Plug 'autozimu/LanguageClient-neovim',
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'yfiua/vim-github-colorscheme'
+Plug 'jlesquembre/base16-neovim'
 
 if (has("termguicolors"))
   set termguicolors
@@ -395,5 +396,5 @@ nnoremap <silent> lc :call LanguageClient_contextMenu()<CR>
 
 let ayucolor='dark'
 let g:airline_powerline_fonts = 1
-let g:airline_theme='kalisi'
+let g:airline_theme='base16'
 
