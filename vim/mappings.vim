@@ -1,5 +1,8 @@
 " vim:fdm=marker
 
+" let mapleader=" "
+
+
 " Git Mappings {{{
 
 map <silent> <leader>gs :Gstatus<CR>
@@ -60,6 +63,16 @@ nmap <Leader>s :source $MYVIMRC<CR>
 
 " Disable K looking up stuff
 map K <Nop>
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 " Turn hlsearch off when pressing return
 nnoremap <silent> <cr> :nohlsearch<cr>

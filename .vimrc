@@ -4,10 +4,13 @@ call plug#begin('~/.vim/plugged')
 
 " General Plugins {{{
 
+Plug 'tpope/vim-projectionist'
+Plug 'andyl/vim-projectionist-elixir'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'Shougo/denite.nvim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'AndrewRadev/switch.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
-" Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
@@ -34,6 +37,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
+Plug 'Shougo/neco-vim'
 
 " }}}
 
@@ -51,21 +55,21 @@ Plug 'vim-ruby/vim-ruby'
 
 " Javascript / Frontend Plugins {{{
 
-Plug 'HerringtonDarkholme/yats.vim'
+" Plug 'HerringtonDarkholme/yats.vim'
 Plug 'ap/vim-css-color', {'for': ['scss', 'css']}
 Plug 'cakebaker/scss-syntax.vim', {'for': ['css', 'scss']}
 Plug 'moll/vim-node'
-Plug 'mxw/vim-jsx'
+" Plug 'mxw/vim-jsx'
+Plug 'neoclide/vim-jsx-improve'
+
 Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 Plug 'chemzqm/jsonc.vim'
-" Plug 'styled-components/vim-styled-components'
 
 " }}}
 
 " Elixir {{{
 
-Plug 'Shougo/neco-vim'
 Plug 'slashmili/alchemist.vim'
 
 " }}}
@@ -76,15 +80,16 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'morhetz/gruvbox'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
-
-let g:gruvbox_contrast_dark='dark'
+Plug 'chriskempson/base16-vim'
+Plug 'khwon/vim-tomorrow-theme'
+Plug 'kristijanhusak/vim-hybrid-material'
 
 " }}}
 
 " Autocompletion {{{
 
 Plug 'dietsche/vim-lastplace'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install'}
+Plug 'neoclide/coc.nvim', {'do': './install.sh'}
 Plug 'Shougo/neco-vim'
 
 " }}}
@@ -99,7 +104,7 @@ syntax enable
 syntax on
 filetype plugin indent on
 
-colorscheme gruvbox
+colorscheme palenight
 
 " Settings {{{
 
@@ -169,7 +174,7 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 let g:NERDTreeMinimalUI=1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='gruvbox'
+let g:airline_theme='hybrid'
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '▲'
@@ -302,8 +307,6 @@ endif
 
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
-
 
 let airline#extensions#coc#error_symbol = 'Error:'
 let airline#extensions#coc#error_symbol = 'Warning:'
