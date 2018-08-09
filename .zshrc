@@ -11,14 +11,6 @@ export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/sbin:~/bin:$PATH"
 source $ZSH/oh-my-zsh.sh
 
-# Load zsh-syntax-highlighting.
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Load zsh-autosuggestions.
-source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
-
-source "/Applications/SQLAnywhere12/System/bin64/sa_config.sh"
-
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 function ruby_version()

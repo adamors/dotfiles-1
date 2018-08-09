@@ -55,15 +55,12 @@ Plug 'vim-ruby/vim-ruby'
 
 " Javascript / Frontend Plugins {{{
 
-" Plug 'HerringtonDarkholme/yats.vim'
 Plug 'ap/vim-css-color', {'for': ['scss', 'css']}
 Plug 'cakebaker/scss-syntax.vim', {'for': ['css', 'scss']}
 Plug 'moll/vim-node'
-" Plug 'mxw/vim-jsx'
 Plug 'neoclide/vim-jsx-improve'
 
 Plug 'othree/javascript-libraries-syntax.vim'
-" Plug 'pangloss/vim-javascript'
 Plug 'chemzqm/jsonc.vim'
 
 " }}}
@@ -89,7 +86,7 @@ Plug 'kristijanhusak/vim-hybrid-material'
 " Autocompletion {{{
 
 Plug 'dietsche/vim-lastplace'
-Plug 'neoclide/coc.nvim', {'do': './install.sh'}
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'Shougo/neco-vim'
 
 " }}}
@@ -104,7 +101,7 @@ syntax enable
 syntax on
 filetype plugin indent on
 
-colorscheme palenight
+colorscheme gruvbox
 
 " Settings {{{
 
@@ -260,43 +257,6 @@ highlight link ALEWarningSign String
 
 autocmd Filetype haml setlocal cursorcolumn
 autocmd Filetype yaml setlocal cursorcolumn
-
-" Old Unused Configuration {{{
-"
-" highlight jsClassFuncName cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guifg=#e2a478
-" highlight ALEWarning cterm=NONE gui=NONE guibg=#ffcdd2 guifg=#f44336
-
-" Autocompletion Plugins
-" Plug 'roxma/nvim-completion-manager'
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-" Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-" Plug 'Shougo/neoinclude.vim'
-" Plug 'Shougo/neco-syntax'
-" Plug 'roxma/ncm-rct-complete'
-" Plug 'calebeby/ncm-css'
-" Plug 'autozimu/LanguageClient-neovim',
-"       \ {
-"       \   'branch': 'next',
-"       \   'do': 'bash install.sh',
-"       \ }
-" let g:deoplete#enable_at_startup = 1
-
-" let g:LanguageClient_loggingLevel = 'DEBUG'
-" let g:LanguageClient_autoStart = 1
-
-
-" LSP Configuration
-" let g:LanguageClient_serverCommands = {
-    " \ 'javascript': ['javascript-typescript-stdio'],
-    " \ 'ruby': ['solargraph', 'stdio'],
-    " \ }
-
-" nnoremap <silent> lc :call LanguageClient_contextMenu()<CR>
-
-" }}}
-
-" highlight link CocErrorSign GruvboxRed
 
 if exists('g:gui_oni')
   set noshowmode
