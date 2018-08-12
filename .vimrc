@@ -100,7 +100,7 @@ syntax enable
 syntax on
 filetype plugin indent on
 
-colorscheme gruvbox
+colorscheme palenight
 
 " Settings {{{
 
