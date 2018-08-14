@@ -80,6 +80,7 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'chriskempson/base16-vim'
 Plug 'khwon/vim-tomorrow-theme'
 Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'haishanh/night-owl.vim'
 
 " }}}
 
@@ -101,7 +102,7 @@ syntax enable
 syntax on
 filetype plugin indent on
 
-colorscheme gruvbox
+colorscheme night-owl
 
 " Settings {{{
 
@@ -133,7 +134,7 @@ set laststatus=2
 set lcs=tab:\-\
 set list
 set nocursorcolumn
-set cursorline
+" set cursorline
 set noea
 set noshowmode
 set noshowmode
@@ -171,7 +172,7 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 let g:NERDTreeMinimalUI=1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='hybrid'
+let g:airline_theme='luna'
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '▲'
