@@ -7,7 +7,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-projectionist'
 Plug 'andyl/vim-projectionist-elixir'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'Shougo/denite.nvim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'AndrewRadev/switch.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -162,6 +161,7 @@ source ~/dotfiles/vim/mappings.vim
 let g:fzf_files_options =
   \ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 
+" Note: brew install ag
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
   let g:ackprg = 'ag --nogroup --nocolor --column'

@@ -111,6 +111,7 @@ nnoremap <C-T><C-E> :terminal<cr>i
 nnoremap <C-T>e :terminal<cr>i
 
 map <leader>fw :exec 'Rg' expand("<cword>")<CR>
+map <leader>ff :exec 'Files' expand("<cword>")
 
 command! W :w
 command! Q :q
