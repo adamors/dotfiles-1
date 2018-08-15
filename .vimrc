@@ -151,6 +151,7 @@ set undodir=~/.vim/undo//
 set wildignorecase
 set wildmenu
 set wildmode=longest:full,full
+set updatetime=100
 
 " }}}
 
