@@ -80,6 +80,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'khwon/vim-tomorrow-theme'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'haishanh/night-owl.vim'
+Plug 'srcery-colors/srcery-vim'
 
 " }}}
 
@@ -101,10 +102,12 @@ syntax enable
 syntax on
 filetype plugin indent on
 
-colorscheme night-owl
+colorscheme srcery
 
 " Settings {{{
 
+set signcolumn=yes
+set cmdheight=2
 set autoindent
 set autoread
 set background=dark
