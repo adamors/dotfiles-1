@@ -57,7 +57,9 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'ap/vim-css-color', {'for': ['scss', 'css']}
 Plug 'cakebaker/scss-syntax.vim', {'for': ['css', 'scss']}
 Plug 'moll/vim-node'
-Plug 'neoclide/vim-jsx-improve'
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'pangloss/vim-javascript'
+" Plug 'neoclide/vim-jsx-improve'
 
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'chemzqm/jsonc.vim'
@@ -76,10 +78,8 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'morhetz/gruvbox'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'chriskempson/base16-vim'
 Plug 'khwon/vim-tomorrow-theme'
 Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'haishanh/night-owl.vim'
 Plug 'srcery-colors/srcery-vim'
 
 " }}}
@@ -102,7 +102,7 @@ syntax enable
 syntax on
 filetype plugin indent on
 
-colorscheme hybrid_material
+colorscheme palenight
 
 " Settings {{{
 
