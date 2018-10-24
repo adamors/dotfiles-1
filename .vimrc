@@ -22,7 +22,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'machakann/vim-highlightedyank'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'plasticboy/vim-markdown'
+Plug 'tpope/vim-markdown'
 Plug 'rizzatti/dash.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
@@ -37,6 +37,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 Plug 'Shougo/neco-vim'
+Plug 'firegoby/html_entities_helper.vim'
 
 " }}}
 
@@ -80,7 +81,7 @@ Plug 'morhetz/gruvbox'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'khwon/vim-tomorrow-theme'
 Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'srcery-colors/srcery-vim'
+Plug 'mhinz/vim-janah'
 
 " }}}
 
@@ -102,7 +103,7 @@ syntax enable
 syntax on
 filetype plugin indent on
 
-colorscheme palenight
+colorscheme onehalfdark
 
 " Settings {{{
 
@@ -281,4 +282,33 @@ let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_er
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 let g:enable_bold_font = 1
+let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'typescript']
+
+inoremap <silent><expr> <c-space> coc#refresh()
+
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
+
+autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
+autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd User CocQuickfixChange :call fzf_quickfix#run()
+let g:coc_auto_copen=0
+
+nmap <leader>ac  <Plug>(coc-codeaction)
+
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 

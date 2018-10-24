@@ -62,7 +62,7 @@ nmap <leader>v :sp $MYVIMRC<CR>
 nmap <Leader>s :source $MYVIMRC<CR>
 
 " Disable K looking up stuff
-map K <Nop>
+" map K <Nop>
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
