@@ -75,10 +75,6 @@ Plug 'slashmili/alchemist.vim'
 " Colorschemes {{{
 
 Plug 'kristijanhusak/vim-hybrid-material'
-<<<<<<< HEAD
-Plug 'mhinz/vim-janah'
-=======
->>>>>>> 8841a782cf790f5b2613fcc574f232c0ada1aae7
 
 " }}}
 
@@ -100,11 +96,7 @@ syntax enable
 syntax on
 filetype plugin indent on
 
-<<<<<<< HEAD
-colorscheme onehalfdark
-=======
 colorscheme hybrid_reverse
->>>>>>> 8841a782cf790f5b2613fcc574f232c0ada1aae7
 
 " Settings {{{
 
