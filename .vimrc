@@ -59,7 +59,6 @@ Plug 'cakebaker/scss-syntax.vim', {'for': ['css', 'scss']}
 Plug 'moll/vim-node'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'pangloss/vim-javascript'
-" Plug 'neoclide/vim-jsx-improve'
 
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'chemzqm/jsonc.vim'
@@ -74,13 +73,7 @@ Plug 'slashmili/alchemist.vim'
 
 " Colorschemes {{{
 
-Plug 'ayu-theme/ayu-vim'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'morhetz/gruvbox'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'khwon/vim-tomorrow-theme'
 Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'srcery-colors/srcery-vim'
 
 " }}}
 
@@ -102,7 +95,7 @@ syntax enable
 syntax on
 filetype plugin indent on
 
-colorscheme palenight
+colorscheme hybrid_reverse
 
 " Settings {{{
 
@@ -136,7 +129,6 @@ set laststatus=2
 set lcs=tab:\-\
 set list
 set nocursorcolumn
-" set cursorline
 set noea
 set noshowmode
 set noshowmode
