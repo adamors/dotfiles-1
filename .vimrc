@@ -1,4 +1,4 @@
-" vim:fdm=marker
+"5px vim:fdm=marker
 
 call plug#begin('~/.vim/plugged')
 
@@ -75,6 +75,8 @@ Plug 'slashmili/alchemist.vim'
 " Colorschemes {{{
 
 Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'nanotech/jellybeans.vim'
+Plug 'kaicataldo/material.vim'
 
 " }}}
 
@@ -96,7 +98,8 @@ syntax enable
 syntax on
 filetype plugin indent on
 
-colorscheme hybrid_reverse
+colorscheme material
+let g:material_theme_style = "palenight"
 
 " Settings {{{
 
@@ -169,7 +172,7 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 let g:NERDTreeMinimalUI=1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='hybrid'
+let g:airline_theme='material'
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '▲'
