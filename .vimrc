@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 
 " General Plugins {{{
 
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-projectionist'
 Plug 'andyl/vim-projectionist-elixir'
 Plug 'ekalinin/Dockerfile.vim'
@@ -75,8 +76,9 @@ Plug 'slashmili/alchemist.vim'
 " Colorschemes {{{
 
 Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'nanotech/jellybeans.vim'
 Plug 'kaicataldo/material.vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'khatiba/ayu-vim'
 
 " }}}
 
@@ -85,6 +87,7 @@ Plug 'kaicataldo/material.vim'
 Plug 'dietsche/vim-lastplace'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'Shougo/neco-vim'
+
 
 " }}}
 
@@ -98,8 +101,8 @@ syntax enable
 syntax on
 filetype plugin indent on
 
-colorscheme material
-let g:material_theme_style = "palenight"
+" let ayucolor="mirage"
+colorscheme ayu
 
 " Settings {{{
 
@@ -172,7 +175,7 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 let g:NERDTreeMinimalUI=1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='material'
+let g:airline_theme='hybrid'
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '▲'
@@ -306,4 +309,3 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-
