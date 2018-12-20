@@ -1,4 +1,4 @@
-"5px vim:fdm=marker
+"vim:fdm=marker
 
 call plug#begin('~/.vim/plugged')
 
@@ -61,7 +61,7 @@ Plug 'cakebaker/scss-syntax.vim', {'for': ['css', 'scss']}
 Plug 'moll/vim-node'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'pangloss/vim-javascript'
-
+Plug 'jparise/vim-graphql'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'chemzqm/jsonc.vim'
 
@@ -75,10 +75,8 @@ Plug 'slashmili/alchemist.vim'
 
 " Colorschemes {{{
 
-Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'kaicataldo/material.vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'khatiba/ayu-vim'
+Plug 'cocopon/iceberg.vim'
+Plug 'morhetz/gruvbox'
 
 " }}}
 
@@ -101,13 +99,14 @@ syntax enable
 syntax on
 filetype plugin indent on
 
-" let ayucolor="mirage"
-colorscheme ayu
+let g:gruvbox_italic = 1
+let g:gruvbox_contrast_dark = 'hard'
+colorscheme gruvbox
 
 " Settings {{{
 
 set signcolumn=yes
-set cmdheight=2
+set cmdheight=1
 set autoindent
 set autoread
 set background=dark
@@ -116,8 +115,9 @@ set backupdir=~/.vim/backup//
 set cindent
 set complete-=i
 set complete=.,b,w,u,t,k
-set completeopt+=noinsert
-set completeopt-=preview
+" set completeopt+=noinsert
+" set completeopt-=preview
+set completeopt=menu,menuone,noinsert
 set conceallevel=1
 set copyindent
 set directory=~/.vim/swap//
@@ -175,7 +175,7 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 let g:NERDTreeMinimalUI=1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='hybrid'
+let g:airline_theme='gruvbox'
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '▲'
@@ -269,9 +269,6 @@ if exists('g:gui_oni')
   set noshowcmd
 endif
 
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
 let airline#extensions#coc#error_symbol = 'Error:'
 let airline#extensions#coc#error_symbol = 'Warning:'
 let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
@@ -309,3 +306,9 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+hi jsObjectKey guifg=#B4BC88
+" hi jsxAttrib guifg=#B4BC88
+highlight SignColumn guibg=#1D2021
+
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
