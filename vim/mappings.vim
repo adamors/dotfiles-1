@@ -85,7 +85,7 @@ nmap <silent> <leader>ne <Plug>(ale_previous_wrap)
 nmap <silent> <leader>pe <Plug>(ale_next_wrap)
 
 " Misc Stuff
-nmap <silent> <leader>o :tabedit %<cr>
+" nmap <silent> <leader>o :tabedit %<cr>
 
 " Command Mode Mappings
 
@@ -116,3 +116,14 @@ map <leader>ff :exec 'Files' expand("<cword>")
 command! W :w
 command! Q :q
 command! Qa :qa
+
+" Zoom
+function! s:zoom()
+  if winnr('$') > 1
+    tab split
+  elseif len(filter(map(range(tabpagenr('$')), 'tabpagebuflist(v:val + 1)'),
+        \ 'index(v:val, '.bufnr('').') >= 0')) > 1
+    tabclose
+  endif
+endfunction
+nnoremap <silent> <leader>o :call <sid>zoom()<cr>

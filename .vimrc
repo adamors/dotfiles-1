@@ -75,17 +75,17 @@ Plug 'slashmili/alchemist.vim'
 
 " Colorschemes {{{
 
-Plug 'cocopon/iceberg.vim'
-Plug 'morhetz/gruvbox'
+Plug 'rakr/vim-one'
+Plug 'tomasr/molokai'
 
 " }}}
 
 " Autocompletion {{{
 
 Plug 'dietsche/vim-lastplace'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'Shougo/neco-vim'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install'}
 
+Plug 'Shougo/neco-vim'
 
 " }}}
 
@@ -101,7 +101,7 @@ filetype plugin indent on
 
 let g:gruvbox_italic = 1
 let g:gruvbox_contrast_dark = 'hard'
-colorscheme gruvbox
+colorscheme one
 
 " Settings {{{
 
@@ -175,7 +175,7 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 let g:NERDTreeMinimalUI=1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='gruvbox'
+let g:airline_theme='one'
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '▲'
@@ -262,19 +262,13 @@ highlight link ALEWarningSign String
 autocmd Filetype haml setlocal cursorcolumn
 autocmd Filetype yaml setlocal cursorcolumn
 
-if exists('g:gui_oni')
-  set noshowmode
-  set noruler
-  set laststatus=0
-  set noshowcmd
-endif
-
 let airline#extensions#coc#error_symbol = 'Error:'
 let airline#extensions#coc#error_symbol = 'Warning:'
 let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
 let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+let g:airline#extensions#tabline#enabled = 0
 
 let g:enable_bold_font = 1
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'typescript']
@@ -288,6 +282,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
+
 
 autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -307,8 +302,15 @@ function! s:show_documentation()
   endif
 endfunction
 
-hi jsObjectKey guifg=#B4BC88
-" hi jsxAttrib guifg=#B4BC88
-highlight SignColumn guibg=#1D2021
+" hi jsObjectKey guifg=#DE9E60
+" hi jsxAttrib guifg=#DE9E60
+" highlight SignColumn guibg=#1D2021
 
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+
+let g:ale_set_signs = 0
+hi link ALEErrorLine ErrorMsg
+hi link ALEWarningLine WarningMsg
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_delay = 0
