@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 
 " General Plugins {{{
 
+Plug 'milkypostman/vim-togglelist'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-projectionist'
 Plug 'andyl/vim-projectionist-elixir'
@@ -37,8 +38,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
-Plug 'Shougo/neco-vim'
 Plug 'firegoby/html_entities_helper.vim'
+Plug 'TaDaa/vimade'
 
 " }}}
 
@@ -64,6 +65,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'jparise/vim-graphql'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'chemzqm/jsonc.vim'
+Plug 'leafgarland/typescript-vim'
 
 " }}}
 
@@ -76,15 +78,16 @@ Plug 'slashmili/alchemist.vim'
 " Colorschemes {{{
 
 Plug 'rakr/vim-one'
-Plug 'tomasr/molokai'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'mhartington/oceanic-next'
+Plug 'morhetz/gruvbox'
 
 " }}}
 
 " Autocompletion {{{
 
 Plug 'dietsche/vim-lastplace'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install'}
-
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#build()}}
 Plug 'Shougo/neco-vim'
 
 " }}}
@@ -99,12 +102,11 @@ syntax enable
 syntax on
 filetype plugin indent on
 
-let g:gruvbox_italic = 1
-let g:gruvbox_contrast_dark = 'hard'
 colorscheme one
 
 " Settings {{{
 
+set updatetime=100
 set signcolumn=yes
 set cmdheight=1
 set autoindent
@@ -115,8 +117,6 @@ set backupdir=~/.vim/backup//
 set cindent
 set complete-=i
 set complete=.,b,w,u,t,k
-" set completeopt+=noinsert
-" set completeopt-=preview
 set completeopt=menu,menuone,noinsert
 set conceallevel=1
 set copyindent
@@ -175,7 +175,7 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 let g:NERDTreeMinimalUI=1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='one'
+let g:airline_theme='jellybeans'
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '▲'
@@ -184,10 +184,9 @@ let g:javascript_plugin_jsdoc = 1
 let g:jsx_ext_required = 0
 let g:polyglot_disabled = ['javascript', 'jsx']
 let g:rubycomplete_rails = 1
-let g:test#preserve_screen = 1
 let g:used_javascript_libs = 'jquery,underscore,angularjs,react,requirejs,jasmine,chai'
 let g:vimrubocop_config = '~/.rubocop.yml'
-let test#strategy = 'neovim'
+let test#strategy = 'dispatch'
 
 if has('nvim')
   nmap <bs> :<c-u>TmuxNavigateLeft<cr>
@@ -215,11 +214,18 @@ let g:ale_linters = {
 \     'reek'
 \   ],
 \  'elixir': [
-\     'mix_dialyxir'
+\     'mix_dialyxir',
+\     'credo'
 \   ]
 \  }
 
 let g:ale_fixers = {
+\  'ruby': [
+\    'rufo'
+\   ],
+\  'html': [
+\    'prettier'
+\   ],
 \  'javascript': [
 \    'prettier',
 \    'eslint'
@@ -283,11 +289,23 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
 
+vmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
 
-autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
+" Remap for do codeAction of current line
+nmap <leader>ac <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf <Plug>(coc-fix-current)
+" Show all diagnostics
+nnoremap <silent> cd  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> ce  :<C-u>CocList extensions<cr>
+nnoremap <silent> cc  :<C-u>CocList commands<cr>
+
+set updatetime=300
+
+autocmd CursorHoldI,CursorMovedI * silent! call CocActionAsync('showSignatureHelp')
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd User CocQuickfixChange :call fzf_quickfix#run()
-let g:coc_auto_copen=0
 
 nmap <leader>ac  <Plug>(coc-codeaction)
 
@@ -298,19 +316,39 @@ function! s:show_documentation()
   if &filetype == 'vim'
     execute 'h '.expand('<cword>')
   else
-    call CocAction('doHover')
+    call CocActionAsync('doHover')
   endif
 endfunction
-
-" hi jsObjectKey guifg=#DE9E60
-" hi jsxAttrib guifg=#DE9E60
-" highlight SignColumn guibg=#1D2021
 
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 
 let g:ale_set_signs = 0
-hi link ALEErrorLine ErrorMsg
-hi link ALEWarningLine WarningMsg
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_delay = 0
+
+let g:vimade = {}
+let g:vimade.fadelevel = 0.5
+let g:vimade.enablesigns = 1
+
+hi Normal guibg=#1B1E2B
+hi ALEWarning guifg=#FF0000 guibg=#ffffff
+hi ALEError guifg=#FF0000 guibg=#ffffff
+hi ALEErrorLine guibg=#3F3F41
+hi ALEWarningLine guibg=#3F3F41
+hi SpellBad gui=undercurl guibg=NONE
+hi ColorColumn guibg=NONE guifg=#555566
+hi Normal guibg=#171b23
+hi NonText guifg=#171b23
+hi DiffChange guibg=#232c45 guifg=NONE gui=NONE
+hi DiffText guibg=#202087 guifg=NONE gui=NONE
+hi DiffAdd guibg=#105501 guifg=NONE gui=NONE
+hi DiffDelete guibg=#cd1010 guifg=#cd1010 gui=NONE
+hi VertSplit guifg=#223322
+hi LightlineRight_active_2 guifg=#ABB2BF
+
+
+
+" hi jsObjectKey guifg=#DE9E60
+" hi jsxAttrib guifg=#DE9E60
+" highlight SignColumn guibg=#1D2021
